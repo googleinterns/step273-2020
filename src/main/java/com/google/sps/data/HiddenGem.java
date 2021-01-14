@@ -43,4 +43,28 @@ public final class HiddenGem {
     this.rating = rating;
     this.photo = photo;
   }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getBusinessType() {
+    return business_type;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public int getPriceLevel() {
+    return price_level;
+  }
+
+  public double getRating() {
+    return rating;
+  }
+
+  public String getPhoto() {
+    return photo;
+  }
 }
