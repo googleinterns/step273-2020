@@ -18,12 +18,12 @@ package com.google.sps.data;
 public final class HiddenGem {
 
   private final int id;
-  private final String name;
-  private final String business_type;
-  private final String address;
-  private final int price_level;
-  private final double rating;
-  private final String photo;
+  public final String name;
+  public final String business_type;
+  public final String address;
+  public final int price_level;
+  public final double rating;
+  public final String photo;
 
   /** Create a new Hidden Gem. 
    *  @param id             the id the of the hidden gem.
@@ -42,29 +42,5 @@ public final class HiddenGem {
     this.price_level = price_level;
     this.rating = rating;
     this.photo = photo;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getBusinessType() {
-    return business_type;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public int getPriceLevel() {
-    return price_level;
-  }
-
-  public double getRating() {
-    return rating;
-  }
-
-  public String getPhoto() {
-    return photo;
   }
 }
