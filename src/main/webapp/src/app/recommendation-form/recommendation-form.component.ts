@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-recommendation-form',
@@ -8,36 +8,22 @@ import { FormGroup, FormBuilder} from '@angular/forms';
 })
 export class RecommendationFormComponent implements OnInit {
 
-  restaurantPrefereces: string[] = ['Thai', 'Mexican', 'Indian', 'Vegan', 'Sushi', 'Take-away'];
-  preferenceForm: FormGroup;  
-
+  // Build preference form
+  preferenceForm = this.fb.group({
+    cuisine: "",
+    price: "",
+    rating:"",
+    type: ""
+  });
 
   constructor(private fb: FormBuilder) { }
    
   ngOnInit(){
-    this.initialiseForm()
   }
 
-  initialiseForm(): void {
-    this.preferenceForm = this.fb.group({
-      price: this.fb.group({
-        $ : false,
-        $$ : false,
-        $$$ : false,
-        $$$$ : false,
-      }),
-      rating: this.fb.group({
-        1 : false,
-        2 : false,
-        3 : false,
-        4 : false,
-        5 : false,
-      }),
-      type: ""
-    });
-  }
-
+  // Submit user's preference form
   onSubmit(): void {
     console.log(this.preferenceForm);
   }
+
 }

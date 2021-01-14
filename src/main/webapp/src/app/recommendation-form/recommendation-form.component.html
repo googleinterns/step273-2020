@@ -1,59 +1,74 @@
 <h1>Hidden Gems Recommendations</h1>
 <h4>Get a restaurant recommendation tailored just for you!</h4>
-<br></br>
-<form [formGroup]="preferenceForm" (ngSubmit)="onSubmit">
-<h2>Your Restaurant Preferences</h2>
-<p>Please select your restaurant preferences in the form below. If you have no preference for a field, please feel free to leave it blank</p>
 
-<h3>Price Range</h3>
-<div formGroupName="price" class="price-group">
-  <label for="1">
-    💲
-    <input type="radio" formControlName="1" value="1">
-  </label>
-  <label for="2">
-    💲💲
-    <input type="radio" formControlName="2" value="2">
-  </label>
-  <label for="3">
-    💲💲💲
-    <input type="radio" formControlName="3" value="3">
-  </label>
-  <label for="4">
-    💲💲💲💲
-    <input type="radio" formControlName="4" value="4">
-  </label>
-</div>
+<form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()">
+  <h2>Your Restaurant Preferences</h2>
+  <p>Please select your restaurant preferences in the form below. If you have no preference for a field, please feel free to leave it blank</p>
+  
+  <h3>
+    <label for="cuisine">
+        Cuisine
+        <br>
+        <br>
+        <input type="text" formControlName="cuisine" value="cuisine">
+      </label>
+  </h3>
 
-<h3>Minimum star rating preferred</h3> 
-<div formGroupName="rating" class="rating-group">
-  <label for="1">
-    ⭐️
-    <input type="radio" formControlName="1" value="1">
-  </label>
-  <label for="2">
-    ⭐️ ⭐️
-    <input type="radio" formControlName="2" value="2">
-  </label>
-  <label for="3">
-    ⭐️ ⭐️ ⭐️
-    <input type="radio" formControlName="3" value="3">
-  </label>
-  <label for="4">
-    ⭐️ ⭐️ ⭐️ ⭐️
-    <input type="radio" formControlName="4" value="4">
-  </label>
-  <label for="5">
-    ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
-    <input type="radio" formControlName="5" value="5">
-  </label>
-</div>
-<label>Restaurant Type</label>
-<select formControlName="type" (change)>
-  <option value="Restaurant">Restaurant</option>
-  <option value="Cafe">Cafe</option>
-</select>
+  <h3>Price Range</h3>
+  <div  class="price-group">
+    <label for="low">
+      💲
+      <input type="radio" formControlName="price" value="low">
+    </label>
+    <label for="medium">
+      💲💲
+      <input type="radio" formControlName="price" value="medium" >
+    </label>
+    <label for="high">
+      💲💲💲
+      <input type="radio" formControlName="price" value="high" >
+    </label>
+    <label for="extreme">
+      💲💲💲💲
+      <input type="radio" formControlName="price"value="extreme" >
+    </label>
+  </div>
 
-<button type="button">Find my hidden gems</button>
+  <h3>Minimum star rating preferred</h3> 
+  <div class="rating-group">
+    <label for="1">
+      ⭐️
+      <input type="radio" formControlName="rating" value="1">
+    </label>
+    <label for="2">
+      ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="2">
+    </label>
+    <label for="3">
+      ⭐️ ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="3">
+    </label>
+    <label for="4">
+      ⭐️ ⭐️ ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="4">
+    </label>
+    <label for="5">
+      ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="5">
+    </label>
+  </div>
+
+  <h3>
+    <label>Restaurant Type</label>
+  </h3>
+  <select formControlName="type">
+    <option value="Dine In Restaurant">Dine In Restaurant</option>
+    <option value="Cafe">Cafe</option>
+    <option value="TakeOut">Take Out</option>
+    <option value="Delivery">Delivery</option>
+  </select>
+  <br>
+  <br>
+  <button type="submit">Find my hidden gems</button>
 
 </form>
