@@ -14,7 +14,7 @@
 
 package com.google.sps.data;
 
-/** An item on a comment section. */
+/** Hidden Gems are restaurants or cafes in Australia which have 10-50 reviews and a rating of at least 3.5/5. */
 public final class HiddenGem {
 
   private final int id;
