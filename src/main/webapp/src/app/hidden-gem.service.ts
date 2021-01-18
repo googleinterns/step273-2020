@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,13 +9,8 @@ import { Observable } from 'rxjs';
 export class HiddenGemService {
   constructor(private httpClient: HttpClient) { }
 
-  getAllHiddenGems() {
-    return this.httpClient.get<HiddenGemsResponse>('/hiddengems', {
-      responseType: 'json'
-    })
-      .pipe(
-        map((response: HiddenGemsResponse) => {return response.hiddenGems})
-      )
+  getAllHiddenGems() : Observable<HiddenGem[]> {
+    return this.httpClient.get<HiddenGem[]>('/hiddengems')
   }
 }
 

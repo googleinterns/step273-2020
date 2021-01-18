@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HiddenGemService, HiddenGem } from '../../hidden-gem.service';
+import { HiddenGemService } from '../../hidden-gem.service';
 
 @Component({
   selector: 'app-ranking-list',
@@ -7,7 +7,7 @@ import { HiddenGemService, HiddenGem } from '../../hidden-gem.service';
   styleUrls: ['./ranking-list.component.css']
 })
 export class RankingListComponent implements OnInit {
-  hiddenGems : any;
+  hiddenGems : any = [];
 
   constructor(private hiddenGemService: HiddenGemService) { }
 

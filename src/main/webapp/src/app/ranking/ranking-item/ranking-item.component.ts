@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./ranking-item.component.css']
 })
 export class RankingItemComponent {
-  @Input() hiddenGem : any
+  @Input() hiddenGem: any = {}
 }
