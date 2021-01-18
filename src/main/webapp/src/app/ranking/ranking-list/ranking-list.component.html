@@ -1,3 +1,4 @@
+<h2>Ranking List Component: </h2>
 <section>
-  <app-ranking-item></app-ranking-item>
+  <app-ranking-item *ngFor="let hiddenGem of hiddenGems" [hiddenGem]="hiddenGem"></app-ranking-item>
 </section>
