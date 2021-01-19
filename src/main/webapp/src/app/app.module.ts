@@ -16,7 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
-
+import { MapModule } from './map/map.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MapModule
   ],
   providers: [],
   bootstrap: [
