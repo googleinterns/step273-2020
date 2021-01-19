@@ -1,0 +1,16 @@
+<div>
+  <mat-card class="mat-elevation-24">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{hiddenGem.name}}</mat-card-title>
+      <mat-card-subtitle>{{hiddenGem.address}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image height="200" src={{hiddenGem.photo}} alt={{hiddenGem.name}}>
+    <mat-card-content>
+      <p>Price Level (💲): {{hiddenGem.price_level}} </p>
+      <p>Star Rating (⭐️): {{hiddenGem.rating}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>
