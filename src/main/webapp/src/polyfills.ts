@@ -57,6 +57,8 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 import 'zone.js/dist/zone-testing';
+import 'zone.js/dist/proxy';
+import "zone.js/dist/jasmine-patch";
 
 
 /***************************************************************************************************

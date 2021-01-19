@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RankingListComponent } from './ranking-list.component';
 
@@ -19,7 +19,7 @@ describe('RankingListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', fakeAsync(() => {
+  it('should create', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 });
