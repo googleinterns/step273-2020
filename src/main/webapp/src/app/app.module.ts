@@ -11,7 +11,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
-import { MapModule } from './map/map.module';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 
 @NgModule({
@@ -30,8 +29,7 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule,
-    MapModule
+    MatIconModule
   ],
   providers: [],
   bootstrap: [
