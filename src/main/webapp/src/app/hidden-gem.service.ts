@@ -15,7 +15,7 @@ export class HiddenGemService {
   }
 
   findHiddenGemReccomendation(data: any) : Observable<HiddenGem[]> {
-    return this.httpClient.post<HiddenGem[]>('/recommendations', data)
+    return this.httpClient.post<HiddenGem[]>('/recommendation', data)
   }
   
   private top3gems = new Subject<HiddenGem[]>();
