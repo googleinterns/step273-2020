@@ -1,25 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { RankingListComponent } from './ranking-list.component';
+import { HiddenGemService } from '../../hidden-gem.service';
 
-describe('RankingListComponent', () => {
-  let component: RankingListComponent;
-  let fixture: ComponentFixture<RankingListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ RankingListComponent ]
-    })
-    .compileComponents();
-  });
+describe('HiddenGemService', () => {
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(RankingListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [HttpClientTestingModule],
+    providers: [HiddenGemService]
+  }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should be created', () => {
+    const service: HiddenGemService = TestBed.get(HiddenGemService);
+    expect(service).toBeTruthy();
+    });
+
+    it('should have getAllHiddenGems function', () => {
+    const service: HiddenGemService = TestBed.get(HiddenGemService);
+    expect(service.getAllHiddenGems).toBeTruthy();
+    });
+
 });
