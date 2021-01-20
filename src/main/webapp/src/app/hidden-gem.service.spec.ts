@@ -1,4 +1,5 @@
-import { HiddenGemService, HiddenGem } from "./hidden-gem.service";
+import { HiddenGemService } from "./hidden-gem.service";
+import { HiddenGem } from './hidden-gem';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 

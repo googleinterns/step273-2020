@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RankingListComponent } from './ranking-list.component';
+import { HiddenGemService } from '../../hidden-gem.service';
 
 describe('RankingListComponent', () => {
   let component: RankingListComponent;
@@ -8,7 +9,8 @@ describe('RankingListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RankingListComponent ]
+      declarations: [RankingListComponent],
+      providers: [HiddenGemService]
     })
     .compileComponents();
   });

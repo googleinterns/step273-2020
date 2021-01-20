@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../../../target/hidden-gems-1/",
+            "outputPath": "dist/hidden-gems",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -120,8 +120,5 @@
       }
     }
   },
-  "defaultProject": "webapp",
-  "cli": {
-    "analytics": "dcb6542c-9c84-47f0-a3c5-e9bf7c283d66"
-  }
+  "defaultProject": "webapp"
 }
