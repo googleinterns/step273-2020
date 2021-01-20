@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
-
 import { MapComponent } from "./map/map.component";
+import { RecommendationComponent } from "./recommendation/recommendation.component";
 import { CommonModule } from '@angular/common';
-  
 
 const routes: Routes = [ 
-  { path: 'map' , 
-    component: MapComponent,
-    outlet: 'popup' }
+  { path: '' , 
+    component: MapComponent
+  },
+  { path: '/recommendation' , 
+    component: RecommendationComponent
+  }
 ];
 
 @NgModule({
-  // imports: [RouterModule.forRoot(routes)],
-  //exports: [RouterModule]
   imports: [
     CommonModule,
     RouterModule.forRoot(routes )
