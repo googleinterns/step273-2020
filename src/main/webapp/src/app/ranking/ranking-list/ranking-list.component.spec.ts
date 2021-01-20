@@ -18,7 +18,7 @@ describe('HiddenGemService', () => {
     expect(service).toBeTruthy();
     });
 
-    it('should have getData function', () => {
+    it('should have getAllHiddenGems function', () => {
     const service: HiddenGemService = TestBed.get(HiddenGemService);
     expect(service.getAllHiddenGems).toBeTruthy();
     });
