@@ -2,20 +2,22 @@
   "scripts": {
     "build": "npm install && cd src/main/webapp && npm install && cd ../../..",
     "dev": "concurrently 'cd src/main/webapp && npm run build:dev' 'mvn package appengine:run'",
+    "test": "cd src/main/webapp && npm run test",
     "prod": "cd src/main/webapp && npm run build:prod && cd ../../../ && mvn package appengine:run",
     "deploy": "cd src/main/webapp && npm run build:prod && cd ../../../ && mvn package war:war appengine:deploy"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
-    "eslint": "^7.2.0",
+    "eslint": "^7.18.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.2",
     "karma": "^6.0.0",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "zone.js": "~0.10.2"
   },
   "dependencies": {
     "@angular/animations": "^10.0.2",
