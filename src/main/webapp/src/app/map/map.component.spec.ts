@@ -18,7 +18,21 @@ describe('MapComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the Map Component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render heading', () => {
+    const fixture = TestBed.createComponent(MapComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Maps!');
+  });
+
+  it('should render the image', () => {
+  const fixture = TestBed.createComponent(MapComponent);
+  fixture.detectChanges();
+  const compiled = fixture.debugElement.nativeElement;
+  expect(compiled.querySelector('div.image>img').src).toContain('map.jpg');
+});
 });

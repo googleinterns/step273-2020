@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 
 export class NavBarComponent implements OnInit {
 
+  navigatedAway: boolean = false;
   constructor() {  }
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+  
+   }
 }
