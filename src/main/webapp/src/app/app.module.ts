@@ -37,5 +37,5 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
   ]
 })
 export class AppModule { 
-  constructor(router: Router) {  }
+  constructor() {  }
 }

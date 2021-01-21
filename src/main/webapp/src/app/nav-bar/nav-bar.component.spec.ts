@@ -1,13 +1,11 @@
-import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { NavBarComponent } from './nav-bar.component';
-
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MapComponent } from '../map/map.component';
-
 
 describe('NavBarComponent', () => {
  
@@ -34,10 +32,9 @@ describe('NavBarComponent', () => {
         ])
       ],
     }),
-   
+    
     fixture = TestBed.createComponent(NavBarComponent);
     component = fixture.componentInstance;
-    
     fixture.detectChanges();
   });
 
