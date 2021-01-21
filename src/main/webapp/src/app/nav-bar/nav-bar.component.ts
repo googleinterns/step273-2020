@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class NavBarComponent implements OnInit {
+  [x: string]: any;
 
-  navigatedAway: boolean = false;
+
   constructor() {  }
   ngOnInit(): void { 
   
