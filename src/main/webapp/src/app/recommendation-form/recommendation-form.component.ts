@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-recommendation-form',
@@ -15,7 +15,7 @@ export class RecommendationFormComponent{
     type: ""
   });
 
-  constructor(private formBuilder: FormBuilder) { }   
+  constructor(private readonly formBuilder: FormBuilder) { }   
 
   // Submit user's preference form
   onSubmit(): void {

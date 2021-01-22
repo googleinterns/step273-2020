@@ -6,13 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RecommendationFormComponent } from './recommendation-form/recommendation-form.component';
-import { TestComponentComponent } from './test-component/test-component.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecommendationFormComponent,
-    TestComponentComponent
+    RecommendationFormComponent
   ],
   imports: [
     BrowserModule,

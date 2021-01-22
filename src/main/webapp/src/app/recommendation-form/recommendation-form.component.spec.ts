@@ -46,7 +46,6 @@ describe('RecommendationFormComponent', () => {
     expect(priceRange.errors).toBeNull();
     expect(priceRange.value).toEqual("low");
     expect(priceRange.valueChanges).toBeTruthy();
-    //expect(priceRange.touched).toBeTruthy();
   });
 
   it('[Form Check] - Rating', () => {
@@ -97,6 +96,5 @@ describe('RecommendationFormComponent', () => {
     expect(component.preferenceForm.controls['type'].value).toEqual('Restaurant');
 
   });
-
 
 });
