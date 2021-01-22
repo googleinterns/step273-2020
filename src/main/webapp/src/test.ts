@@ -2,6 +2,10 @@
 
 import 'zone.js/dist/zone-testing';
 
+/**
+ * These imports are needed so that the system can be updated when changes occur
+ * and enable it to test the .spec.ts files using karma and jasmine.
+*/
 import 'zone.js/dist/proxy';
 import 'zone.js/dist/jasmine-patch';
 import 'zone.js/dist/long-stack-trace-zone';

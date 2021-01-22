@@ -6,24 +6,6 @@ import { RankingListComponent } from './ranking-list.component';
 import { HiddenGemService } from '../../hidden-gem.service';
 import { HiddenGem } from '../../hidden-gem';
 
-describe('HiddenGemService', () => {
-
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule],
-    providers: [HiddenGemService]
-  }));
-
-    it('should be created', () => {
-    const service: HiddenGemService = TestBed.get(HiddenGemService);
-    expect(service).toBeTruthy();
-    });
-
-    it('should have getAllHiddenGems function', () => {
-    const service: HiddenGemService = TestBed.get(HiddenGemService);
-    expect(service.getAllHiddenGems).toBeTruthy();
-    });
-});
-
 describe('RankingListComponent', () => {
   let component: RankingListComponent;
   let fixture: ComponentFixture<RankingListComponent>;

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { HiddenGem } from 'src/app/hidden-gem';
 
 @Component({
   selector: 'app-ranking-item',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./ranking-item.component.css']
 })
 export class RankingItemComponent {
-  @Input() hiddenGem: any = {}
+  @Input() hiddenGem = {} as HiddenGem;
 }
