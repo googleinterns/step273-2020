@@ -1,15 +1,15 @@
 <mat-card class="mat-elevation-z2">
   <mat-card-header>
-    <mat-card-title>{{hiddenGem.id}}. {{hiddenGem.name}}</mat-card-title>
-    <mat-card-subtitle>{{hiddenGem.address}}</mat-card-subtitle>
+    <mat-card-title id="name">{{hiddenGem.id}}. {{hiddenGem.name}}</mat-card-title>
+    <mat-card-subtitle id="address">{{hiddenGem.address}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <mat-grid-list cols="2" rowHeight="200px">
       <mat-grid-tile>
         <div id="business-info">
-          <p class="mat-subheading-2"><b>Business type:</b> {{hiddenGem.business_type}}</p>
-          <p class="mat-subheading-2"><b>Price level:</b> {{hiddenGem.price_level}}</p>
-          <p class="mat-subheading-2"><b>Rating:</b> {{hiddenGem.rating}}</p>
+          <p class="mat-subheading-2" id="business_type"><b>Business type:</b> {{hiddenGem.business_type}}</p>
+          <p class="mat-subheading-2" id="price_level"><b>Price level:</b> {{hiddenGem.price_level}}</p>
+          <p class="mat-subheading-2" id="rating"><b>Rating:</b> {{hiddenGem.rating}}</p>
         </div>
       </mat-grid-tile>
       <mat-grid-tile><img height="200" src={{hiddenGem.photo}} alt={{hiddenGem.name}}></mat-grid-tile>
