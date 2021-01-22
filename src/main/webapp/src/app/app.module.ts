@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
