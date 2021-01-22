@@ -26,8 +26,6 @@ describe('RankingListComponent', () => {
   });
 
   it('should display only 10 hidden gems', () => {
-    const fixture = TestBed.createComponent(RankingListComponent);
-    const component = fixture.componentInstance;
     const hiddenGems = new Array<HiddenGem>(20);
     component.hiddenGems = hiddenGems;
     fixture.detectChanges();

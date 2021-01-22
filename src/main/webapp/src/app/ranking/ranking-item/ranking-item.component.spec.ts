@@ -25,8 +25,6 @@ describe('RankingItemComponent', () => {
   });
 
   it('should render hidden gem details', () => {
-    const fixture = TestBed.createComponent(RankingItemComponent);
-    const component = fixture.componentInstance;
     const hiddenGem: HiddenGem = {
       id: 1,
       name: 'Fratelli Fresh',
