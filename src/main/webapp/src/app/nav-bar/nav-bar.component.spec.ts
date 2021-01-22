@@ -41,7 +41,8 @@ describe('NavBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should go to reccomendation url', () => {
+  it('should go to recommendation url', () => {
+    fixture.detectChanges();
     fixture.debugElement.query(By.css('a')).nativeElement.click();
     fixture.whenStable().then(() => {
       expect(location.path()).toEqual('/recommendation');
