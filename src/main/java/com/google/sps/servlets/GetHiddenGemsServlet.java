@@ -22,7 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/get-hidden-gems")
+/** Servlet that return the hidden gems dummy data. */
+@WebServlet("/hiddengems")
 public class GetHiddenGemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

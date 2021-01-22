@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -12,13 +13,18 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { RecommendationComponent } from './recommendation/recommendation.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
+import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     NavBarComponent,
-    RecommendationComponent
+    RecommendationComponent,
+    RankingListComponent,
+    RankingItemComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +34,7 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
+    HttpClientModule,
     MatIconModule
   ],
   providers: [],
