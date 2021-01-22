@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, async } from '@angular/core/testing';
 import { NavBarComponent } from './nav-bar.component';
 import { Location } from '@angular/common';
 import { By } from '@angular/platform-browser';
@@ -41,18 +41,27 @@ describe('NavBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should go to recommendation url', () => {
-    fixture.detectChanges();
-    fixture.debugElement.query(By.css('a')).nativeElement.click();
+  it('should go to recommendation url', async(() => {
+    fixture.nativeElement.querySelector("#recommendation-navbar").click();
     fixture.whenStable().then(() => {
       expect(location.path()).toEqual('/recommendation');
-      console.log('after expect');
     });
-  });
+  }));
+  it('should go to home url', async(() => {
+    fixture.nativeElement.querySelector("#home-navbar").click();
+    fixture.whenStable().then(() => {
+      expect(location.path()).toEqual('/');
+    });
+  }));
 
-  it('routes should be rendered correctly', () => {
-      let href = fixture.debugElement.query(By.css('a')).nativeElement
+  it('recommendation route should be rendered correctly', () => {
+      let href = fixture.nativeElement.querySelector("#recommendation-navbar")
       .getAttribute('href');
     expect(href).toEqual('/recommendation');
+  });
+  it('home route should be rendered correctly', () => {
+      let href = fixture.nativeElement.querySelector("#home-navbar")
+      .getAttribute('href');
+    expect(href).toEqual('/');
   });
 })

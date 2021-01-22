@@ -19,8 +19,7 @@ export const routes: Routes = [
     RouterModule.forRoot(routes )
   ],
   exports: [
-    RouterModule,
-    routes
+    RouterModule
   ],
   declarations: [ ]
 })
