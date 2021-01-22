@@ -24,7 +24,6 @@ describe('HiddenGemService', () => {
     });
 });
 
-//TODO:get rid of the HTTP client problem by,maybe,having the first describe go first, then the second one? Or include the service in the test, or combine
 describe('RankingListComponent', () => {
   let component: RankingListComponent;
   let fixture: ComponentFixture<RankingListComponent>;
