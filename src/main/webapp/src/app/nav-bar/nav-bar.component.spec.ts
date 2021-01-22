@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { NavBarComponent } from './nav-bar.component';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MapComponent } from '../map/map.component';
+import { routes } from '../app-routing.module'
 
 describe('NavBarComponent', () => {
  
   let component: NavBarComponent;
   let fixture: ComponentFixture<NavBarComponent>;
-  
+  let location: Location;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ RouterTestingModule ],
@@ -27,14 +27,13 @@ describe('NavBarComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        RouterTestingModule.withRoutes([
-         { path: '', component: MapComponent }
-        ])
+        RouterTestingModule.withRoutes(routes)
       ],
     }),
     
     fixture = TestBed.createComponent(NavBarComponent);
     component = fixture.componentInstance;
+    location = TestBed.get(Location);
     fixture.detectChanges();
   });
 
@@ -42,22 +41,17 @@ describe('NavBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should go to home url',
-    inject([Router, Location], (router: Router, location: Location)=> {
-    let fixture = TestBed.createComponent(NavBarComponent);
-    fixture.detectChanges();
-
+  it('should go to reccomendation url', () => {
     fixture.debugElement.query(By.css('a')).nativeElement.click();
     fixture.whenStable().then(() => {
-      expect(location.path()).toEqual('/');
+      expect(location.path()).toEqual('/recommendation');
       console.log('after expect');
     });
-  }));
+  });
 
-  it('routes should be rendered correctly', 
-    inject([Router, Location], (router: Router, location: Location)=> {
+  it('routes should be rendered correctly', () => {
       let href = fixture.debugElement.query(By.css('a')).nativeElement
       .getAttribute('href');
     expect(href).toEqual('/recommendation');
-  }));
+  });
 })

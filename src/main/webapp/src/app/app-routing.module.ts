@@ -4,11 +4,11 @@ import { MapComponent } from "./map/map.component";
 import { RecommendationComponent } from "./recommendation/recommendation.component";
 import { CommonModule } from '@angular/common';
 
-const routes: Routes = [ 
+export const routes: Routes = [ 
   { path: '' , 
     component: MapComponent
   },
-  { path: '/recommendation' , 
+  { path: 'recommendation' , 
     component: RecommendationComponent
   }
 ];
@@ -19,8 +19,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes )
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    routes
   ],
   declarations: [ ]
 })
 export class AppRoutingModule { }
+

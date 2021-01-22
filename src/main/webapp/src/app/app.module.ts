@@ -22,7 +22,6 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatToolbarModule,
