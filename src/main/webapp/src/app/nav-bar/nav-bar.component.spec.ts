@@ -1,8 +1,6 @@
-import { ComponentFixture, TestBed, inject, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NavBarComponent } from './nav-bar.component';
 import { Location } from '@angular/common';
-import { By } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { routes } from '../app-routing.module'
 
@@ -14,11 +12,11 @@ describe('NavBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule ],
+      imports: [ 
+        RouterTestingModule.withRoutes(routes)
+      ],
       declarations: [ NavBarComponent ],
-      providers: [
-        NavBarComponent
-      ]
+      providers: [  ]
     })
     .compileComponents();
   });
@@ -26,8 +24,7 @@ describe('NavBarComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        CommonModule,
-        RouterTestingModule.withRoutes(routes)
+        
       ],
     }),
     
@@ -59,6 +56,7 @@ describe('NavBarComponent', () => {
       .getAttribute('href');
     expect(href).toEqual('/recommendation');
   });
+
   it('home route should be rendered correctly', () => {
       let href = fixture.nativeElement.querySelector("#home-navbar")
       .getAttribute('href');
