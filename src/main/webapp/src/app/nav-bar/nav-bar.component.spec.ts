@@ -19,15 +19,6 @@ describe('NavBarComponent', () => {
       providers: [  ]
     })
     .compileComponents();
-  });
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        
-      ],
-    }),
-    
     fixture = TestBed.createComponent(NavBarComponent);
     component = fixture.componentInstance;
     location = TestBed.get(Location);
