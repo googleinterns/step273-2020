@@ -53,13 +53,13 @@ describe('NavBarComponent', () => {
 
   it('recommendation route should be rendered correctly', () => {
       let href = fixture.nativeElement.querySelector("#recommendation-navbar")
-      .getAttribute('href');
+        .getAttribute('href');
     expect(href).toEqual('/recommendation');
   });
 
   it('home route should be rendered correctly', () => {
       let href = fixture.nativeElement.querySelector("#home-navbar")
-      .getAttribute('href');
+        .getAttribute('href');
     expect(href).toEqual('/');
   });
 })
