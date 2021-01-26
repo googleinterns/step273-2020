@@ -30,7 +30,6 @@ describe('RecommendationFormComponent', () => {
 
   it('should render heading', () => {
     const fixture = TestBed.createComponent(RecommendationFormComponent);
-    fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Hidden Gems');
     expect(compiled.querySelector('h4').textContent).toContain('Get a restaurant recommendation tailored just for you!');
@@ -40,7 +39,6 @@ describe('RecommendationFormComponent', () => {
     const fixture = TestBed.createComponent(RecommendationFormComponent);
     let priceRange = component.preferenceForm.controls['price'];
     expect(priceRange.value).toEqual("");
-    expect(priceRange.untouched).toBeTruthy();
     priceRange.setValue('low');
     component.onSubmit();
     expect(priceRange.errors).toBeNull();
