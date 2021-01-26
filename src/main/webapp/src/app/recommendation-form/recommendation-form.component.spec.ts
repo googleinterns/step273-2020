@@ -29,14 +29,12 @@ describe('RecommendationFormComponent', () => {
   });
 
   it('should render heading', () => {
-    const fixture = TestBed.createComponent(RecommendationFormComponent);
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Hidden Gems');
     expect(compiled.querySelector('h4').textContent).toContain('Get a restaurant recommendation tailored just for you!');
   });
 
   it('[Form Check] - Price Range', () => {
-    const fixture = TestBed.createComponent(RecommendationFormComponent);
     let priceRange = component.preferenceForm.controls['price'];
     expect(priceRange.value).toEqual("");
     priceRange.setValue('low');
@@ -47,7 +45,6 @@ describe('RecommendationFormComponent', () => {
   });
 
   it('[Form Check] - Rating', () => {
-    const fixture = TestBed.createComponent(RecommendationFormComponent);
     let starRating = component.preferenceForm.controls['rating'];
     expect(starRating.value).toEqual("");
     starRating.setValue('3');
@@ -61,7 +58,6 @@ describe('RecommendationFormComponent', () => {
   });
 
   it('[Form Check] - Restaurant Type', () => {
-    const fixture = TestBed.createComponent(RecommendationFormComponent);
     let type = component.preferenceForm.controls['type'];
     expect(type.value).toEqual("");
     type.setValue('Cafe');
