@@ -1,19 +1,10 @@
 <h1>Hidden Gems Recommendations</h1>
 <h4>Get a restaurant recommendation tailored just for you!</h4>
 
-<form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()" #formID="ngForm">
   <h2>Your Restaurant Preferences</h2>
   <p>Please select your restaurant preferences in the form below. If you have no preference for a field, please feel free to leave it blank</p>
   
-  <h3>
-    <label for="cuisine">
-        Cuisine
-        <br>
-        <br>
-        <input type="text" formControlName="cuisine" value="cuisine">
-      </label>
-  </h3>
-
   <h3>Price Range</h3>
   <div  class="price-group">
     <label for="low">
@@ -62,13 +53,11 @@
     <label>Restaurant Type</label>
   </h3>
   <select formControlName="type">
-    <option value="Dine In Restaurant">Dine In Restaurant</option>
+    <option value="Restaurant">Restaurant</option>
     <option value="Cafe">Cafe</option>
-    <option value="TakeOut">Take Out</option>
-    <option value="Delivery">Delivery</option>
   </select>
   <br>
   <br>
-  <button type="submit">Find my hidden gems</button>
+  <button type="submit" id='submit'>Find my hidden gems</button>
 
 </form>

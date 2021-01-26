@@ -12,6 +12,8 @@ import { RecommendationListComponent } from './recommendation-list/recommendatio
 import { RecommendationItemComponent } from './recommendation-item/recommendation-item.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
+import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     RecommendationFormComponent,
     RecommendationItemComponent,
     RecommendationListComponent,
-    RecommendationComponent
+    RecommendationComponent,
+    RankingListComponent,
+    RankingItemComponent
   ],
   imports: [
     BrowserModule,

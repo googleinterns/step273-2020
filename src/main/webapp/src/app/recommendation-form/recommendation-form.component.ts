@@ -7,23 +7,19 @@ import { HiddenGemService } from '../hidden-gem.service';
   templateUrl: './recommendation-form.component.html',
   styleUrls: ['./recommendation-form.component.css']
 })
-export class RecommendationFormComponent implements OnInit {
+export class RecommendationFormComponent{
 
    @Output() formSubmit: EventEmitter<void> = new EventEmitter()
 
    hiddenGems : any = [];
   // Build preference form
-  preferenceForm = this.fb.group({
-    cuisine: "",
+  preferenceForm = this.formBuilder.group({
     price: "",
     rating:"",
     type: ""
   });
 
-  constructor(private fb: FormBuilder, private hiddenGemService: HiddenGemService) { }
-   
-  ngOnInit(){
-  }
+  constructor(private readonly formBuilder: FormBuilder, private hiddenGemService: HiddenGemService) { }
 
   // Submit user's preference form
   onSubmit(): void {
