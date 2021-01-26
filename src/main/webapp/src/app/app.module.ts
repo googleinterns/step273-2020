@@ -14,7 +14,6 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
 import { HttpClientModule } from '@angular/common/http';
 import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
 import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 
@@ -37,7 +36,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     MatCardModule,
     MatGridListModule
   ],
@@ -46,6 +44,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
     AppComponent
   ]
 })
-export class AppModule { 
+export class AppModule {
   constructor() {  }
 }
