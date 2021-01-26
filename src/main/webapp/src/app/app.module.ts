@@ -14,6 +14,8 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
 import { HttpClientModule } from '@angular/common/http';
 import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
 import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,14 @@ import { RankingItemComponent } from './ranking/ranking-item/ranking-item.compon
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [
     AppComponent
   ]
 })
-export class AppModule { 
+export class AppModule {
   constructor() {  }
 }
