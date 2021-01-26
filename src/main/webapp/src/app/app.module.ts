@@ -11,7 +11,6 @@ import { RecommendationFormComponent } from './recommendation-form/recommendatio
 import { RecommendationListComponent } from './recommendation-list/recommendation-list.component';
 import { RecommendationItemComponent } from './recommendation-item/recommendation-item.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
 import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
 
@@ -31,8 +30,7 @@ import { RankingItemComponent } from './ranking/ranking-item/ranking-item.compon
     AppRoutingModule,
     HttpClientModule,
     FlexLayoutModule,
-    MatCardModule,
-    NoopAnimationsModule
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

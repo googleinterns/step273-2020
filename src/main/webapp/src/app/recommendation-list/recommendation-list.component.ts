@@ -12,10 +12,6 @@ export class RecommendationListComponent implements OnInit {
   constructor(private hiddenGemService: HiddenGemService) { }
 
   ngOnInit() {
-    // this.hiddenGemService.getAllHiddenGems()
-    //   .subscribe(hiddenGems => {
-    //     this.hiddenGems = hiddenGems;
-    // })
     this.hiddenGemService.top3gems$
       .subscribe(hiddenGems => {
         this.hiddenGems = hiddenGems;
