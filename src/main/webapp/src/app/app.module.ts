@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
 import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
+import { LocationComponent } from './location/location.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RankingListComponent,
-    RankingItemComponent
+    RankingItemComponent,
+    LocationComponent
   ],
   imports: [
     BrowserModule,
