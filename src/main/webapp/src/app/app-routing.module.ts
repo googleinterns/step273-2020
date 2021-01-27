@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
+import { RecommendationComponent  } from './recommendation/recommendation.component';
 import { RouterModule, Routes } from "@angular/router";
 import { MapComponent } from "./map/map.component";
-import { RecommendationComponent } from "./recommendation/recommendation.component";
 import { CommonModule } from '@angular/common';
 
 export const routes: Routes = [ 
@@ -9,7 +9,7 @@ export const routes: Routes = [
     component: MapComponent
   },
   { path: 'recommendation' , 
-    component: RecommendationComponent
+    component: RecommendationComponent 
   }
 ];
 
