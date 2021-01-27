@@ -1,3 +1,4 @@
+
 // Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,21 +13,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.sps.servlets;
+package com.google.sps;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/** Servlet that returns some example content.*/
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
+@RunWith(JUnit4.class)
+public final class GetConfigPropertiesTest {
+  @Test
+  public void GetApiKeyString() throws FileNotFoundException, IOException {
+    String actual = GetConfigProperties.getApiKey();
+    String expected = "INSERT_API_KEY";
+    Assert.assertEquals(expected, actual);
   }
 }
+
