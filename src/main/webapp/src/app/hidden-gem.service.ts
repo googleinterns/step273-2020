@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { HiddenGem } from './hidden-gem';
 import { catchError } from 'rxjs/operators';
@@ -23,8 +23,9 @@ export class HiddenGemService {
 
 
   findHiddenGemReccomendation(data: any) : Observable<HiddenGem[]> {
+    const params = new HttpParams().append("preferences", data);
     return this.httpClient
-      .post<HiddenGem[]>('/recommendation', data)
+      .get<HiddenGem[]>('/recommendation', {params})
       .pipe(catchError(this.handleError))
   }
   

@@ -31,18 +31,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/recommendation")
 public class GetTop3GemsServlet extends HttpServlet {
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
 
     List<HiddenGem> top3Gems = new ArrayList<>();
     List<HiddenGem> hiddenGems = Arrays.asList(HiddenGems.hiddenGems);
-    // //HiddenGem[] top3Gems;
     for(int i=0; i < 3; i++){
       top3Gems.add(hiddenGems.get(i));
       
     }
-    
-    //String jsonResponse = gson.toJson(HiddenGems.hiddenGems);
+
    String jsonResponse = gson.toJson(top3Gems);
     // Send the JSON back as the response
     response.setContentType("application/json");

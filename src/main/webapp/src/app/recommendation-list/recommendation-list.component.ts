@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HiddenGemService } from '../hidden-gem.service';
+import { HiddenGem } from '../hidden-gem';
 
 @Component({
   selector: 'app-recommendation-list',
@@ -8,7 +9,7 @@ import { HiddenGemService } from '../hidden-gem.service';
 })
 export class RecommendationListComponent implements OnInit {
 
-  hiddenGems : any = [];
+  hiddenGems: HiddenGem[] = [];
   constructor(private hiddenGemService: HiddenGemService) { }
 
   ngOnInit() {

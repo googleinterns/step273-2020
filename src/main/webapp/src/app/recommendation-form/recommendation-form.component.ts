@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 import { HiddenGemService } from '../hidden-gem.service';
 
 @Component({
@@ -14,9 +14,9 @@ export class RecommendationFormComponent{
    hiddenGems : any = [];
   // Build preference form
   preferenceForm = this.formBuilder.group({
-    price: "",
-    rating:"",
-    type: ""
+    price: ["", Validators.required],
+    rating: ["", Validators.required],
+    type: ["", Validators.required]
   });
 
   constructor(private readonly formBuilder: FormBuilder, private hiddenGemService: HiddenGemService) { }

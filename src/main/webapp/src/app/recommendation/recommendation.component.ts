@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-recommendation',
   templateUrl: './recommendation.component.html',
   styleUrls: ['./recommendation.component.css']
 })
-export class RecommendationComponent implements OnInit {
+export class RecommendationComponent  {
 
   formSubmitted = false;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   onFormSubmit(){
     this.formSubmitted = true;

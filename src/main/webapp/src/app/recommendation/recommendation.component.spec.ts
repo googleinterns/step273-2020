@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { By } from '@angular/platform-browser';
 import { RecommendationComponent } from './recommendation.component';
 
 describe('RecommendationComponent', () => {
@@ -21,5 +21,22 @@ describe('RecommendationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should only display recommendation form in initial state', () => {
+    expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeDefined;
+    expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeNull;
+  });
+
+  it('should display recommendation form and list after form submission', () => {
+    expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeTruthy;
+    expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeFalsy;
+    
+    component.onFormSubmit();
+    fixture.detectChanges();
+
+    expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeTruthy;
+    expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeTruthy;
+
   });
 });
