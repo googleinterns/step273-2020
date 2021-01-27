@@ -14,11 +14,3 @@ export const environment = {
  * on performance if an error is thrown.
  */
 import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-
-// import 'zone.js/dist/zone-testing';
-// import 'zone.js/dist/proxy';
-// import 'zone.js/dist/jasmine-patch';
-// import 'zone.js/dist/long-stack-trace-zone';
-// import 'zone.js/dist/sync-test';
-// import 'zone.js/dist/async-test';
-// import 'zone.js/dist/fake-async-test';
