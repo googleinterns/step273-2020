@@ -18,6 +18,7 @@ import { RankingListComponent } from './ranking/ranking-list/ranking-list.compon
 import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     NavBarComponent,
     RecommendationComponent,
     RankingListComponent,
-    RankingItemComponent
+    RankingItemComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,

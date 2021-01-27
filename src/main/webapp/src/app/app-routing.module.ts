@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RecommendationComponent  } from './recommendation/recommendation.component';
 import { RouterModule, Routes } from "@angular/router";
-import { MapComponent } from "./map/map.component";
 import { CommonModule } from '@angular/common';
+import { HomepageComponent } from './homepage/homepage.component';
 
-export const routes: Routes = [ 
-  { path: '' , 
-    component: MapComponent
+export const routes: Routes = [
+  { path: '' ,
+    component: HomepageComponent
   },
-  { path: 'recommendation' , 
-    component: RecommendationComponent 
+  { path: 'recommendation' ,
+    component: RecommendationComponent
   }
 ];
 
