@@ -36,13 +36,13 @@ describe('RecommendationItemComponent', () => {
     };
     
     component.hiddenGem = hiddenGem;
-
+    console.log(component);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('img').src).toContain('https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg');
-    expect(compiled.querySelector('#name').textContent).toContain('Fratelli Fresh');
-    expect(compiled.querySelector('#address').textContent).toContain('ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000');
-    expect(compiled.querySelector('#price_level').textContent).toContain(3);
-    expect(compiled.querySelector('#rating').textContent).toContain(4);
+    expect(compiled.querySelector('img').src).toBe('https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg');
+    expect(compiled.querySelector('#name').textContent).toBe('Fratelli Fresh');
+    expect(compiled.querySelector('#address').textContent).toBe('ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000');
+    expect(compiled.querySelector('#price').textContent).toBe('Price Level (💲): 3');
+    expect(compiled.querySelector('#rating').textContent).toBe('Star Rating (⭐️): 4');
   });
 });

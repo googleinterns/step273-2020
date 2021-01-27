@@ -3,8 +3,6 @@
 // This import is needed for tests to work. Otherwise, tests fail and indicate that
 // zone-testing.js is necessary for the async() test helper but couldn't be found.
 import 'zone.js/dist/zone-testing';
-import 'zone.js/dist/zone-testing.js';
-
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,

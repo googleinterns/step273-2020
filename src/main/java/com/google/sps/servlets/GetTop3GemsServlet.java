@@ -34,8 +34,6 @@ public class GetTop3GemsServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
 
-    System.out.println("hihi" + request);
-
     List<HiddenGem> top3Gems = new ArrayList<>();
     List<HiddenGem> hiddenGems = Arrays.asList(HiddenGems.hiddenGems);
     // //HiddenGem[] top3Gems;

@@ -1,13 +1,26 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { RecommendationFormComponent  } from './recommendation-form/recommendation-form.component'
+import { RecommendationComponent  } from './recommendation/recommendation.component';
+import { RouterModule, Routes } from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { HomepageComponent } from './homepage/homepage.component';
 
-const routes: Routes = [
-  { path: 'recommendation-form', component: RecommendationFormComponent }
+export const routes: Routes = [
+  { path: '' ,
+    component: HomepageComponent
+  },
+  { path: 'recommendation' ,
+    component: RecommendationComponent
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes )
+  ],
+  exports: [
+    RouterModule
+  ],
+  declarations: [ ]
 })
 export class AppRoutingModule { }

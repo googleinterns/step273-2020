@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { HiddenGem } from '../hidden-gem';
 
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./recommendation-item.component.css']
 })
 export class RecommendationItemComponent {
-  @Input() hiddenGem: any = {}
+  @Input() hiddenGem = {} as HiddenGem;
 
 }
 
