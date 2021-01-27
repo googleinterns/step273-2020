@@ -1,10 +1,26 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RecommendationComponent  } from './recommendation/recommendation.component';
+import { RouterModule, Routes } from "@angular/router";
+import { MapComponent } from "./map/map.component";
+import { CommonModule } from '@angular/common';
 
-const routes: Routes = [];
+export const routes: Routes = [ 
+  { path: '' , 
+    component: MapComponent
+  },
+  { path: 'recommendation' , 
+    component: RecommendationComponent 
+  }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes )
+  ],
+  exports: [
+    RouterModule
+  ],
+  declarations: [ ]
 })
 export class AppRoutingModule { }

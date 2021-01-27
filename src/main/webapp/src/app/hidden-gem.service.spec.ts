@@ -2,7 +2,7 @@ import { HiddenGemService } from "./hidden-gem.service";
 import { HiddenGem } from './hidden-gem';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
-import { fakeAsync, TestBed } from '@angular/core/testing';
+import { fakeAsync } from '@angular/core/testing';
 
 describe('HiddenGemService', () => {
   let httpClientSpy: { get: jasmine.Spy };
