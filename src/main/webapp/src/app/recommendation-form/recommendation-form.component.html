@@ -1,0 +1,64 @@
+<h1>Hidden Gems Recommendations</h1>
+<h4>Get a restaurant recommendation tailored just for you!</h4>
+
+<form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()" #formID="ngForm">
+  <h2>Your Restaurant Preferences</h2>
+  <p>Please select your restaurant preferences in the form below. If you have no preference for a 
+    field, please feel free to leave it blank</p>
+  
+  <h3>Price Range</h3>
+  <div  class="price-group">
+    <label for="low">
+      💲
+      <input type="radio" formControlName="price" value="low">
+    </label>
+    <label for="medium">
+      💲💲
+      <input type="radio" formControlName="price" value="medium" >
+    </label>
+    <label for="high">
+      💲💲💲
+      <input type="radio" formControlName="price" value="high" >
+    </label>
+    <label for="extreme">
+      💲💲💲💲
+      <input type="radio" formControlName="price"value="extreme" >
+    </label>
+  </div>
+
+  <h3>Minimum star rating preferred</h3> 
+  <div class="rating-group">
+    <label for="1">
+      ⭐️
+      <input type="radio" formControlName="rating" value="1">
+    </label>
+    <label for="2">
+      ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="2">
+    </label>
+    <label for="3">
+      ⭐️ ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="3">
+    </label>
+    <label for="4">
+      ⭐️ ⭐️ ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="4">
+    </label>
+    <label for="5">
+      ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
+      <input type="radio" formControlName="rating" value="5">
+    </label>
+  </div>
+
+  <h3>
+    <label>Restaurant Type</label>
+  </h3>
+  <select formControlName="type">
+    <option value="Restaurant">Restaurant</option>
+    <option value="Cafe">Cafe</option>
+  </select>
+  <br>
+  <br>
+  <button type="submit" id='submit'>Find my hidden gems</button>
+
+</form>
