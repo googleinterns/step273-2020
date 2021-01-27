@@ -13,6 +13,11 @@ public class GetConfigProperties {
     Properties appProps = new Properties();
     appProps.load(new FileInputStream(appConfigPath));
 
-    return appProps.getProperty("api_key");
+    String apiKey = appProps.getProperty("api_key");
+    if (apiKey == null) {
+      return "";
+    }
+    else
+      return apiKey;
   }
 }

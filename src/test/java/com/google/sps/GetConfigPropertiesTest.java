@@ -17,6 +17,10 @@ package com.google.sps;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +31,14 @@ public final class GetConfigPropertiesTest {
   @Test
   public void GetApiKeyString() throws FileNotFoundException, IOException {
     String actual = GetConfigProperties.getApiKey();
-    String expected = "INSERT_API_KEY";
+    String expected = "mockApiKey";
     Assert.assertEquals(expected, actual);
   }
-}
 
+  @Test
+  public void CheckIfPropertiesFileExist() {
+    String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+    Path path = Paths.get(rootPath + "app.properties");
+    Assert.assertTrue(Files.exists(path));
+  }
+}
