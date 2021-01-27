@@ -49,23 +49,25 @@ describe('RecommendationFormComponent', () => {
 
   it('[Form Check] - Rating', () => {
     let starRating = component.preferenceForm.controls['rating'];
-    expect(starRating.value).toEqual("");
-    starRating.setValue('3');
-    expect(starRating.valueChanges).toBeTruthy();
-    starRating.setValue('4');
+    expect(starRating.untouched).toBeTrue;
+    expect(starRating.valid).toBeFalse;
+
+    starRating.setValue(3);
     component.onSubmit();
-    expect(starRating.valid).toBeTruthy();
-    expect(starRating.errors).toBeNull();
-    expect(starRating.value).toEqual("4");
-    expect(starRating.valueChanges).toBeTruthy();
+
+    expect(starRating.touched).toBeTrue;
+    expect(starRating.valid).toBeTrue;
+    expect(starRating.value).toEqual(3);
+
   });
 
   it('[Form Check] - Restaurant Type', () => {
     let type = component.preferenceForm.controls['type'];
     expect(type.value).toEqual("");
+    expect(type.pristine).toBeTrue;
     type.setValue('Cafe');
     component.onSubmit();
-    expect(type.valid).toBeTruthy();
+    expect(type.pristine).toBeFalse;
     expect(type.errors).toBeNull();
     expect(type.value).toEqual("Cafe");
     expect(type.valueChanges).toBeTruthy();
@@ -94,4 +96,15 @@ describe('RecommendationFormComponent', () => {
 
   });
 
+  it('[Form Check] -  No Preference', () => {
+
+    component.onSubmit();
+    expect(component.preferenceForm.controls['price'].value).toEqual('');
+    expect(component.preferenceForm.controls['rating'].value).toEqual('');
+    expect(component.preferenceForm.controls['type'].value).toEqual('');
+
+    expect(component.preferenceForm.status).toEqual("INVALID");
+    expect(component.preferenceForm.touched).toBeFalse;
+    expect(component.preferenceForm.pristine).toBeTrue;
+  });
 });

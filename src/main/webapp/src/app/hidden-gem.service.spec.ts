@@ -71,4 +71,33 @@ describe('HiddenGemService', () => {
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   })
 
+  it('should update top 3 gems', () => {
+
+    const expectedTopGems: HiddenGem[] =
+      [
+        {
+          id: 1,
+          name: 'The best restaurant',
+          business_type: 'Restaurant',
+          address: 'An address located within Sydney, Sydney NSW 2000',
+          price_level: 3,
+          rating: 3,
+          photo: 'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg'
+        },
+      ];
+
+    httpClientSpy.get.and.returnValue(of(expectedTopGems));
+
+    hiddenGemService.findHiddenGemReccomendation("")
+      .subscribe(hiddenGems => {
+        hiddenGemService.updateTop3Gems(expectedTopGems);
+    })
+  
+    hiddenGemService.top3gems$.subscribe(
+      hiddenGems => expect(hiddenGems).toEqual(expectedTopGems));
+
+    expect(httpClientSpy.get.calls.count()).toBe(1);
+  })
+
+
 })

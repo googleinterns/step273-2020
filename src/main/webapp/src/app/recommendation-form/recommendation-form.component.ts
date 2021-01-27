@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import { Component, Output, EventEmitter } from '@angular/core';
+import {  FormBuilder, Validators} from '@angular/forms';
 import { HiddenGemService } from '../hidden-gem.service';
 
 @Component({
@@ -9,9 +9,8 @@ import { HiddenGemService } from '../hidden-gem.service';
 })
 export class RecommendationFormComponent{
 
-   @Output() formSubmit: EventEmitter<void> = new EventEmitter()
+  @Output() formSubmit: EventEmitter<void> = new EventEmitter()
 
-   hiddenGems : any = [];
   // Build preference form
   preferenceForm = this.formBuilder.group({
     price: ["", Validators.required],
@@ -23,15 +22,12 @@ export class RecommendationFormComponent{
 
   // Submit user's preference form
   onSubmit(): void {
-    console.log(this.preferenceForm.value);
-    //this.hiddenGemService.findHiddenGemReccomendation(this.preferenceForm.value);
+    console.log(this.preferenceForm);
     this.hiddenGemService.findHiddenGemReccomendation(this.preferenceForm.value)
       .subscribe(hiddenGems => {
-        this.hiddenGems = hiddenGems;
         this.hiddenGemService.updateTop3Gems(hiddenGems);
     })
     this.formSubmit.emit();
-    // 
   }
 
 }

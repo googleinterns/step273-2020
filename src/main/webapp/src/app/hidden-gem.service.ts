@@ -32,7 +32,7 @@ export class HiddenGemService {
   private top3gems = new Subject<HiddenGem[]>();
   top3gems$ = this.top3gems.asObservable();
 
-  updateTop3Gems(gems: any){
+  updateTop3Gems(gems: HiddenGem[] = []){
     this.top3gems.next(gems)
   }
 }
