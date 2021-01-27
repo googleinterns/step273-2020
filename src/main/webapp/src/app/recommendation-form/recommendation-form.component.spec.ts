@@ -27,7 +27,7 @@ describe('RecommendationFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the recommendation form component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
