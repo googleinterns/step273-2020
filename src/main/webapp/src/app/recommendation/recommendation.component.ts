@@ -14,5 +14,4 @@ export class RecommendationComponent  {
   onFormSubmit(){
     this.formSubmitted = true;
   }
-
 }

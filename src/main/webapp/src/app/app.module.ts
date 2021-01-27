@@ -44,13 +44,11 @@ import { HomepageComponent } from './homepage/homepage.component';
     FlexLayoutModule,
     MatCardModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule,
     MatCardModule,
     MatGridListModule
   ],

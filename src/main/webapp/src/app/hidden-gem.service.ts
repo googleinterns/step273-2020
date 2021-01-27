@@ -21,7 +21,6 @@ export class HiddenGemService {
     return throwError('A data error occured, please try again.');
   }
 
-
   findHiddenGemReccomendation(data: any) : Observable<HiddenGem[]> {
     const params = new HttpParams().append("preferences", data);
     return this.httpClient
@@ -36,4 +35,3 @@ export class HiddenGemService {
     this.top3gems.next(gems)
   }
 }
-

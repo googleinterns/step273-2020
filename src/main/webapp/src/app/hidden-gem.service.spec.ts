@@ -99,5 +99,4 @@ describe('HiddenGemService', () => {
     expect(httpClientSpy.get.calls.count()).toBe(1);
   })
 
-
 })

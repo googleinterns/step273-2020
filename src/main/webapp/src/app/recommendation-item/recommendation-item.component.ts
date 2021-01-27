@@ -11,6 +11,3 @@ export class RecommendationItemComponent {
   @Input() hiddenGem = {} as HiddenGem;
 
 }
-
-
-
