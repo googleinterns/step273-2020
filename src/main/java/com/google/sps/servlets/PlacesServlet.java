@@ -64,11 +64,10 @@ public class PlacesServlet extends HttpServlet {
           .pageToken(cafeNextPageToken)
           .await();
         
-          TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(2);
         restaurantNextPageToken = restaurant_results.nextPageToken;
         cafeNextPageToken = cafes_results.nextPageToken;
       } catch (ApiException | InterruptedException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
       jsonResponse = jsonResponse.concat(gson.toJson(restaurant_results));
