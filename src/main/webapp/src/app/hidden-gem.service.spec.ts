@@ -90,12 +90,8 @@ describe('HiddenGemService', () => {
 
     hiddenGemService.findHiddenGemRecommendation("")
       .subscribe(hiddenGems => {
-        hiddenGemService.updateTop3Gems(expectedTopGems);
+        expect(hiddenGems).toEqual(expectedTopGems);
     })
-  
-    hiddenGemService.top3gems$.subscribe(
-      hiddenGems => expect(hiddenGems).toEqual(expectedTopGems));
-
     expect(httpClientSpy.get.calls.count()).toBe(1);
   })
 

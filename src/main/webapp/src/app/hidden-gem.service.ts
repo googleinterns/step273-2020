@@ -21,6 +21,8 @@ export class HiddenGemService {
     return throwError('A data error occured, please try again.');
   }
 
+  // TODO: MVP - params with user preference data from form to be used in request.
+  // TODO: MVP - convert back to a httpClient.post request
   findHiddenGemRecommendation(data: any) : Observable<HiddenGem[]> {
     const params = new HttpParams().append("preferences", data);
     return this.httpClient
@@ -28,10 +30,4 @@ export class HiddenGemService {
       .pipe(catchError(this.handleError))
   }
   
-  private top3gems = new Subject<HiddenGem[]>();
-  top3gems$ = this.top3gems.asObservable();
-
-  updateTop3Gems(gems: HiddenGem[] = []){
-    this.top3gems.next(gems)
-  }
 }

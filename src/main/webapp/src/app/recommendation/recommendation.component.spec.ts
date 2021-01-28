@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RecommendationComponent } from './recommendation.component';
+import { HiddenGem } from '../hidden-gem';
 
 describe('RecommendationComponent', () => {
   let component: RecommendationComponent;
@@ -37,7 +38,8 @@ describe('RecommendationComponent', () => {
     expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeFalsy;
     
     spyOn(component, 'onFormSubmit');
-    component.onFormSubmit();
+    const hiddenGems: HiddenGem[] = [];
+    component.onFormSubmit(hiddenGems);
     fixture.detectChanges();
     expect(component.onFormSubmit).toHaveBeenCalled();
 
