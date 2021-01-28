@@ -22,12 +22,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public final class GetConfigPropertiesTest {
+  @Rule
+  public ExpectedException exception = ExpectedException.none();
+    
   @Test
   public void GetApiKeyString() throws FileNotFoundException, IOException {
     String actual = GetConfigProperties.getApiKey();
@@ -40,5 +45,18 @@ public final class GetConfigPropertiesTest {
     String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
     Path path = Paths.get(rootPath + "app.properties");
     Assert.assertTrue(Files.exists(path));
+  }
+
+  @Test 
+  public void getEmptyStringIfPropertyNotFound() throws FileNotFoundException, IOException {
+    String actual = GetConfigProperties.getPropertyValue("app.properties", "non_existing_property");
+    String expected = "";
+    Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getFileNotFoundExceptionWithNonExistentFilePath() throws FileNotFoundException, IOException {
+    exception.expect(FileNotFoundException.class);
+    GetConfigProperties.getPropertyValue("non_existing_file", "mockApiKey");
   }
 }
