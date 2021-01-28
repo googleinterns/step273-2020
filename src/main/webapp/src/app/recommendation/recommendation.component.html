@@ -1,2 +1,2 @@
-<app-recommendation-form (formSubmit)="onFormSubmit()" ></app-recommendation-form>
-<app-recommendation-list *ngIf="formSubmitted"></app-recommendation-list> 
+<app-recommendation-form (hiddenGemRecommendation)="onFormSubmit($event)" ></app-recommendation-form>
+<app-recommendation-list *ngIf="formSubmitted" [hiddenGems]="hiddenGems"></app-recommendation-list> 

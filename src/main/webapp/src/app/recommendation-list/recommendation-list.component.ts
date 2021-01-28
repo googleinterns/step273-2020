@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HiddenGemService } from '../hidden-gem.service';
 import { HiddenGem } from '../hidden-gem';
 
@@ -9,15 +9,11 @@ import { HiddenGem } from '../hidden-gem';
 })
 export class RecommendationListComponent implements OnInit {
 
-  hiddenGems: HiddenGem[] = [];
-  constructor(private hiddenGemService: HiddenGemService) { }
+  @Input() hiddenGems: HiddenGem[] = [];
 
-  ngOnInit() {
-    this.hiddenGemService.top3gems$
-      .subscribe(hiddenGems => {
-        this.hiddenGems = hiddenGems;
-      })
-  }
+  constructor() {}
+
+  ngOnInit() {}
 
 }
 
