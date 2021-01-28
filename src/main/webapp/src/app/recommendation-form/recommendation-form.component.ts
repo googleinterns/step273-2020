@@ -23,7 +23,7 @@ export class RecommendationFormComponent{
   // Submit user's preference form
   onSubmit(): void {
     console.log(this.preferenceForm);
-    this.hiddenGemService.findHiddenGemReccomendation(this.preferenceForm.value)
+    this.hiddenGemService.findHiddenGemRecommendation(this.preferenceForm.value)
       .subscribe(hiddenGems => {
         this.hiddenGemService.updateTop3Gems(hiddenGems);
     })

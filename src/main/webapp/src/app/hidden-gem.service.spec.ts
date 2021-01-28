@@ -88,7 +88,7 @@ describe('HiddenGemService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedTopGems));
 
-    hiddenGemService.findHiddenGemReccomendation("")
+    hiddenGemService.findHiddenGemRecommendation("")
       .subscribe(hiddenGems => {
         hiddenGemService.updateTop3Gems(expectedTopGems);
     })
