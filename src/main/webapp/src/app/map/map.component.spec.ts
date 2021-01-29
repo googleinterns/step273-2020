@@ -9,7 +9,7 @@ describe('MapComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MapComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -28,11 +28,4 @@ describe('MapComponent', () => {
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to Maps!');
   });
-
-  it('should render the image', () => {
-  const fixture = TestBed.createComponent(MapComponent);
-  fixture.detectChanges();
-  const compiled = fixture.debugElement.nativeElement;
-  expect(compiled.querySelector('div.image>img').src).toContain('map.jpg');
-});
 });

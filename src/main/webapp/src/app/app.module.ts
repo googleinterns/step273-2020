@@ -19,7 +19,7 @@ import { RankingItemComponent } from './ranking/ranking-item/ranking-item.compon
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { HomepageComponent } from './homepage/homepage.component';
-
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatIconModule,
     HttpClientModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [

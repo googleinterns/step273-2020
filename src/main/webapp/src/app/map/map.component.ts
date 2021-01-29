@@ -8,5 +8,23 @@ import { Component, OnInit } from '@angular/core';
 
 export class MapComponent implements OnInit {
   constructor() {  }
-  ngOnInit() {  }
+  zoom = 12
+  center!: google.maps.LatLngLiteral;
+  options: google.maps.MapOptions = {
+    mapTypeId: 'terrain',
+    zoomControl: false,
+    scrollwheel: false,
+    disableDoubleClickZoom: true,
+    maxZoom: 15,
+    minZoom: 8,
+  }
+
+  ngOnInit() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+    })
+  }
 }
