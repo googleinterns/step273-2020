@@ -71,7 +71,7 @@ describe('HiddenGemService', () => {
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   })
 
-  it('should update top 3 gems', () => {
+  it('should return hidden gem recommendations', () => {
 
     const expectedTopGems: HiddenGem[] =
       [
@@ -94,5 +94,22 @@ describe('HiddenGemService', () => {
     })
     expect(httpClientSpy.get.calls.count()).toBe(1);
   })
+
+  it('should return an error when the recommendation server returns a 404', fakeAsync((done: DoneFn) => {
+    const errorResponse = new HttpErrorResponse({
+      error: 'test 404 error',
+      status: 404, statusText: 'Not Found'
+    });
+
+    httpClientSpy.get.and.returnValue(of(errorResponse));
+
+    hiddenGemService.findHiddenGemRecommendation("").subscribe(
+      {
+        error: error => {
+          expect(error).toEqual({ error: 'A data error occured, please try again.' });
+          done();
+      }}
+    );
+  }));
 
 })
