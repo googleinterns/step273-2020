@@ -26,6 +26,7 @@ describe('RecommendationComponent', () => {
 
   it('should only display recommendation form in initial state', () => {
 
+    expect(component.formSubmitted).toBeFalse;
     spyOn(component, 'onFormSubmit');
     expect(component.onFormSubmit).not.toHaveBeenCalled();
     expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeDefined;
@@ -37,11 +38,11 @@ describe('RecommendationComponent', () => {
     expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeTruthy;
     expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeFalsy;
     
-    spyOn(component, 'onFormSubmit');
     const hiddenGems: HiddenGem[] = [];
     component.onFormSubmit(hiddenGems);
     fixture.detectChanges();
-    expect(component.onFormSubmit).toHaveBeenCalled();
+    expect(component.formSubmitted).toBeTrue;
+    expect(component.hiddenGems).toEqual(hiddenGems)
 
     expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeTruthy;
     expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeTruthy;

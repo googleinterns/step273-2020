@@ -1,7 +1,7 @@
 <h1>Hidden Gems Recommendations</h1>
 <h4>Get a restaurant recommendation tailored just for you!</h4>
 
-<form [formGroup]="preferenceForm" novalidate (ngSubmit)="onSubmit()" #formID="ngForm">
+<form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()" #formID="ngForm">
   <h2>Your Restaurant Preferences</h2>
   <p>Please select your restaurant preferences in the form below. If you have no preference for a 
     field, please feel free to leave it blank</p>
