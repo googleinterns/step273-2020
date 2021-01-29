@@ -15,8 +15,6 @@
 
 package com.google.sps.data;
 
-import java.util.Arrays;
-
 public final class HiddenGems {
   private static final String TYPE_RESTAURANT = "restaurant";
   private static final String TYPE_CAFE = "cafe";
