@@ -38,7 +38,7 @@ public final class Places {
     .apiKey(GetConfigProperties.getApiKey())
     .build();
 
-  // TODO: Replace hardcoded location with user's location.
+  // TODO: Replace hardcoded location with user's location for MVP. 
   static LatLng location = new LatLng(-33.865143, 151.209900);
 
   /**
