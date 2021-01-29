@@ -27,15 +27,15 @@ import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
 import com.google.maps.model.PlacesSearchResult;
 import com.google.maps.model.RankBy;
+import com.google.sps.GetConfigProperties;
 
 /**
  * This is a temporary class. Everything will be be moved to the HiddenGems.java file
  * when there will be no more need for the hidden gems dummy data.
  */
 public final class Places {
-  // TODO: Use config file to get API Key.
   static GeoApiContext context = new GeoApiContext.Builder()
-    .apiKey("myapikey")
+    .apiKey(GetConfigProperties.getApiKey())
     .build();
 
   // TODO: Replace hardcoded location with user's location.
