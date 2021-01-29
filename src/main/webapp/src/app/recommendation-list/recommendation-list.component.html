@@ -1,0 +1,6 @@
+<div class="recommendation-list">
+  <h2>Your top 3 tailored recommendations</h2>
+  <section fxLayout="row wrap" fxLayoutGap="16px grid">
+    <app-recommendation-item fxFlex="33%" *ngFor="let hiddenGem of hiddenGems | slice:0:3" [hiddenGem]="hiddenGem" ></app-recommendation-item>
+  </section>
+</div>

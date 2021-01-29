@@ -34,7 +34,7 @@ public final class GetConfigPropertiesTest {
   public ExpectedException exception = ExpectedException.none();
     
   @Test
-  public void GetApiKeyString() throws FileNotFoundException, IOException {
+  public void GetApiKeyString() {
     String actual = GetConfigProperties.getApiKey();
     String expected = "mockApiKey";
     Assert.assertEquals(expected, actual);
