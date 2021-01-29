@@ -44,9 +44,8 @@ public final class Places {
   /**
    * This function return all places (restaurants and cafes) near the given location. 
    * @return ArrayList<PlacesSearchResult[]>    This return an array list of a list of Places Search Results. 
-   * @throws IOException                        This exception is thrown the nearbySearchQuery has invalid inputs. 
    */
-  public static ArrayList<PlacesSearchResult[]> getAllPlaces() throws IOException {
+  public static ArrayList<PlacesSearchResult[]> getAllPlaces() {
     PlacesSearchResponse restaurant_results = new PlacesSearchResponse();
     PlacesSearchResponse cafes_results = new PlacesSearchResponse();
     String restaurantNextPageToken = "";
@@ -71,7 +70,7 @@ public final class Places {
         TimeUnit.SECONDS.sleep(2);
         restaurantNextPageToken = restaurant_results.nextPageToken;
         cafeNextPageToken = cafes_results.nextPageToken;
-      } catch (ApiException | InterruptedException e) {
+      } catch (ApiException | InterruptedException | IOException e) {
         e.printStackTrace();
       }
       all_results.add(restaurant_results.results);

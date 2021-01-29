@@ -14,6 +14,13 @@
 
 package com.google.sps;
 
+import static org.junit.Assert.assertFalse;
+
+import java.util.ArrayList;
+
+import com.google.maps.model.PlacesSearchResult;
+import com.google.sps.data.Places;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -21,15 +28,14 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public final class PlacesTest {
   /**
-   * TODO: Test:
-   * - Successful: Get 60 results for each (or 120 results total) // Not empty 
-   * - Successful: every PlacesSearchResults[] are different
-   * - Unsuccessful: duplicate PlacesSearchResults[]
-   * - Unsuccessful: 
+   * TODO: Test: 
+   * - Successful: every PlacesSearchResults[] are different 
+   * - Unsuccessful: duplicate PlacesSearchResults[] - Unsuccessful:
    */
 
-  @Test 
+  @Test
   public void getNonEmptyArrayListOfPlaces() {
-       
+    ArrayList<PlacesSearchResult[]> actual = Places.getAllPlaces();
+    assertFalse(actual.isEmpty());
   }
 }
