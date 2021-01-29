@@ -33,15 +33,10 @@ public class GetTop3GemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
+    
+    List<HiddenGem> top3Gems = Arrays.asList(HiddenGems.hiddenGems).subList(0,3);
 
-    List<HiddenGem> top3Gems = new ArrayList<>();
-    List<HiddenGem> hiddenGems = Arrays.asList(HiddenGems.hiddenGems);
-    for(int i=0; i < 3; i++){
-      top3Gems.add(hiddenGems.get(i));
-      
-    }
-
-   String jsonResponse = gson.toJson(top3Gems);
+    String jsonResponse = gson.toJson(top3Gems);
     // Send the JSON back as the response
     response.setContentType("application/json");
     response.getWriter().println(jsonResponse);

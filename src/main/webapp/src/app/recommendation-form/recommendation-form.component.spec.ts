@@ -37,7 +37,7 @@ describe('RecommendationFormComponent', () => {
     expect(compiled.querySelector('h4').textContent).toContain('Get a restaurant recommendation tailored just for you!');
   });
 
-  it('[Form Check] - Price Range', () => {
+  it('should set price button correctly ', () => {
     let priceRange = component.preferenceForm.controls['price'];
     expect(priceRange.value).toEqual("");
     priceRange.setValue('low');
@@ -47,7 +47,7 @@ describe('RecommendationFormComponent', () => {
     expect(priceRange.valueChanges).toBeTruthy();
   });
 
-  it('[Form Check] - Rating', () => {
+  it('should set rating button correctly ', () => {
     let starRating = component.preferenceForm.controls['rating'];
     expect(starRating.untouched).toBeTrue;
     expect(starRating.valid).toBeFalse;
@@ -61,7 +61,7 @@ describe('RecommendationFormComponent', () => {
 
   });
 
-  it('[Form Check] - Restaurant Type', () => {
+  it('should set restaurant type button correctly ', () => {
     let type = component.preferenceForm.controls['type'];
     expect(type.value).toEqual("");
     expect(type.pristine).toBeTrue;
@@ -73,38 +73,38 @@ describe('RecommendationFormComponent', () => {
     expect(type.valueChanges).toBeTruthy();
   });
 
-  it('[Form Check] - Form Submitted', () => {
+  it('should initially have no user preferences selected and disabled form submissison', () => {
 
-    spyOn(component, 'onSubmit');
-    let btn = fixture.debugElement.query(By.css('#submit'));
-    btn.nativeElement.click();
-    fixture.detectChanges();
-    expect(component.onSubmit).toHaveBeenCalled();
+    expect(component.preferenceForm.controls['price'].value).toEqual('');
+    expect(component.preferenceForm.controls['rating'].value).toEqual('');
+    expect(component.preferenceForm.controls['type'].value).toEqual('');
+    
+    expect(component.preferenceForm.status).toEqual("INVALID");
+
+    let submitBtn = fixture.debugElement.query(By.css('#submit')).nativeElement;
+    expect(submitBtn.disabled).toBeTrue;
+    expect(component.preferenceForm.touched).toBeFalse;
 
   });
 
-  it('[Form Check] -  Form Populated', () => {
+  it('should allow form submission once form is populated', () => {
 
     component.preferenceForm.controls['price'].setValue("2");
     component.preferenceForm.controls['rating'].setValue("1");
     component.preferenceForm.controls['type'].setValue("Restaurant");
 
-    component.onSubmit();
+    expect(component.preferenceForm.status).toEqual("VALID");
+    let submitBtn = fixture.debugElement.query(By.css('#submit')).nativeElement;
+    expect(submitBtn.disabled).toBeFalse;
+
+    submitBtn.click();
+    fixture.detectChanges();
+    expect(component.onSubmit).toHaveBeenCalled;
+
     expect(component.preferenceForm.controls['price'].value).toEqual('2');
     expect(component.preferenceForm.controls['rating'].value).toEqual('1');
     expect(component.preferenceForm.controls['type'].value).toEqual('Restaurant');
 
   });
 
-  it('[Form Check] -  No Preference', () => {
-
-    component.onSubmit();
-    expect(component.preferenceForm.controls['price'].value).toEqual('');
-    expect(component.preferenceForm.controls['rating'].value).toEqual('');
-    expect(component.preferenceForm.controls['type'].value).toEqual('');
-
-    expect(component.preferenceForm.status).toEqual("INVALID");
-    expect(component.preferenceForm.touched).toBeFalse;
-    expect(component.preferenceForm.pristine).toBeTrue;
-  });
 });
