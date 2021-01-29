@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { RecommendationFormComponent } from './recommendation-form.component';
 
@@ -12,7 +14,8 @@ describe('RecommendationFormComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ RecommendationFormComponent ],
       imports: [
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientTestingModule
       ]
     })
     .compileComponents();
@@ -24,7 +27,7 @@ describe('RecommendationFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the recommendation form component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -34,7 +37,7 @@ describe('RecommendationFormComponent', () => {
     expect(compiled.querySelector('h4').textContent).toContain('Get a restaurant recommendation tailored just for you!');
   });
 
-  it('[Form Check] - Price Range', () => {
+  it('should set price button correctly ', () => {
     let priceRange = component.preferenceForm.controls['price'];
     expect(priceRange.value).toEqual("");
     priceRange.setValue('low');
@@ -44,47 +47,60 @@ describe('RecommendationFormComponent', () => {
     expect(priceRange.valueChanges).toBeTruthy();
   });
 
-  it('[Form Check] - Rating', () => {
+  it('should set rating button correctly ', () => {
     let starRating = component.preferenceForm.controls['rating'];
-    expect(starRating.value).toEqual("");
-    starRating.setValue('3');
-    expect(starRating.valueChanges).toBeTruthy();
-    starRating.setValue('4');
+    expect(starRating.untouched).toBeTrue;
+    expect(starRating.valid).toBeFalse;
+
+    starRating.setValue(3);
     component.onSubmit();
-    expect(starRating.valid).toBeTruthy();
-    expect(starRating.errors).toBeNull();
-    expect(starRating.value).toEqual("4");
-    expect(starRating.valueChanges).toBeTruthy();
+
+    expect(starRating.touched).toBeTrue;
+    expect(starRating.valid).toBeTrue;
+    expect(starRating.value).toEqual(3);
+
   });
 
-  it('[Form Check] - Restaurant Type', () => {
+  it('should set restaurant type button correctly ', () => {
     let type = component.preferenceForm.controls['type'];
     expect(type.value).toEqual("");
+    expect(type.pristine).toBeTrue;
     type.setValue('Cafe');
     component.onSubmit();
-    expect(type.valid).toBeTruthy();
+    expect(type.pristine).toBeFalse;
     expect(type.errors).toBeNull();
     expect(type.value).toEqual("Cafe");
     expect(type.valueChanges).toBeTruthy();
   });
 
-  it('[Form Check] - Form Submitted', () => {
+  it('should initially have no user preferences selected and disabled form submissison', () => {
 
-    spyOn(component, 'onSubmit');
-    let btn = fixture.debugElement.query(By.css('#submit'));
-    btn.nativeElement.click();
-    fixture.detectChanges();
-    expect(component.onSubmit).toHaveBeenCalled();
+    expect(component.preferenceForm.controls['price'].value).toEqual('');
+    expect(component.preferenceForm.controls['rating'].value).toEqual('');
+    expect(component.preferenceForm.controls['type'].value).toEqual('');
+    
+    expect(component.preferenceForm.status).toEqual("INVALID");
+
+    let submitBtn = fixture.debugElement.query(By.css('#submit')).nativeElement;
+    expect(submitBtn.disabled).toBeTrue;
+    expect(component.preferenceForm.touched).toBeFalse;
 
   });
 
-  it('[Form Check] -  Form Populated', () => {
+  it('should allow form submission once form is populated', () => {
 
     component.preferenceForm.controls['price'].setValue("2");
     component.preferenceForm.controls['rating'].setValue("1");
     component.preferenceForm.controls['type'].setValue("Restaurant");
 
-    component.onSubmit();
+    expect(component.preferenceForm.status).toEqual("VALID");
+    let submitBtn = fixture.debugElement.query(By.css('#submit')).nativeElement;
+    expect(submitBtn.disabled).toBeFalse;
+
+    submitBtn.click();
+    fixture.detectChanges();
+    expect(component.onSubmit).toHaveBeenCalled;
+
     expect(component.preferenceForm.controls['price'].value).toEqual('2');
     expect(component.preferenceForm.controls['rating'].value).toEqual('1');
     expect(component.preferenceForm.controls['type'].value).toEqual('Restaurant');

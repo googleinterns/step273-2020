@@ -70,4 +70,46 @@ describe('HiddenGemService', () => {
     );
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   })
+
+  it('should return hidden gem recommendations', () => {
+
+    const expectedTopGems: HiddenGem[] =
+      [
+        {
+          id: 1,
+          name: 'The best restaurant',
+          business_type: 'Restaurant',
+          address: 'An address located within Sydney, Sydney NSW 2000',
+          price_level: 3,
+          rating: 3,
+          photo: 'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg'
+        },
+      ];
+
+    httpClientSpy.get.and.returnValue(of(expectedTopGems));
+
+    hiddenGemService.findHiddenGemRecommendation("")
+      .subscribe(hiddenGems => {
+        expect(hiddenGems).toEqual(expectedTopGems);
+    })
+    expect(httpClientSpy.get.calls.count()).toBe(1);
+  })
+
+  it('should return an error when the recommendation server returns a 404', fakeAsync((done: DoneFn) => {
+    const errorResponse = new HttpErrorResponse({
+      error: 'test 404 error',
+      status: 404, statusText: 'Not Found'
+    });
+
+    httpClientSpy.get.and.returnValue(of(errorResponse));
+
+    hiddenGemService.findHiddenGemRecommendation("").subscribe(
+      {
+        error: error => {
+          expect(error).toEqual({ error: 'A data error occured, please try again.' });
+          done();
+      }}
+    );
+  }));
+
 })
