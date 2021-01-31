@@ -50,7 +50,7 @@ public final class Places {
     PlacesSearchResponse cafes_results = new PlacesSearchResponse();
     String restaurantNextPageToken = "";
     String cafeNextPageToken = "";
-    ArrayList<PlacesSearchResult[]> all_results = new ArrayList<PlacesSearchResult[]>();
+    ArrayList<PlacesSearchResult[]> all_results = new ArrayList<>();
 
     for (int i = 0; i < 3; i++) {
       try {
