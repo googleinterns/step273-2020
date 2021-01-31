@@ -78,4 +78,16 @@ public final class Places {
     }
     return all_results;
   }
+
+  public static ArrayList<String> getAllHiddenGems() {
+    ArrayList<PlacesSearchResult[]> all_places = getAllPlaces();
+    ArrayList<String> details = new ArrayList<>();
+    for (int i = 0; i < all_places.size(); i++) {
+      PlacesSearchResult[] list_of_places = all_places.get(i);
+      for (int j = 0; j < list_of_places.length; j++) {
+        details.add("rating: " + list_of_places[j].rating + " / Number of ratings: " + list_of_places[j].userRatingsTotal);
+      }
+    }
+    return details;
+  }
 }
