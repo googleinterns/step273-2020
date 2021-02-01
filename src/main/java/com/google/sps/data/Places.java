@@ -15,6 +15,7 @@
 
 package com.google.sps.data;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,15 +32,14 @@ import com.google.maps.model.RankBy;
 import com.google.sps.GetConfigProperties;
 
 /**
- * This is a temporary class. Everything will be be moved to the HiddenGems.java file
- * when there will be no more need for the hidden gems dummy data.
+ * This is a temporary class. Everything will be be moved to the HiddenGems.java
+ * file when there will be no more need for the hidden gems dummy data.
  */
 public final class Places {
-  // TODO: Replace hardcoded location with user's location for MVP. 
+  // TODO: Replace hardcoded location with user's location for MVP.
   static LatLng location = new LatLng(-33.865143, 151.209900);
 
-
-  public static Set<PlacesSearchResult[]> getAllPlaces() {
+  public static Set<PlacesSearchResult[]> getAllPlaces() throws FileNotFoundException, IOException {
     GeoApiContext context = new GeoApiContext.Builder()
     .apiKey(GetConfigProperties.getApiKey())
     .build();

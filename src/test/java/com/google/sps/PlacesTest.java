@@ -17,6 +17,8 @@ package com.google.sps;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -31,19 +33,19 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public final class PlacesTest {
   @Test
-  public void getNonEmptyArrayListOfPlaces() {
+  public void getNonEmptyArrayListOfPlaces() throws FileNotFoundException, IOException {
     Set<PlacesSearchResult[]> places = Places.getAllPlaces();
     assertFalse(places.isEmpty());
   }
 
   @Test
-  public void getUpToSixListsOfPlacesResults() {
+  public void getUpToSixListsOfPlacesResults() throws FileNotFoundException, IOException {
     Set<PlacesSearchResult[]> places = Places.getAllPlaces();
     assertTrue(places.size() <= 6);
   }
 
   @Test 
-  public void getOnlyRestaurantsAndCafes() {
+  public void getOnlyRestaurantsAndCafes() throws FileNotFoundException, IOException {
     Set<PlacesSearchResult[]> places = Places.getAllPlaces();
     for (PlacesSearchResult[] listOfPlaces : places) {
       for (int i = 0; i < listOfPlaces.length; i++) {
