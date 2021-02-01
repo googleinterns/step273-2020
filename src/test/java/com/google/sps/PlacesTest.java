@@ -17,8 +17,7 @@ package com.google.sps;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Set;
 
 import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
@@ -31,21 +30,13 @@ import org.junit.runners.JUnit4;
 public final class PlacesTest {
   @Test
   public void getNonEmptyArrayListOfPlaces() {
-    ArrayList<PlacesSearchResult[]> places = Places.getAllPlaces();
+    Set<PlacesSearchResult[]> places = Places.getAllPlaces();
     assertFalse(places.isEmpty());
   }
 
   @Test
   public void getUpToSixListsOfPlacesResults() {
-    ArrayList<PlacesSearchResult[]> places = Places.getAllPlaces();
+    Set<PlacesSearchResult[]> places = Places.getAllPlaces();
     assertTrue(places.size() <= 6);
-  }
-
-  @Test 
-  public void getDifferentPlacesSearchResults() {
-    ArrayList<PlacesSearchResult[]> places = Places.getAllPlaces();
-    for (int i = 0; i < places.size() - 1; i++) {
-      assertFalse(Arrays.equals(places.get(i), places.get(i + 1)));
-    }
   }
 }

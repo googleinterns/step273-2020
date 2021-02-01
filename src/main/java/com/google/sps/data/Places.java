@@ -16,7 +16,8 @@
 package com.google.sps.data;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.google.maps.GeoApiContext;
@@ -43,14 +44,16 @@ public final class Places {
 
   /**
    * This function return all places (restaurants and cafes) near the given location. 
-   * @return ArrayList<PlacesSearchResult[]>    This return an array list of a list of Places Search Results. 
+   * @return Set<PlacesSearchResult[]>    This return a set of a list of Places Search Results. 
    */
-  public static ArrayList<PlacesSearchResult[]> getAllPlaces() {
+  public static Set<PlacesSearchResult[]> getAllPlaces() {
     PlacesSearchResponse restaurant_results = new PlacesSearchResponse();
     PlacesSearchResponse cafes_results = new PlacesSearchResponse();
     String restaurantNextPageToken = "";
     String cafeNextPageToken = "";
-    ArrayList<PlacesSearchResult[]> all_results = new ArrayList<>();
+
+    // A set is used to avoid duplicates. 
+    Set<PlacesSearchResult[]> all_results = new HashSet<>();
 
     for (int i = 0; i < 3; i++) {
       try {
