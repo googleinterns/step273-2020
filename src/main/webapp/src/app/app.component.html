@@ -1,3 +1,60 @@
-<h1>Hidden Gems</h1>
-<app-location></app-location>
-<app-ranking-list></app-ranking-list>
+
+
+
+<!-- <div *ngIf="!locationSet">
+  
+  <app-location (locationSet)="onLocationSet()" ></app-location>
+  <router-outlet name="noLocation"></router-outlet>
+</div>
+
+<div *ngIf="locationSet">
+  <app-nav-bar ></app-nav-bar>
+  <router-outlet name="setLocation"></router-outlet>
+</div> -->
+
+
+<app-location (locationSet)="onLocationSet()" ></app-location>
+<app-nav-bar *ngIf="locationS]"></app-nav-bar>
+
+<!-- <div *ngIf="!locationSet">
+  <app-location (locationSet)="onLocationSet()"></app-location>
+  <router-outlet [hidden]="!locationSet"></router-outlet> 
+</div>
+
+<div *ngIf="locationSet">
+  <app-nav-bar></app-nav-bar>
+  <router-outlet></router-outlet> 
+</div> -->
+
+<!-- 
+<div [hidden]="hideNavBar">
+  <app-nav-bar></app-nav-bar>
+</div> -->
+
+
+
+
+<div [hidden]="router.url.includes('/')">
+  <app-nav-bar></app-nav-bar>
+</div>
+
+<router-outlet></router-outlet> 
+<!-- <div >
+  <router-outlet></router-outlet> 
+</div>
+
+<div  *ngIf="!router.urlTree.contains(router.createUrlTree(['/']))">
+  <app-nav-bar></app-nav-bar>
+  <router-outlet></router-outlet> 
+</div>  -->
+
+
+
+<!-- <ng-container *ngIf="!router.url.includes('/')">
+  <app-nav-bar></app-nav-bar>
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-container *ngIf="router.url.includes('/')">
+  <router-outlet></router-outlet>
+</ng-container> -->

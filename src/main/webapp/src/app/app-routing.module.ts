@@ -1,10 +1,31 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RecommendationComponent  } from './recommendation/recommendation.component';
+import { RouterModule, Routes } from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { HomepageComponent } from './homepage/homepage.component';
+import { LocationComponent } from './location/location.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
-const routes: Routes = [];
+export const routes: Routes = [
+  { path: '' ,
+    component: LocationComponent,
+  },
+  { path: 'recommendation' ,
+    component: RecommendationComponent,
+  },
+  { path: 'home' ,
+    component: HomepageComponent,
+  }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes )
+  ],
+  exports: [
+    RouterModule
+  ],
+  declarations: [ ]
 })
 export class AppRoutingModule { }

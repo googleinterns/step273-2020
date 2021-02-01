@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { LocationService } from '../location.service';
+import { Location } from '../location';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
@@ -7,40 +9,77 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationComponent implements OnInit {
 
-  constructor() { }
+  @Output() locationSet: EventEmitter<void> = new EventEmitter()
+  // TODO set a location interface variable that you set?
+  location = {} as Location;
 
+  // TODO change to VIEWCHILD
+  //errorMessage = document.getElementById("coord") as HTMLParagraphElement;
+  constructor(private locationService: LocationService, private router: Router) { }
 
+  
   ngOnInit(){
-    const locationButton = document.getElementById("locationButton") as HTMLButtonElement;
-    const locationDisplay = document.getElementById("coord") as HTMLParagraphElement;
-    locationButton.textContent = "Pan to Current Location";
-
-    locationButton.addEventListener("click", () => {
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position: Position) => {
-            locationDisplay.innerHTML = 
-                "Latitude: " + position.coords.latitude +
-                "<br>Longitude: " + position.coords.longitude;
-            console.log("Latitude: " + position.coords.latitude +
-                "<br>Longitude: " + position.coords.longitude)
-            // const pos = {
-            //   lat: position.coords.latitude,
-            //   lng: position.coords.longitude,
-            // };
-          },
-        );
-      } 
-    });
   } 
 
   handleLocationError(browserHasGeolocation: boolean): void {
-  // console.log(browserHasGeolocation
-  //     ? "Error: The Geolocation service failed."
-  //     : "Error: Your browser doesn't support geolocation.")
-  // }    
-  console.log("plz work")
+
+    const errorMessage = document.getElementById("coord") as HTMLParagraphElement;
+    browserHasGeolocation
+      ? errorMessage.innerText = "Geolocation services have failed. Try a default location."
+      : errorMessage.innerText = "Geolocation is not supported by this browser. Try a default location."  
+  
+  }
+
+  getGeolocation(): void {
+    console.log("geolocation")
+    if (navigator.geolocation) {
+
+      // TO DO implement error handling with codes?
+      //navigator.geolocation.getCurrentPosition(getPosition, showError);
+      navigator.geolocation.getCurrentPosition(
+        (position: Position) => {
+          this.location.lat = position.coords.latitude;
+          this.location.lng = position.coords.longitude;
+          console.log(this.location);
+          this.setLocation();
+        },
+        () => {
+          this.handleLocationError(true);
+          console.log("boo");
+          // remove button/diable
+        }
+      );
+    } 
+      this.handleLocationError(false);
+      console.log("boohoo");
+      // remove button/disable
+
+    
+    console.log("boohoo ahhhh");
+  }
+
+  getSydneyLocation(): void {
+    console.log("sydney");
+    this.location.lat = -33.8688;
+    this.location.lng = 151.2093;
+    console.log(this.location);
+    this.setLocation();
+  }
+
+  getAdelaideLocation(): void {
+    console.log("adelaide")
+    this.location.lat = -34.9285;
+    this.location.lng = 138.6007;
+    console.log(this.location);
+    this.setLocation();
+
+  }
+
+  setLocation(){
+    // if location set them redirect/ show rest of homepage
+    this.locationService.setLocation(this.location);
+    this.locationSet.emit();
+
   }
 }
 

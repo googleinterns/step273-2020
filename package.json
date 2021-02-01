@@ -14,17 +14,21 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "karma": "^6.0.0",
     "prettier": "^2.0.5",
     "typescript": "^3.9.6",
     "zone.js": "~0.10.2"
   },
   "dependencies": {
     "@angular/animations": "^10.0.2",
+    "@angular/cdk": "^11.0.4",
     "@angular/common": "^10.0.2",
     "@angular/core": "^10.0.2",
+    "@angular/flex-layout": "^11.0.0-beta.33",
     "@angular/forms": "^10.0.2",
     "@angular/platform-browser": "^10.0.2",
     "@angular/router": "^10.0.2",
+    "@material-ui/core": "^4.11.2",
     "@types/gapi": "0.0.39",
     "concurrently": "^5.2.0"
   }
