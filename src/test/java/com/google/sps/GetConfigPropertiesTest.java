@@ -15,8 +15,6 @@
 
 package com.google.sps;
 
-import static org.junit.Assert.assertFalse;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,8 +35,9 @@ public final class GetConfigPropertiesTest {
     
   @Test
   public void GetApiKeyValue() {
-    String apiKey = GetConfigProperties.getApiKey();
-    assertFalse(apiKey.isBlank());
+    String actual = GetConfigProperties.getApiKey();
+    String expected = "mockApiKey";
+    Assert.assertEquals(expected, actual);
   }
 
   @Test
