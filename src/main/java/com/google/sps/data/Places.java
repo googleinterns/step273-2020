@@ -34,6 +34,10 @@ import com.google.sps.GetConfigProperties;
  * when there will be no more need for the hidden gems dummy data.
  */
 public final class Places {
+  private static final double hiddenGemsRating = 3.5;
+  private static final int hiddenGemsNumberOfRatingsMin = 10;
+  private static final int hiddenGemsNumberOfRatingsMax = 50;
+
   static GeoApiContext context = new GeoApiContext.Builder()
     .apiKey(GetConfigProperties.getApiKey())
     .build();
@@ -79,15 +83,20 @@ public final class Places {
     return all_results;
   }
 
-  public static ArrayList<String> getAllHiddenGems() {
+  public static ArrayList<PlacesSearchResult> getAllHiddenGems() {
     ArrayList<PlacesSearchResult[]> all_places = getAllPlaces();
-    ArrayList<String> details = new ArrayList<>();
+    ArrayList<PlacesSearchResult> all_hiddengems = new ArrayList<>();
+    
     for (int i = 0; i < all_places.size(); i++) {
       PlacesSearchResult[] list_of_places = all_places.get(i);
       for (int j = 0; j < list_of_places.length; j++) {
-        details.add("rating: " + list_of_places[j].rating + " / Number of ratings: " + list_of_places[j].userRatingsTotal);
+        if (list_of_places[j].rating >= hiddenGemsRating
+            && (list_of_places[j].userRatingsTotal >= hiddenGemsNumberOfRatingsMin
+            && list_of_places[j].userRatingsTotal <= hiddenGemsNumberOfRatingsMax)) {
+          all_hiddengems.add(list_of_places[j]);
+        }
       }
     }
-    return details;
+    return all_hiddengems;
   }
 }

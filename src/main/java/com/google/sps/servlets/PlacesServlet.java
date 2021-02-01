@@ -34,7 +34,7 @@ public class PlacesServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
-    String jsonResponse = gson.toJson(Places.getAllPlaces());
+    String jsonResponse = gson.toJson(Places.getAllHiddenGems());
 
     // Send the JSON back as the response
     response.setContentType("application/json");
