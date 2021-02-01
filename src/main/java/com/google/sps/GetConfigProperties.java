@@ -31,15 +31,13 @@ public class GetConfigProperties {
   }
 
   /**
-   * This function retrieves the value of the API Key from the app.properties file. 
-   * @return String     This return the String value of the API key.
+   * This function retrieves the value of the API Key from the app.properties file.
+   * 
+   * @return                        String This return the String value of the API key.
+   * @throws IOException            This exception is thrown if the filepath given does not exist. 
+   * @throws FileNotFoundException  This exception is thrown if the filepath and/or the propertyName do not exist. 
    */
-  public static String getApiKey() {
-    try {
-      return getPropertyValue("app.properties", "api_key");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return "";
+  public static String getApiKey() throws FileNotFoundException, IOException {
+    return getPropertyValue("app.properties", "api_key");
   }
 }
