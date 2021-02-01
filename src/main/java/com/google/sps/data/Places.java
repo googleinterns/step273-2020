@@ -55,19 +55,29 @@ public final class Places {
     // A set is used to avoid duplicates. 
     Set<PlacesSearchResult[]> all_results = new HashSet<>();
 
+    // Places API allows up to 3 pages of results (each page having a max of 20 results)
     for (int i = 0; i < 3; i++) {
-      try {
-        restaurant_results = PlacesApi.nearbySearchQuery(context, location)
-          .rankby(RankBy.DISTANCE)
-          .type(PlaceType.RESTAURANT)
-          .pageToken(restaurantNextPageToken)
-          .await();
+      
+      // If the tokens are null, there are no more pages of results.
+      if (restaurantNextPageToken == null && cafeNextPageToken == null)
+        break;
 
-        cafes_results = PlacesApi.nearbySearchQuery(context, location)
-          .rankby(RankBy.DISTANCE)
-          .type(PlaceType.CAFE)
-          .pageToken(cafeNextPageToken)
-          .await();
+      try {
+        if (restaurantNextPageToken != null) {
+          restaurant_results = PlacesApi.nearbySearchQuery(context, location)
+            .rankby(RankBy.DISTANCE)
+            .type(PlaceType.RESTAURANT)
+            .pageToken(restaurantNextPageToken)
+            .await();
+        }
+
+        if (cafeNextPageToken != null) {
+          cafes_results = PlacesApi.nearbySearchQuery(context, location)
+            .rankby(RankBy.DISTANCE)
+            .type(PlaceType.CAFE)
+            .pageToken(cafeNextPageToken)
+            .await();
+        }
 
         // Wait 2 seconds to get the nextPageToken, otherwise there is an INVALID_REQUEST status. 
         TimeUnit.SECONDS.sleep(2);
