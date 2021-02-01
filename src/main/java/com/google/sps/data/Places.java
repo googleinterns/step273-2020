@@ -35,18 +35,23 @@ import com.google.sps.GetConfigProperties;
  * when there will be no more need for the hidden gems dummy data.
  */
 public final class Places {
-  static GeoApiContext context = new GeoApiContext.Builder()
-    .apiKey(GetConfigProperties.getApiKey())
-    .build();
-
   // TODO: Replace hardcoded location with user's location for MVP. 
   static LatLng location = new LatLng(-33.865143, 151.209900);
+
+
+  public static Set<PlacesSearchResult[]> getAllPlaces() {
+    GeoApiContext context = new GeoApiContext.Builder()
+    .apiKey(GetConfigProperties.getApiKey())
+    .build();
+    
+    return fetchAllPlacesFromApi(context);
+  }
 
   /**
    * This function return all places (restaurants and cafes) near the given location. 
    * @return Set<PlacesSearchResult[]>    This return a set of a list of Places Search Results. 
    */
-  public static Set<PlacesSearchResult[]> getAllPlaces() {
+  public static Set<PlacesSearchResult[]> fetchAllPlacesFromApi(GeoApiContext context) {
     PlacesSearchResponse restaurant_results = new PlacesSearchResponse();
     PlacesSearchResponse cafes_results = new PlacesSearchResponse();
     String restaurantNextPageToken = "";
