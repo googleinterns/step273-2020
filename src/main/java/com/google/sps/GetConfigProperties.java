@@ -44,11 +44,6 @@ public class GetConfigProperties implements ServletContextListener {
 
   private String apiKey = getPropertyValue("app.properties", "api_key");
 
-  /**
-   * This function retrieves the String value of the API Key.
-   * 
-   * @return String This returns the String value of the API Key.
-   */
   public String getApiKey() {
     return apiKey;
   }
