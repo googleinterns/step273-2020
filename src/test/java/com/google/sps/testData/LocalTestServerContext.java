@@ -23,11 +23,11 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 
  /** Local test mock server (GeoApi Context) for unit tests. */
-public class LocalTestServerContext {
+public class LocalTestServerContext implements AutoCloseable {
   private final MockWebServer server;
   public final GeoApiContext context;
 
-   LocalTestServerContext(String responseBody) throws IOException {
+  public LocalTestServerContext(String responseBody) throws IOException {
     this.server = new MockWebServer();
     MockResponse response = new MockResponse();
     response.setHeader("Content-Type", "application/json");
@@ -35,10 +35,17 @@ public class LocalTestServerContext {
     server.enqueue(response);
     server.start();
 
-    this.context =
-        new GeoApiContext.Builder()
-          .apiKey("AIzaFakeKey")
-          .baseUrlOverride("http://127.0.0.1:" + server.getPort())
-          .build();
+    this.context = new GeoApiContext.Builder()
+      .apiKey("mockApiKey")
+      .build();
+  }
+
+@Override
+  public void close() {
+    try {
+      server.shutdown();
+    } catch (IOException e) {
+      System.err.println("Failed to close server: " + e);
+    }
   }
 }

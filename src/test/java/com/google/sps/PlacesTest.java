@@ -25,6 +25,7 @@ import java.util.Set;
 
 import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
+import com.google.sps.testData.LocalTestServerContext;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,23 +35,29 @@ import org.junit.runners.JUnit4;
 public final class PlacesTest {
   @Test
   public void getNonEmptyArrayListOfPlaces() throws FileNotFoundException, IOException {
-    Set<PlacesSearchResult[]> places = Places.getAllPlaces();
-    assertFalse(places.isEmpty());
+    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context);
+      assertFalse(places.isEmpty());
+    }
   }
 
   @Test
   public void getUpToSixListsOfPlacesResults() throws FileNotFoundException, IOException {
-    Set<PlacesSearchResult[]> places = Places.getAllPlaces();
-    assertTrue(places.size() <= 6);
+    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
+      Set<PlacesSearchResult[]> places = Places.getAllPlaces();
+      assertTrue(places.size() <= 6);
+    }
   }
 
   @Test 
   public void getOnlyRestaurantsAndCafes() throws FileNotFoundException, IOException {
-    Set<PlacesSearchResult[]> places = Places.getAllPlaces();
-    for (PlacesSearchResult[] listOfPlaces : places) {
-      for (int i = 0; i < listOfPlaces.length; i++) {
-        List<String> types = Arrays.asList(listOfPlaces[i].types);
-        assertTrue(types.contains("restaurant") || types.contains("cafe"));
+    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
+      Set<PlacesSearchResult[]> places = Places.getAllPlaces();
+      for (PlacesSearchResult[] listOfPlaces : places) {
+        for (int i = 0; i < listOfPlaces.length; i++) {
+          List<String> types = Arrays.asList(listOfPlaces[i].types);
+          assertTrue(types.contains("restaurant") || types.contains("cafe"));
+        }
       }
     }
   }
