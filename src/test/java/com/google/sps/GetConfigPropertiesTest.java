@@ -15,11 +15,12 @@
 
 package com.google.sps;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import com.google.sps.errors.IncorrectFileNameException;
+import com.google.sps.errors.IncorrectPropertyNameException;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -30,12 +31,14 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public final class GetConfigPropertiesTest {
+  private final String configFileName = "app.properties";
+
   @Rule
   public ExpectedException exception = ExpectedException.none();
     
   @Test
-  public void GetApiKeyValue() throws FileNotFoundException, IOException {
-    String actual = GetConfigProperties.getApiKey();
+  public void GetApiKeyValue() {
+    String actual = GetConfigProperties.getPropertyValue(configFileName, "api_key");
     String expected = "mockApiKey";
     Assert.assertEquals(expected, actual);
   }
@@ -43,20 +46,19 @@ public final class GetConfigPropertiesTest {
   @Test
   public void CheckIfPropertiesFileExist() {
     String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-    Path path = Paths.get(rootPath + "app.properties");
+    Path path = Paths.get(rootPath + configFileName);
     Assert.assertTrue(Files.exists(path));
   }
 
   @Test 
-  public void getEmptyStringIfPropertyNotFound() throws FileNotFoundException, IOException {
-    String actual = GetConfigProperties.getPropertyValue("app.properties", "non_existing_property");
-    String expected = "";
-    Assert.assertEquals(expected, actual);
+  public void getErrorIfPropertyNotFound() {
+    exception.expect(IncorrectPropertyNameException.class);
+    GetConfigProperties.getPropertyValue(configFileName, "non_existing_property");
   }
 
   @Test
-  public void getFileNotFoundExceptionWithNonExistentFilePath() throws FileNotFoundException, IOException {
-    exception.expect(FileNotFoundException.class);
+  public void getErrorWithNonExistentFilePath() {
+    exception.expect(IncorrectFileNameException.class);
     GetConfigProperties.getPropertyValue("non_existing_file", "mockApiKey");
   }
 }
