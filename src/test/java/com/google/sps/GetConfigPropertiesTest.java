@@ -15,7 +15,6 @@
 
 package com.google.sps;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,7 +33,7 @@ public final class GetConfigPropertiesTest {
   public ExpectedException exception = ExpectedException.none();
     
   @Test
-  public void GetApiKeyValue() {
+  public void GetApiKeyValue() throws IOException {
     String actual = GetConfigProperties.getApiKey();
     String expected = "mockApiKey";
     Assert.assertEquals(expected, actual);
@@ -48,15 +47,14 @@ public final class GetConfigPropertiesTest {
   }
 
   @Test 
-  public void getEmptyStringIfPropertyNotFound() throws FileNotFoundException, IOException {
-    String actual = GetConfigProperties.getPropertyValue("app.properties", "non_existing_property");
-    String expected = "";
-    Assert.assertEquals(expected, actual);
+  public void getErrorIfPropertyNotFound() throws IOException {
+    exception.expect(IOException.class);
+    GetConfigProperties.getPropertyValue("app.properties", "non_existing_property");
   }
 
   @Test
-  public void getFileNotFoundExceptionWithNonExistentFilePath() throws FileNotFoundException, IOException {
-    exception.expect(FileNotFoundException.class);
+  public void getErrorWithNonExistentFilePath() throws IOException {
+    exception.expect(IOException.class);
     GetConfigProperties.getPropertyValue("non_existing_file", "mockApiKey");
   }
 }
