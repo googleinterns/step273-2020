@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from '../location.service';
 
 @Component({
   selector: 'app-homepage',
@@ -8,14 +7,9 @@ import { LocationService } from '../location.service';
 })
 export class HomepageComponent implements OnInit {
 
-  locationSet = false;
-  no = false;
-  constructor(private locationService: LocationService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  onLocationSet(){
-    this.locationSet = true;
-  }
 }

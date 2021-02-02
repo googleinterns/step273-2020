@@ -4,7 +4,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LocationComponent } from './location/location.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 export const routes: Routes = [
   { path: '' ,

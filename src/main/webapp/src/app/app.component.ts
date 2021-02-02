@@ -7,25 +7,14 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Hidden Gems'; 
-  //routerUrl: string
-  locationSet = false;
-  hideNavBar = true;
-  constructor(public router: Router) { 
-    if(this.router.url == "/") {
-      this.hideNavBar = true;
-      console.log("true location" + this.hideNavBar);
-    } else {
-      this.hideNavBar = false;
-      console.log("nooo location" + this.hideNavBar);
-    }
+  displayApp = false;
+
+  constructor() { 
   }
 
-  ngOnInit() {
-  }
-
-  onLocationSet(): void {
-    this.locationSet = true;
+  onLocationSetUp(): void {
+    this.displayApp = true;
   }
 }

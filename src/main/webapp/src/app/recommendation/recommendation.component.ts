@@ -21,7 +21,6 @@ export class RecommendationComponent implements OnInit   {
     this.locationService.getLocation.subscribe(
       location => this.location = location
     )
-    console.log("recommendation" + this.location.lat + "   " + this.location.lng)
   }
 
   // Form submitted so can display hidden gem recommendations.

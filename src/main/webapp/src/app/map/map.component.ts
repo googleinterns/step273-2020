@@ -11,11 +11,15 @@ import { Location } from 'src/app/location';
 export class MapComponent implements OnInit {
 
   location = {} as Location;
+
   constructor(private locationService: LocationService) {  }
+
   ngOnInit() {  
-    this.locationService.getLocation.subscribe(
-      location => this.location = location
-    )
-    console.log("map" + this.location.lat + "   " + this.location.lng)
+
+    this.locationService.getLocation
+      .subscribe(location => {
+        this.location = location;
+    })
+    console.log("map" + this.location.lat + "   " + this.location.lng);
   }
 }

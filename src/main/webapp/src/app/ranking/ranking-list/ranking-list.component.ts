@@ -10,20 +10,25 @@ import { Location } from 'src/app/location';
   styleUrls: ['./ranking-list.component.css']
 })
 export class RankingListComponent implements OnInit {
+
   hiddenGems! : HiddenGem[];
   location = {} as Location;
+
   constructor(private hiddenGemService: HiddenGemService, private locationService: LocationService) { }
 
   ngOnInit() {
-    this.locationService.getLocation.subscribe(
-      location => this.location = location
-    )
-    console.log("ranking-list" + this.location.lat + "   " + this.location.lng)
 
+    this.locationService.getLocation
+      .subscribe(location => {
+        this.location = location;
+    })
+
+    
     this.hiddenGemService.getAllHiddenGems()
       .subscribe(hiddenGems => {
         this.hiddenGems = hiddenGems;
     })
+    console.log("list " + this.location.lat + "   " + this.location.lng);
   }
 
 }

@@ -1,9 +1,8 @@
 <div id="location-container">
     <h1>Welcome to Hidden Gems!</h1>
     <p>To use Hidden Gems, please allow location services or if not possible select a default location.</p>
-    <button #geolocateButton (click)="getGeolocation()" type="button"><i></i>Find My Location</button>
-    <button #sydneyButton (click)="getSydneyLocation()" type="button"><i></i>Sydney</button>
-    <button #adelaideButton (click)="getAdelaideLocation()" type="button"><i></i>Adelaide</button>
-    <p id="coord"> </p>
+    <button id="geolocateButton" (click)="getGeolocation()" type="button"><i></i>Find My Location</button>
+    <button id="sydneyButton" (click)="getSydneyLocation()" type="button"><i></i>Sydney</button>
+    <button id="adelaideButton" (click)="getAdelaideLocation()" type="button"><i></i>Adelaide</button>
+    <p id="error-message"> </p>
 </div>
-
