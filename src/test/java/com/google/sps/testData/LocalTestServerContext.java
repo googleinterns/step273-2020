@@ -36,7 +36,7 @@ public class LocalTestServerContext implements AutoCloseable {
     server.start();
 
     this.context = new GeoApiContext.Builder()
-      .apiKey("mockApiKey")
+      .apiKey("AIzaFakeKey")
       .build();
   }
 

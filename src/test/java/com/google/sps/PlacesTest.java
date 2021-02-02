@@ -19,8 +19,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 import com.google.maps.model.PlacesSearchResult;
@@ -44,21 +42,8 @@ public final class PlacesTest {
   @Test
   public void getUpToSixListsOfPlacesResults() throws FileNotFoundException, IOException {
     try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
-      Set<PlacesSearchResult[]> places = Places.getAllPlaces();
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context);
       assertTrue(places.size() <= 6);
-    }
-  }
-
-  @Test 
-  public void getOnlyRestaurantsAndCafes() throws FileNotFoundException, IOException {
-    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
-      Set<PlacesSearchResult[]> places = Places.getAllPlaces();
-      for (PlacesSearchResult[] listOfPlaces : places) {
-        for (int i = 0; i < listOfPlaces.length; i++) {
-          List<String> types = Arrays.asList(listOfPlaces[i].types);
-          assertTrue(types.contains("restaurant") || types.contains("cafe"));
-        }
-      }
     }
   }
 }
