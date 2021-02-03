@@ -20,7 +20,7 @@ export class LocationService {
   // redirect to homepage component.
   setLocation(userLocation: Location){
     this.location.next(userLocation);
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('home');
   }
 
 }

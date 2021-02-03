@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { LocationService } from '../location.service';
+import { Location } from 'src/app/location';
+import { By } from '@angular/platform-browser';
 import { LocationComponent } from './location.component';
 
 describe('LocationComponent', () => {
@@ -8,7 +11,9 @@ describe('LocationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LocationComponent ]
+      declarations: [ LocationComponent ],
+      imports: [ RouterTestingModule ],
+      providers: [ LocationService ]
     })
     .compileComponents();
   });
@@ -22,4 +27,96 @@ describe('LocationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render heading', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Hidden Gems!');
+    expect(compiled.querySelector('h4').textContent).toContain
+    ('To use Hidden Gems, please allow location services. If not possible select a default location [Sydney, Adelaide].');
+  });
+
+  it('should set the default location [Sydney]', () => {
+
+    const sydneyLocation: Location = {
+      lat: -33.8688,
+      lng: 151.2093,
+    };
+
+    // spy on event emitter
+    spyOn(component.locationStored, 'emit')
+
+    // trigger the click
+    let sydneyBtn = fixture.debugElement.query(By.css('#sydneyButton')).nativeElement;
+    sydneyBtn.click();
+    fixture.detectChanges();
+
+    expect(component.location).toEqual(sydneyLocation);
+    expect(component.locationStored.emit).toHaveBeenCalled;
+  });
+
+  it('should set the default location [Adelaide]', () => {
+
+    const adelaideLocation: Location = {
+      lat: -34.9285,
+      lng: 138.6007,
+    };
+
+    // spy on event emitter
+    spyOn(component.locationStored, 'emit')
+
+    // trigger the click
+    let adelaideBtn = fixture.debugElement.query(By.css('#adelaideButton')).nativeElement;
+    adelaideBtn.click();
+    fixture.detectChanges();
+
+    expect(component.location).toEqual(adelaideLocation);
+    expect(component.locationStored.emit).toHaveBeenCalled;
+  });
+
+  it('should set the users location [Geolocation] success', function() {
+
+    expect(navigator.geolocation).toBeDefined;
+
+    spyOn(navigator.geolocation,"getCurrentPosition").and.callFake(function() {
+      var position = { coords: { latitude: 66.6666, longitude: -1.1111} };
+      arguments[0](position);
+    });
+
+    // spy on event emitter
+    spyOn(component.locationStored, 'emit');
+
+    // trigger the click
+    let geolocationBtn = fixture.debugElement.query(By.css('#geolocationButton')).nativeElement;
+    geolocationBtn.click();
+    fixture.detectChanges();
+
+   expect(navigator.geolocation.getCurrentPosition).toHaveBeenCalled;
+   expect(component.locationStored.emit).toHaveBeenCalled;
+   expect(component.location.lat).toEqual(66.6666);
+   expect(component.location.lng).toEqual(-1.1111);
+
+  });
+
+
+  it('should set display error message [Geolocation] failure!', function() {
+
+    spyOn(navigator.geolocation,"getCurrentPosition").and.callFake(function() {
+      const error = "FAILED"
+      arguments[1](error);
+    });
+
+    //spyOn(component, "handleLocationError")
+
+    // trigger the click
+    let geolocationBtn = fixture.debugElement.query(By.css('#geolocationButton')).nativeElement;
+    geolocationBtn.click();
+    fixture.detectChanges();
+
+    expect(component.handleLocationError).toHaveBeenCalled;
+    expect(component.setLocation).not.toHaveBeenCalled;
+    const compiled = fixture.nativeElement;
+    //expect(compiled.querySelector('p').textContent).toContain('Geolocation services have failed. Try a default location.');
+    expect(compiled.querySelector('p').textContent).toContain('Geolocation services have failed. Try a default location. User denied the request for Geolocation.');
+  });
+
 });

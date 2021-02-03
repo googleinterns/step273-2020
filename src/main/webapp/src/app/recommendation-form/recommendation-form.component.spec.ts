@@ -3,6 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LocationService } from '../location.service';
+import { Location } from 'src/app/location';
 
 import { RecommendationFormComponent } from './recommendation-form.component';
 
@@ -15,8 +18,10 @@ describe('RecommendationFormComponent', () => {
       declarations: [ RecommendationFormComponent ],
       imports: [
         ReactiveFormsModule,
-        HttpClientTestingModule
-      ]
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
+      providers: [LocationService]
     })
     .compileComponents();
   });

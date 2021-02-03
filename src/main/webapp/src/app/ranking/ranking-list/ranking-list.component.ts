@@ -4,6 +4,7 @@ import { HiddenGem } from 'src/app/hidden-gem';
 import { LocationService } from '../../location.service';
 import { Location } from 'src/app/location';
 
+
 @Component({
   selector: 'app-ranking-list',
   templateUrl: './ranking-list.component.html',

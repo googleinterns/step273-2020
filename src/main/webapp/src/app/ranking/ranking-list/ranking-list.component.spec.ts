@@ -5,6 +5,9 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RankingListComponent } from './ranking-list.component';
 import { HiddenGemService } from '../../hidden-gem.service';
 import { HiddenGem } from '../../hidden-gem';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LocationService } from '../../location.service';
+import { Location } from 'src/app/location';
 
 describe('RankingListComponent', () => {
   let component: RankingListComponent;
@@ -13,8 +16,14 @@ describe('RankingListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RankingListComponent ],
-      imports: [HttpClientTestingModule],
-      providers: [HiddenGemService]
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
+      providers: [
+        HiddenGemService,
+        LocationService
+      ]
     })
     .compileComponents();
   });

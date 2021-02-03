@@ -14,7 +14,9 @@ export const routes: Routes = [
   },
   { path: 'home' ,
     component: HomepageComponent,
-  }
+  },
+  { path: '**', 
+    redirectTo: 'home' }
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter} from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from '../location';
+import { string } from 'prop-types';
 
 @Component({
   selector: 'app-location',
@@ -10,42 +11,63 @@ import { Location } from '../location';
 export class LocationComponent{
 
   @Output() locationStored: EventEmitter<void> = new EventEmitter()
-  location = {} as Location;
+	location = {} as Location;
+	locationFound = false;
 
+  @ViewChild("errorMessage", { static: false })
+  errorMessage!: ElementRef;
 
   constructor(private locationService: LocationService) { }
 
   
-  handleLocationError(browserHasGeolocation: boolean): void {
+  handleLocationError(browserHasGeolocation: boolean, message: string): void {
 
     // TODO change to VIEWCHILD?
-    // errorMessage = document.getElementById("coord") as HTMLParagraphElement;
-    const errorMessage = document.getElementById("error-message") as HTMLParagraphElement;
+		// errorMessage = document.getElementById("coord") as HTMLParagraphElement;
+		
+    //const errorMessage = document.getElementById("error-message") as HTMLParagraphElement;
     browserHasGeolocation
-      ? errorMessage.innerText = "Geolocation services have failed. Try a default location."
-      : errorMessage.innerText = "Geolocation is not supported by this browser. Try a default location."  
+      ? this.errorMessage.nativeElement.innerText = "Geolocation services have failed. Try a default location. " + message
+      : this.errorMessage.nativeElement.innerText = "Geolocation is not supported by this browser. Try a default location."  
 
   }
 
-  getGeolocation(): void {
+  locationSuccess(position: Position): void {
+      this.location.lat = position.coords.latitude;
+      this.location.lng = position.coords.longitude;
+      this.setLocation();
+  }
 
+  locationError(error : PositionError): void {
+
+		var message:string;
+
+		message = "An unknown error occured/"
+		switch(error.code) {
+			case error.PERMISSION_DENIED:
+				message = "User denied the request for Geolocation."
+				break;
+			case error.POSITION_UNAVAILABLE:
+				message = "Location information is unavailable."
+				break;
+			case error.TIMEOUT:
+				message = "The request to get user location timed out."
+				break;
+		}
+    this.handleLocationError(true, message);
+	}
+	
+
+
+  enableNavigatorLocation(): void {
     if (navigator.geolocation) {
-      // TO DO implement error handling with codes?
-      // navigator.geolocation.getCurrentPosition(getPosition, showError);
       navigator.geolocation.getCurrentPosition(
-        (position: Position) => {
-          this.location.lat = position.coords.latitude;
-          this.location.lng = position.coords.longitude;
-          this.setLocation();
-        },
-        () => {
-          this.handleLocationError(true);
-        }
-      );
+        this.locationSuccess = this.locationSuccess.bind(this),
+        this.locationError = this.locationError.bind(this),
+      {timeout:10000});
     } else {
-      this.handleLocationError(false);
-    }
-    // TODO: Searching the world for your location message? 
+			this.handleLocationError(false, "");
+		}
   }
 
   getSydneyLocation(): void {
