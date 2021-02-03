@@ -39,7 +39,7 @@ public final class Places {
   // TODO: Replace hardcoded location with user's location for MVP.
   static LatLng location = new LatLng(-33.865143, 151.209900);
 
-  public static Set<PlacesSearchResult[]> getAllPlaces() throws FileNotFoundException, IOException {
+  public static Set<PlacesSearchResult[]> getAllPlaces() {
     GeoApiContext context = new GeoApiContext.Builder()
     .apiKey(GetConfigProperties.getApiKey())
     .build();
