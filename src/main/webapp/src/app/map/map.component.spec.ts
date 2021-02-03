@@ -1,16 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { MapComponent } from './map.component';
+import "./google.maps.mock";
 
 describe('MapComponent', () => {
   let component: MapComponent;
   let fixture: ComponentFixture<MapComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ MapComponent ]
-    })
-    .compileComponents();
-  });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ MapComponent ],
+      providers: [
+        { provide: MapsAPILoader, useValue: { load() { return new Promise((resolve) => resolve()); } } },
+      ],
+    }).compileComponents();
+  }));
+  
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MapComponent);
@@ -38,3 +42,4 @@ describe('MapComponent', () => {
     expect(mock.verifyMock).toBe(true);
   });
 });
+ 

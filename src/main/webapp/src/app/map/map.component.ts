@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from 
   '@angular/core';
-//import { google } from '@google/maps';
-  //declare var google: any;
-
+import { } from "googlemaps";
+ import { MapsAPILoader } from "@agm/core";
+ declare var google;
 @Component({
   selector: 'app-map',
   templateUrl: `map.component.html`,
