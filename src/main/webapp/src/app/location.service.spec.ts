@@ -7,9 +7,7 @@ import { Router } from '@angular/router';
 
 describe('LocationService', () => {
   let service: LocationService;
-  // let router = {
-  //   navigate: jasmine.createSpy('navigateByUrl')
-  // };
+
   let routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
   beforeEach(() => {
@@ -17,7 +15,6 @@ describe('LocationService', () => {
       providers: [
         LocationService,
         { provide: Router, useValue: routerSpy },
-        //Router
       ],
     });
     service = TestBed.inject(LocationService);

@@ -105,8 +105,6 @@ describe('LocationComponent', () => {
       arguments[1](error);
     });
 
-    //spyOn(component, "handleLocationError")
-
     // trigger the click
     let geolocationBtn = fixture.debugElement.query(By.css('#geolocationButton')).nativeElement;
     geolocationBtn.click();
@@ -115,7 +113,6 @@ describe('LocationComponent', () => {
     expect(component.handleLocationError).toHaveBeenCalled;
     expect(component.setLocation).not.toHaveBeenCalled;
     const compiled = fixture.nativeElement;
-    //expect(compiled.querySelector('p').textContent).toContain('Geolocation services have failed. Try a default location.');
     expect(compiled.querySelector('p').textContent).toContain('Geolocation services have failed. Try a default location. User denied the request for Geolocation.');
   });
 

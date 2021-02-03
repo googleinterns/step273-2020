@@ -11,7 +11,6 @@ export class LocationService {
   // default location initialised to Sydney.
   private location = new BehaviorSubject<Location>({lat: -33.8688, lng: 151.2093});
 
-
   // allows components to access location.
   getLocation = this.location.asObservable();
 

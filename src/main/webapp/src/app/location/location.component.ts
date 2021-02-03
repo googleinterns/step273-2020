@@ -19,13 +19,8 @@ export class LocationComponent{
 
   constructor(private locationService: LocationService) { }
 
-  
   handleLocationError(browserHasGeolocation: boolean, message: string): void {
 
-    // TODO change to VIEWCHILD?
-		// errorMessage = document.getElementById("coord") as HTMLParagraphElement;
-		
-    //const errorMessage = document.getElementById("error-message") as HTMLParagraphElement;
     browserHasGeolocation
       ? this.errorMessage.nativeElement.innerText = "Geolocation services have failed. Try a default location. " + message
       : this.errorMessage.nativeElement.innerText = "Geolocation is not supported by this browser. Try a default location."  
@@ -33,16 +28,16 @@ export class LocationComponent{
   }
 
   locationSuccess(position: Position): void {
-      this.location.lat = position.coords.latitude;
-      this.location.lng = position.coords.longitude;
-      this.setLocation();
+    this.location.lat = position.coords.latitude;
+    this.location.lng = position.coords.longitude;
+    this.setLocation();
   }
 
   locationError(error : PositionError): void {
 
 		var message:string;
-
-		message = "An unknown error occured/"
+    message = "An unknown error occured/"
+    
 		switch(error.code) {
 			case error.PERMISSION_DENIED:
 				message = "User denied the request for Geolocation."
@@ -57,16 +52,14 @@ export class LocationComponent{
     this.handleLocationError(true, message);
 	}
 	
-
-
   enableNavigatorLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         this.locationSuccess = this.locationSuccess.bind(this),
         this.locationError = this.locationError.bind(this),
-      {timeout:10000});
+        {timeout:10000});
     } else {
-			this.handleLocationError(false, "");
+		  this.handleLocationError(false, "");
 		}
   }
 
@@ -88,4 +81,3 @@ export class LocationComponent{
     this.locationStored.emit();
   }
 }
-

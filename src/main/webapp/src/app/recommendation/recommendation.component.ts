@@ -29,8 +29,3 @@ export class RecommendationComponent implements OnInit   {
     this.hiddenGems = hiddenGems;
   } 
 }
-
-
-
-
-
