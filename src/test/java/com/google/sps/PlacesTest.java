@@ -17,11 +17,13 @@ package com.google.sps;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Set;
 
 import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
+import com.google.sps.testData.LocalTestServerContext;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,45 +36,51 @@ public final class PlacesTest {
   private static final int hiddenGemsNumberOfRatingsMax = 50;
 
   @Test
-  public void getNonEmptyArrayListOfPlaces() {
-    ArrayList<PlacesSearchResult[]> places = Places.getAllPlaces();
-    assertFalse(places.isEmpty());
+  public void getNonEmptyArrayListOfPlaces() throws FileNotFoundException, IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context);
+      assertFalse(places.isEmpty());
+    }
   }
 
   @Test
-  public void getUpToSixListsOfPlacesResults() {
-    ArrayList<PlacesSearchResult[]> places = Places.getAllPlaces();
-    assertTrue(places.size() <= 6);
-  }
-
-  @Test 
-  public void getDifferentPlacesSearchResults() {
-    ArrayList<PlacesSearchResult[]> places = Places.getAllPlaces();
-    for (int i = 0; i < places.size() - 1; i++) {
-      assertFalse(Arrays.equals(places.get(i), places.get(i + 1)));
+  public void getUpToSixListsOfPlacesResults() throws FileNotFoundException, IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context);
+      assertTrue(places.size() <= 6);
     }
   }
 
-  @Test 
-  public void getOnlyPlacesWithExpectedRatingAsHiddenGems() {
-    ArrayList<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems();
-    for (int i = 0; i < hiddenGems.size(); i++) {
-      assertTrue(hiddenGems.get(i).rating >= hiddenGemsRating);
-    }
-  }
+  // @Test 
+  // public void getOnlyPlacesWithExpectedRatingAsHiddenGems() throws IOException {
+  //   try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
+  //     Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context));
+  //     for (PlacesSearchResult hiddenGem : hiddenGems) {
+  //       assertTrue(hiddenGem.rating >= hiddenGemsRating);
+  //     }
+  //   }
+  // }
 
-  @Test 
-  public void getOnlyPlacesWithExpectedNumberOfRatingsAsHiddenGems() {
-    ArrayList<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems();
-    for (int i = 0; i < hiddenGems.size(); i++) {
-      assertTrue(hiddenGems.get(i).userRatingsTotal >= hiddenGemsNumberOfRatingsMin
-          && hiddenGems.get(i).userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
-    }
-  }
+  //  @Test 
+  // public void getOnlyPlacesWithExpectedRatingAsHiddenGems() {
+  //   Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
+  //   for (PlacesSearchResult hiddenGem : hiddenGems) {
+  //     assertTrue(hiddenGem.rating >= hiddenGemsRating);
+  //   }
+  // }
+
+  // @Test 
+  // public void getOnlyPlacesWithExpectedNumberOfRatingsAsHiddenGems() {
+  //   Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems();
+  //   for (PlacesSearchResult hiddenGem : hiddenGems) {
+  //     assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
+  //         && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
+  //   }
+  // }
   
-  @Test 
-  public void getNonEmptyArrayOfHiddenGems() {
-    ArrayList<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems();
-    assertFalse(hiddenGems.isEmpty());
-  }
+  // @Test 
+  // public void getNonEmptyArrayOfHiddenGems() {
+  //   Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems();
+  //   assertFalse(hiddenGems.isEmpty());
+  // }
 }

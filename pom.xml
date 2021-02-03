@@ -50,6 +50,12 @@
       <version>2.0.2-beta</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>mockwebserver</artifactId>
+      <version>3.14.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -91,11 +97,19 @@
     </plugins>
     <testResources>
       <testResource>
-        <directory>src/main/java</directory>
+        <directory>src/test/java</directory>
         <includes>
           <include> *.properties</include>
         </includes>
       </testResource>
     </testResources>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include> *.properties</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
 </project>
