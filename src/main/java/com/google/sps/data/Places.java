@@ -48,9 +48,9 @@ public final class Places {
 
   public static Set<PlacesSearchResult[]> getAllPlaces() {
     GeoApiContext context = new GeoApiContext.Builder()
-      .apiKey(GetConfigProperties.getPropertyValue("app.properties", "api_key"))
-      .build();
-
+    .apiKey(GetConfigProperties.getApiKey())
+    .build();
+    
     return fetchAllPlacesFromApi(context);
   }
 
