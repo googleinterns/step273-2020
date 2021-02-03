@@ -41,7 +41,7 @@ public final class Places {
 
   public static Set<PlacesSearchResult[]> getAllPlaces() throws FileNotFoundException, IOException {
     GeoApiContext context = new GeoApiContext.Builder()
-    .apiKey(GetConfigProperties.getPropertyValue("app.properties", "api_key"))
+    .apiKey(GetConfigProperties.getApiKey())
     .build();
     
     return fetchAllPlacesFromApi(context);
