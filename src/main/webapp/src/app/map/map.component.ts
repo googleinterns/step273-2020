@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from 
   '@angular/core';
+//import { google } from '@google/maps';
+  //declare var google: any;
 
 @Component({
   selector: 'app-map',

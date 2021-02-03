@@ -29,4 +29,12 @@ describe('MapComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to Maps!');
   });
 
+   it("should init map", () => {
+    component.mapInitializer();
+    //check that the object of google.maps.Map is generated 
+    expect(component.mapEl).toBeTruthy();
+    //check that a mock object 
+    const mock: any = component.mapEl;
+    expect(mock.verifyMock).toBe(true);
+  });
 });
