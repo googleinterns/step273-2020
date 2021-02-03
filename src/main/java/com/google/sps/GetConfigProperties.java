@@ -42,9 +42,9 @@ public class GetConfigProperties implements ServletContextListener {
     }
   }
 
-  private String apiKey = getPropertyValue("app.properties", "api_key");
+  private static String apiKey = getPropertyValue("app.properties", "api_key");
 
-  public String getApiKey() {
+  public static String getApiKey() {
     return apiKey;
   }
 
