@@ -55,11 +55,9 @@ public final class Places {
   }
 
   /**
-   * This function return all places (restaurants and cafes) near the given
-   * location.
+   * This function return all places (restaurants and cafes) near the given location.
    * 
-   * @return Set<PlacesSearchResult[]> This return a set of a list of Places
-   *         Search Results.
+   * @return Set<PlacesSearchResult[]> This return a set of a list of Places Search Results.
    */
   public static Set<PlacesSearchResult[]> fetchAllPlacesFromApi(GeoApiContext context) {
     PlacesSearchResponse restaurant_results = new PlacesSearchResponse();
@@ -67,11 +65,10 @@ public final class Places {
     String restaurantNextPageToken = "";
     String cafeNextPageToken = "";
 
-    // A set is used to avoid duplicates.
+    // A set is used to avoid duplicates. 
     Set<PlacesSearchResult[]> all_results = new HashSet<>();
 
-    // Places API allows up to 3 pages of results (each page having a max of 20
-    // results)
+    // Places API allows up to 3 pages of results (each page having a max of 20 results)
     for (int i = 0; i < 3; i++) {
 
       // If the tokens are null, there are no more pages of results.
@@ -95,8 +92,7 @@ public final class Places {
             .await();
         }
 
-        // Wait 2 seconds to get the nextPageToken, otherwise there is an
-        // INVALID_REQUEST status.
+        // Wait 2 seconds to get the nextPageToken, otherwise there is an INVALID_REQUEST status.
         TimeUnit.SECONDS.sleep(2);
         restaurantNextPageToken = restaurant_results.nextPageToken;
         cafeNextPageToken = cafes_results.nextPageToken;
