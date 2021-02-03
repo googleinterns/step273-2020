@@ -112,4 +112,12 @@ describe('RecommendationFormComponent', () => {
 
   });
 
+  it('should store the initial location', () => {
+
+    const defaultSydneyLocation: Location = {
+      lat: -33.8688,
+      lng: 151.2093,
+    };
+    expect(component.location).toEqual(defaultSydneyLocation);
+  });
 });

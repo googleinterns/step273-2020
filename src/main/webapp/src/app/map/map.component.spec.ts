@@ -36,9 +36,18 @@ describe('MapComponent', () => {
   });
 
   it('should render the image', () => {
-  const fixture = TestBed.createComponent(MapComponent);
-  fixture.detectChanges();
-  const compiled = fixture.debugElement.nativeElement;
-  expect(compiled.querySelector('div.image>img').src).toContain('map.jpg');
-});
+    const fixture = TestBed.createComponent(MapComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('div.image>img').src).toContain('map.jpg');
+  });
+
+  it('should store the initial location', () => {
+
+    const defaultSydneyLocation: Location = {
+      lat: -33.8688,
+      lng: 151.2093,
+    };
+    expect(component.location).toEqual(defaultSydneyLocation);
+  });
 });

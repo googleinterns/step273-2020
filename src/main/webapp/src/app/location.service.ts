@@ -6,10 +6,11 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-
 export class LocationService {
 
-  private location = new BehaviorSubject<Location>({lat: 0, lng: 0});
+  // default location initialised to Sydney.
+  private location = new BehaviorSubject<Location>({lat: -33.8688, lng: 151.2093});
+
 
   // allows components to access location.
   getLocation = this.location.asObservable();
@@ -18,9 +19,8 @@ export class LocationService {
 
   // store location on client side
   // redirect to homepage component.
-  setLocation(userLocation: Location){
+  setLocation(userLocation: Location) {
     this.location.next(userLocation);
     this.router.navigateByUrl('home');
   }
-
 }
