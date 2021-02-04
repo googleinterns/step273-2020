@@ -9,9 +9,7 @@ describe('MapComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MapComponent ],
-      providers: [
-        { provide: MapsAPILoader, useValue: { load() { return new Promise((resolve) => resolve()); } } },
-      ],
+      
     }).compileComponents();
   }));
   
