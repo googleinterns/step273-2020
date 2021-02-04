@@ -14,7 +14,7 @@ export class MapComponent implements AfterViewInit {
 
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
-  mapEl!: google.maps.Map;
+  map!: google.maps.Map;
   lat = -34;
   lng = 154;
   
@@ -31,6 +31,6 @@ export class MapComponent implements AfterViewInit {
   }
 
   mapInitializer(): void {
-    this.mapEl = new google.maps.Map(this.mapContainer.nativeElement, this.mapOptions);
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, this.mapOptions);
   }
 }
