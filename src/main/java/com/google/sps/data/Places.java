@@ -38,7 +38,9 @@ public final class Places {
   static final int NUM_RESULTS_PAGES = 3;
 
   public static Set<PlacesSearchResult[]> getAllPlaces() {
-    GeoApiContext context = new GeoApiContext.Builder().apiKey(GetConfigProperties.getApiKey()).build();
+    GeoApiContext context = new GeoApiContext.Builder()
+      .apiKey(GetConfigProperties.getApiKey())
+      .build();
 
     // TODO: Replace hardcoded location with user's location for MVP.
     LatLng location = new LatLng(-33.865143, 151.209900);
@@ -68,13 +70,19 @@ public final class Places {
 
       try {
         if (restaurantNextPageToken != null) {
-          restaurant_results = PlacesApi.nearbySearchQuery(context, location).rankby(RankBy.DISTANCE)
-              .type(PlaceType.RESTAURANT).pageToken(restaurantNextPageToken).await();
+          restaurant_results = PlacesApi.nearbySearchQuery(context, location)
+            .rankby(RankBy.DISTANCE)
+            .type(PlaceType.RESTAURANT)
+            .pageToken(restaurantNextPageToken)
+            .await();
         }
 
         if (cafeNextPageToken != null) {
-          cafes_results = PlacesApi.nearbySearchQuery(context, location).rankby(RankBy.DISTANCE).type(PlaceType.CAFE)
-              .pageToken(cafeNextPageToken).await();
+          cafes_results = PlacesApi.nearbySearchQuery(context, location)
+            .rankby(RankBy.DISTANCE)
+            .type(PlaceType.CAFE)
+            .pageToken(cafeNextPageToken)
+            .await();
         }
 
         // Wait 2 seconds to get the nextPageToken, otherwise there is an INVALID_REQUEST status. 
@@ -88,10 +96,5 @@ public final class Places {
       all_results.add(cafes_results.results);
     }
     return all_results;
-  }
-
-  public static PlacesSearchResponse testOneApiCall(GeoApiContext context, LatLng location)
-      throws ApiException, InterruptedException, IOException {
-    return PlacesApi.nearbySearchQuery(context, location).rankby(RankBy.DISTANCE).type(PlaceType.RESTAURANT).await();
   }
 }
