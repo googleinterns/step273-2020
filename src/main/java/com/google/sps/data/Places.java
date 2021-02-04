@@ -56,7 +56,6 @@ public final class Places {
 
   /**
    * This function return all places (restaurants and cafes) near the given location.
-   * 
    * @return Set<PlacesSearchResult[]> This return a set of a list of Places Search Results.
    */
   public static Set<PlacesSearchResult[]> fetchAllPlacesFromApi(GeoApiContext context) {
@@ -92,7 +91,7 @@ public final class Places {
             .await();
         }
 
-        // Wait 2 seconds to get the nextPageToken, otherwise there is an INVALID_REQUEST status.
+        // Wait 2 seconds to get the nextPageToken, otherwise there is an INVALID_REQUEST status. 
         TimeUnit.SECONDS.sleep(2);
         restaurantNextPageToken = restaurant_results.nextPageToken;
         cafeNextPageToken = cafes_results.nextPageToken;

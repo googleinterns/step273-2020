@@ -19,8 +19,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashSet;
 import java.util.Set;
 
+import com.google.maps.model.Geometry;
 import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
 import com.google.sps.testData.LocalTestServerContext;
@@ -31,10 +34,6 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public final class PlacesTest {
-  private static final double hiddenGemsRating = 3.5;
-  private static final int hiddenGemsNumberOfRatingsMin = 10;
-  private static final int hiddenGemsNumberOfRatingsMax = 50;
-
   @Test
   public void getNonEmptyArrayListOfPlaces() throws FileNotFoundException, IOException {
     try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
@@ -49,6 +48,13 @@ public final class PlacesTest {
       Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context);
       assertTrue(places.size() <= 6);
     }
+  }
+
+  @Test 
+  public void getFilteredListOfBusinessesAsHiddenGems() throws IOException {
+    Set<PlacesSearchResult[]> mockPlaces = new HashSet<>();
+    PlacesSearchResult mockPlaces_1 = new PlacesSearchResult();
+    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(mockPlaces);
   }
 
   // @Test 
