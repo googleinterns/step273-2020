@@ -16,9 +16,15 @@ package com.google.sps;
 
 import static com.google.sps.TestUtils.retrieveBody;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import com.google.maps.model.LatLng;
-import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
 import com.google.sps.testData.LocalTestServerContext;
 
@@ -36,20 +42,23 @@ public final class PlacesTest {
   }
 
   @Test
-  public void getNonEmptyArrayListOfPlaces() throws Exception {
+  public void getSixArraysOfPlacesSearchResults() throws Exception {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      PlacesSearchResponse places = Places.testOneApiCall(sc.context, LOCATION);
-      System.out.println(places);
-      assertEquals(20, places.results.length);
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context, LOCATION);
+      assertEquals(6, places.size());
     }
   }
 
-  // @Test
-  // public void getUpToSixListsOfPlacesResults() throws FileNotFoundException, IOException {
-  //   try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
-  //     Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context, LOCATION);
-  //     // System.out.println(places);
-  //     assertTrue(places.size() <= 6);
-  //   }
-  // }
+  @Test
+  public void getOnlyRestaurantsAndCafes() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context, LOCATION);
+      for (PlacesSearchResult[] arrayOfPlaces : places) {
+        for (int i = 0; i < arrayOfPlaces.length; i++) {
+          List<String> types = Arrays.asList(arrayOfPlaces[i].types);	
+          assertTrue(types.contains("restaurant") || types.contains("cafe"));
+        }
+      }
+    }
+  }
 }

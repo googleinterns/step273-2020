@@ -18,6 +18,7 @@ package com.google.sps.testData;
 import java.io.IOException;
 
 import com.google.maps.GeoApiContext;
+import com.google.sps.GetConfigProperties;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -36,7 +37,7 @@ public class LocalTestServerContext implements AutoCloseable {
     server.start();
 
     this.context = new GeoApiContext.Builder()
-      .apiKey("AIzaFakeKey")
+      .apiKey(GetConfigProperties.getPropertyValue("app.properties", "test_api_key"))
       .build();
   }
 
