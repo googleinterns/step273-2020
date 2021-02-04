@@ -99,7 +99,13 @@
       <testResource>
         <directory>src/test/java</directory>
         <includes>
-          <include> *.properties</include>
+          <include>*.properties</include>
+        </includes>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <includes>
+          <include>**/*</include>
         </includes>
       </testResource>
     </testResources>
@@ -107,7 +113,7 @@
       <resource>
         <directory>src/main/java</directory>
         <includes>
-          <include> *.properties</include>
+          <include>*.properties</include>
         </includes>
       </resource>
     </resources>

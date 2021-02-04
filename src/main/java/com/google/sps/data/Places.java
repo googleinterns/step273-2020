@@ -15,7 +15,6 @@
 
 package com.google.sps.data;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,22 +35,22 @@ import com.google.sps.GetConfigProperties;
  * file when there will be no more need for the hidden gems dummy data.
  */
 public final class Places {
-  // TODO: Replace hardcoded location with user's location for MVP.
-  static LatLng location = new LatLng(-33.865143, 151.209900);
+  static final int NUM_RESULTS_PAGES = 3;
 
   public static Set<PlacesSearchResult[]> getAllPlaces() {
-    GeoApiContext context = new GeoApiContext.Builder()
-    .apiKey(GetConfigProperties.getApiKey())
-    .build();
-    
-    return fetchAllPlacesFromApi(context);
+    GeoApiContext context = new GeoApiContext.Builder().apiKey(GetConfigProperties.getApiKey()).build();
+
+    // TODO: Replace hardcoded location with user's location for MVP.
+    LatLng location = new LatLng(-33.865143, 151.209900);
+
+    return fetchAllPlacesFromApi(context, location);
   }
 
   /**
    * This function return all places (restaurants and cafes) near the given location. 
    * @return Set<PlacesSearchResult[]>    This return a set of a list of Places Search Results. 
    */
-  public static Set<PlacesSearchResult[]> fetchAllPlacesFromApi(GeoApiContext context) {
+  public static Set<PlacesSearchResult[]> fetchAllPlacesFromApi(GeoApiContext context, LatLng location) {
     PlacesSearchResponse restaurant_results = new PlacesSearchResponse();
     PlacesSearchResponse cafes_results = new PlacesSearchResponse();
     String restaurantNextPageToken = "";
@@ -61,27 +60,21 @@ public final class Places {
     Set<PlacesSearchResult[]> all_results = new HashSet<>();
 
     // Places API allows up to 3 pages of results (each page having a max of 20 results)
-    for (int i = 0; i < 3; i++) {
-      
+    for (int i = 0; i < NUM_RESULTS_PAGES; i++) {
+
       // If the tokens are null, there are no more pages of results.
       if (restaurantNextPageToken == null && cafeNextPageToken == null)
         break;
 
       try {
         if (restaurantNextPageToken != null) {
-          restaurant_results = PlacesApi.nearbySearchQuery(context, location)
-            .rankby(RankBy.DISTANCE)
-            .type(PlaceType.RESTAURANT)
-            .pageToken(restaurantNextPageToken)
-            .await();
+          restaurant_results = PlacesApi.nearbySearchQuery(context, location).rankby(RankBy.DISTANCE)
+              .type(PlaceType.RESTAURANT).pageToken(restaurantNextPageToken).await();
         }
 
         if (cafeNextPageToken != null) {
-          cafes_results = PlacesApi.nearbySearchQuery(context, location)
-            .rankby(RankBy.DISTANCE)
-            .type(PlaceType.CAFE)
-            .pageToken(cafeNextPageToken)
-            .await();
+          cafes_results = PlacesApi.nearbySearchQuery(context, location).rankby(RankBy.DISTANCE).type(PlaceType.CAFE)
+              .pageToken(cafeNextPageToken).await();
         }
 
         // Wait 2 seconds to get the nextPageToken, otherwise there is an INVALID_REQUEST status. 
@@ -95,5 +88,10 @@ public final class Places {
       all_results.add(cafes_results.results);
     }
     return all_results;
+  }
+
+  public static PlacesSearchResponse testOneApiCall(GeoApiContext context, LatLng location)
+      throws ApiException, InterruptedException, IOException {
+    return PlacesApi.nearbySearchQuery(context, location).rankby(RankBy.DISTANCE).type(PlaceType.RESTAURANT).await();
   }
 }
