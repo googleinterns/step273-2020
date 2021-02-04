@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { LocationService } from './location.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +7,4 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Hidden Gems'; 
-  displayApp = false;
-
-  constructor() { 
-  }
-
-  onLocationSetUp(): void {
-    this.displayApp = true;
-  }
 }
