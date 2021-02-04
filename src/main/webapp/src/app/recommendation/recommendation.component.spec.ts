@@ -2,9 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RecommendationComponent } from './recommendation.component';
 import { HiddenGem } from '../hidden-gem';
-import { RouterTestingModule } from '@angular/router/testing';
-import { LocationService } from '../location.service';
-import { Location } from 'src/app/location';
 
 describe('RecommendationComponent', () => {
   let component: RecommendationComponent;
@@ -12,9 +9,7 @@ describe('RecommendationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecommendationComponent ],
-      imports: [RouterTestingModule],
-      providers: [LocationService]
+      declarations: [ RecommendationComponent ]
     })
     .compileComponents();
   });

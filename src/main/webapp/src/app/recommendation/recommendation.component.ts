@@ -13,14 +13,9 @@ export class RecommendationComponent implements OnInit   {
   hiddenGems: HiddenGem[] = [];
   formSubmitted = false;
 
-  location = {} as Location;
-  constructor(private locationService: LocationService) {  }
-
+  constructor() {  }
 
   ngOnInit() {  
-    this.locationService.getLocation.subscribe(
-      location => this.location = location
-    )
   }
 
   // Form submitted so can display hidden gem recommendations.
