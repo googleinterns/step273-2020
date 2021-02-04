@@ -12,8 +12,8 @@ export class MapComponent implements AfterViewInit {
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
   mapEl!: google.maps.Map;
-  lat = 40.73061;
-  lng = -73.935242;
+  lat = -34;
+  lng = 154;
 
   //Coordinates to set the center of the map
   coordinates = new google.maps.LatLng(this.lat, this.lng);
