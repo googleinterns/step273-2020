@@ -24,12 +24,11 @@ export class RankingListComponent implements OnInit {
         this.location = location;
     })
 
-    
     this.hiddenGemService.getAllHiddenGems()
       .subscribe(hiddenGems => {
         this.hiddenGems = hiddenGems;
     })
-    console.log("list " + this.location.lat + "   " + this.location.lng);
+    
   }
 
 }

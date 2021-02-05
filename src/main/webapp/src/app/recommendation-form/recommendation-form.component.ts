@@ -32,7 +32,7 @@ export class RecommendationFormComponent implements OnInit{
         this.location = location;
         
     })
-    console.log("form" + this.location.lat + "   " + this.location.lng);
+    
   }
   // Submit user's preference form
   // Send hidden gem recommendation as output

@@ -10,7 +10,8 @@ import { string } from 'prop-types';
 })
 export class LocationComponent{
 
-  @Output() locationStored: EventEmitter<void> = new EventEmitter()
+  readonly GEO_LOCATION_TIMEOUT_MS = 10000;
+
 	location = {} as Location;
 	locationFound = false;
 
@@ -57,9 +58,9 @@ export class LocationComponent{
       navigator.geolocation.getCurrentPosition(
         this.locationSuccess = this.locationSuccess.bind(this),
         this.locationError = this.locationError.bind(this),
-        {timeout:10000});
+        {timeout:this.GEO_LOCATION_TIMEOUT_MS});
     } else {
-		  this.handleLocationError(false, "");
+      this.handleLocationError(false, "");
 		}
   }
 
@@ -78,6 +79,5 @@ export class LocationComponent{
   setLocation(){
     // store in location service
     this.locationService.setLocation(this.location);
-    this.locationStored.emit();
   }
 }

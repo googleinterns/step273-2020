@@ -42,16 +42,12 @@ describe('LocationComponent', () => {
       lng: 151.2093,
     };
 
-    // spy on event emitter
-    spyOn(component.locationStored, 'emit')
-
     // trigger the click
     let sydneyBtn = fixture.debugElement.query(By.css('#sydneyButton')).nativeElement;
     sydneyBtn.click();
     fixture.detectChanges();
 
     expect(component.location).toEqual(sydneyLocation);
-    expect(component.locationStored.emit).toHaveBeenCalled;
   });
 
   it('should set the default location [Adelaide]', () => {
@@ -61,16 +57,12 @@ describe('LocationComponent', () => {
       lng: 138.6007,
     };
 
-    // spy on event emitter
-    spyOn(component.locationStored, 'emit')
-
     // trigger the click
     let adelaideBtn = fixture.debugElement.query(By.css('#adelaideButton')).nativeElement;
     adelaideBtn.click();
     fixture.detectChanges();
 
     expect(component.location).toEqual(adelaideLocation);
-    expect(component.locationStored.emit).toHaveBeenCalled;
   });
 
   it('should set the users location [Geolocation] success', function() {
@@ -82,16 +74,12 @@ describe('LocationComponent', () => {
       arguments[0](position);
     });
 
-    // spy on event emitter
-    spyOn(component.locationStored, 'emit');
-
     // trigger the click
     let geolocationBtn = fixture.debugElement.query(By.css('#geolocationButton')).nativeElement;
     geolocationBtn.click();
     fixture.detectChanges();
 
    expect(navigator.geolocation.getCurrentPosition).toHaveBeenCalled;
-   expect(component.locationStored.emit).toHaveBeenCalled;
    expect(component.location.lat).toEqual(66.6666);
    expect(component.location.lng).toEqual(-1.1111);
 

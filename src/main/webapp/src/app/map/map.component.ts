@@ -20,6 +20,5 @@ export class MapComponent implements OnInit {
       .subscribe(location => {
         this.location = location;
     })
-    console.log("map" + this.location.lat + "   " + this.location.lng);
   }
 }
