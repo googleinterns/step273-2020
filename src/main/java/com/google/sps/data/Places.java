@@ -123,9 +123,9 @@ public final class Places {
   public static Set<PlacesSearchResult> getAllHiddenGems(Set<PlacesSearchResult[]> all_places) {
     Set<PlacesSearchResult> hiddenGems = new HashSet<>();
     hiddenGems = flatten(all_places)
-      .filter(x -> 
-        x.rating >= HIDDEN_GEMS_RATINGS_MIN && x.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
-        && x.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX)
+      .filter(place -> 
+        place.rating >= HIDDEN_GEMS_RATINGS_MIN && place.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
+        && place.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX)
       .collect(Collectors.toSet());
     
     return hiddenGems;
