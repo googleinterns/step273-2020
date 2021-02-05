@@ -37,6 +37,11 @@ import com.google.sps.GetConfigProperties;
 public final class Places {
   static final int NUM_RESULTS_PAGES = 3;
 
+  /**
+   * This function getAllPlaces retrieved from a Places Search API using the API
+   * and the user's location.
+   * @return Set<PlacesSearchResult[]> This returns a set of arrays of Places Search Results.
+   */
   public static Set<PlacesSearchResult[]> getAllPlaces() {
     GeoApiContext context = new GeoApiContext.Builder()
       .apiKey(GetConfigProperties.getApiKey())
@@ -49,8 +54,12 @@ public final class Places {
   }
 
   /**
-   * This function return all places (restaurants and cafes) near the given location. 
-   * @return Set<PlacesSearchResult[]>    This return a set of a list of Places Search Results. 
+   * This function return all places (restaurants and cafes) near the given
+   * location.
+   * @param context                    The GeoApiContext to be used for the Nearby Search Query.
+   * @param location                   The location to be used for the Nearby Search Query.
+   * @return Set<PlacesSearchResult[]> This return a set of arrays of Places
+   *                                   Search Results.
    */
   public static Set<PlacesSearchResult[]> fetchAllPlacesFromApi(GeoApiContext context, LatLng location) {
     PlacesSearchResponse restaurant_results = new PlacesSearchResponse();
