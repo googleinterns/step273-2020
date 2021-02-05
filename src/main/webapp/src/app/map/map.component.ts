@@ -12,15 +12,15 @@ export class MapComponent implements AfterViewInit {
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
   map!: google.maps.Map;
-  // Set initila location to Sydney coordinates.
+  // Set initial location to Sydney coordinates.
   lat = -33.865143;
   lng = 154;
   
   // Coordinates to set the center of the map.
-  coordinates = new google.maps.LatLng(this.lat, this.lng);
+  centerOfMapCoordinates = new google.maps.LatLng(this.lat, this.lng);
 
   mapOptions: google.maps.MapOptions = {
-    center: this.coordinates,
+    center: this.centerOfMapCoordinates,
     zoom: 10
   };
 
