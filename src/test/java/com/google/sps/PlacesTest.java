@@ -14,16 +14,17 @@
 
 package com.google.sps;
 
-import static org.junit.Assert.assertFalse;
+import static com.google.sps.TestUtils.retrieveBody;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
 
-import com.google.maps.model.Geometry;
+import com.google.maps.model.LatLng;
 import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
 import com.google.sps.testData.LocalTestServerContext;
@@ -34,19 +35,31 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public final class PlacesTest {
+  private static final LatLng LOCATION = new LatLng(-33.865143, 151.209900);
+  private final String AllPlacesApiNearbySearchRequest;
+
+  public PlacesTest() {
+    AllPlacesApiNearbySearchRequest = retrieveBody("AllPlacesApiNearbySearchRequestResponse.json");
+  }
+
   @Test
-  public void getNonEmptyArrayListOfPlaces() throws FileNotFoundException, IOException {
-    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
-      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context);
-      assertFalse(places.isEmpty());
+  public void getSixArraysOfPlacesSearchResults() throws Exception {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context, LOCATION);
+      assertEquals(6, places.size());
     }
   }
 
   @Test
-  public void getUpToSixListsOfPlacesResults() throws FileNotFoundException, IOException {
-    try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
-      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context);
-      assertTrue(places.size() <= 6);
+  public void getOnlyRestaurantsAndCafes() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context, LOCATION);
+      for (PlacesSearchResult[] arrayOfPlaces : places) {
+        for (int i = 0; i < arrayOfPlaces.length; i++) {
+          List<String> types = Arrays.asList(arrayOfPlaces[i].types);	
+          assertTrue(types.contains("restaurant") || types.contains("cafe"));
+        }
+      }
     }
   }
 
