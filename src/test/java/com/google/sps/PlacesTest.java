@@ -19,9 +19,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.Set;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import com.google.maps.model.LatLng;
 import com.google.maps.model.PlacesSearchResult;
@@ -35,6 +35,9 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public final class PlacesTest {
   private static final LatLng LOCATION = new LatLng(-33.865143, 151.209900);
+  private static final double hiddenGemsRating = 3.5;
+  private static final int hiddenGemsNumberOfRatingsMin = 10;
+  private static final int hiddenGemsNumberOfRatingsMax = 50;
   private final String AllPlacesApiNearbySearchRequest;
 
   public PlacesTest() {
@@ -58,6 +61,27 @@ public final class PlacesTest {
           List<String> types = Arrays.asList(arrayOfPlaces[i].types);	
           assertTrue(types.contains("restaurant") || types.contains("cafe"));
         }
+      }
+    }
+  }
+
+  @Test 
+  public void getOnlyPlacesWithExpectedRatingAsHiddenGems() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      for (PlacesSearchResult hiddenGem : hiddenGems) {
+        assertTrue(hiddenGem.rating >= hiddenGemsRating);
+      }
+    }
+  }
+
+  @Test 
+  public void getOnlyPlacesWithExpectedNumberOfRatingsAsHiddenGems() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      for (PlacesSearchResult hiddenGem : hiddenGems) {
+        assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
+          && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
       }
     }
   }
