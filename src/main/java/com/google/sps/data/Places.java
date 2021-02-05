@@ -116,11 +116,10 @@ public final class Places {
   }
 
   public static <T> Stream<PlacesSearchResult> flatten(Set<PlacesSearchResult[]> all_places) {
- 
     Stream<PlacesSearchResult> stream = Stream.of();
     for (PlacesSearchResult[] arrayOfPlaces: all_places) {
-        stream = Stream.concat(stream, Arrays.stream(arrayOfPlaces));
+      stream = Stream.concat(stream, Arrays.stream(arrayOfPlaces));
     }
     return stream;
-    }
+  }
 }
