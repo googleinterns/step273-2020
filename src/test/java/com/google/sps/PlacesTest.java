@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +35,9 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public final class PlacesTest {
   private static final LatLng LOCATION = new LatLng(-33.865143, 151.209900);
+  private static final double hiddenGemsRating = 3.5;
+  private static final int hiddenGemsNumberOfRatingsMin = 10;
+  private static final int hiddenGemsNumberOfRatingsMax = 50;
   private final String AllPlacesApiNearbySearchRequest;
 
   public PlacesTest() {
@@ -64,42 +66,23 @@ public final class PlacesTest {
   }
 
   @Test 
-  public void getFilteredListOfBusinessesAsHiddenGems() throws IOException {
-    Set<PlacesSearchResult[]> mockPlaces = new HashSet<>();
-    PlacesSearchResult mockPlaces_1 = new PlacesSearchResult();
-    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(mockPlaces);
+  public void getOnlyPlacesWithExpectedRatingAsHiddenGems() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      for (PlacesSearchResult hiddenGem : hiddenGems) {
+        assertTrue(hiddenGem.rating >= hiddenGemsRating);
+      }
+    }
   }
 
-  // @Test 
-  // public void getOnlyPlacesWithExpectedRatingAsHiddenGems() throws IOException {
-  //   try (LocalTestServerContext sc = new LocalTestServerContext("{\"status\" : \"OK\"}")) {
-  //     Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context));
-  //     for (PlacesSearchResult hiddenGem : hiddenGems) {
-  //       assertTrue(hiddenGem.rating >= hiddenGemsRating);
-  //     }
-  //   }
-  // }
-
-  //  @Test 
-  // public void getOnlyPlacesWithExpectedRatingAsHiddenGems() {
-  //   Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
-  //   for (PlacesSearchResult hiddenGem : hiddenGems) {
-  //     assertTrue(hiddenGem.rating >= hiddenGemsRating);
-  //   }
-  // }
-
-  // @Test 
-  // public void getOnlyPlacesWithExpectedNumberOfRatingsAsHiddenGems() {
-  //   Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems();
-  //   for (PlacesSearchResult hiddenGem : hiddenGems) {
-  //     assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
-  //         && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
-  //   }
-  // }
-  
-  // @Test 
-  // public void getNonEmptyArrayOfHiddenGems() {
-  //   Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems();
-  //   assertFalse(hiddenGems.isEmpty());
-  // }
+  @Test 
+  public void getOnlyPlacesWithExpectedNumberOfRatingsAsHiddenGems() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      for (PlacesSearchResult hiddenGem : hiddenGems) {
+        assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
+          && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
+      }
+    }
+  }
 }
