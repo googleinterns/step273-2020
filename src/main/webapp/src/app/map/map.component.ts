@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from 
   '@angular/core';
-import { } from 'googlemaps';
 
 @Component({
   selector: 'app-map',
@@ -13,10 +12,11 @@ export class MapComponent implements AfterViewInit {
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
   map!: google.maps.Map;
-  lat = -34;
+  // Set initila location to Sydney coordinates.
+  lat = -33.865143;
   lng = 154;
   
-  //Coordinates to set the center of the map
+  // Coordinates to set the center of the map.
   coordinates = new google.maps.LatLng(this.lat, this.lng);
 
   mapOptions: google.maps.MapOptions = {
