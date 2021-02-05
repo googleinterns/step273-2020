@@ -18,6 +18,8 @@ package com.google.sps.data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -115,7 +117,7 @@ public final class Places {
   }
 
    /**
-   * This returns a set of hidden gems and their information given a set of places.
+   * This function returns a set of hidden gems and their information given a set of places.
    * @param all_places                  The places search results to be filtered as hidden gems.
    * @return Set<PlacesSearchResult>    This returns a set of Places Search Results, which are the
    *                                    hidden gems and their information.
@@ -132,7 +134,7 @@ public final class Places {
   }
 
    /**
-   * This flatten a given set of arrays of places search results.
+   * This function flattens a given set of arrays of places search results.
    * @param <T>                           This is a generic method.
    * @param all_places                    This is a set of arrays of PlacesSearchResult to be flatten.
    * @return Stream<PlacesSearchResult>   This return a flatten stream of PlacesSearchResult.
@@ -145,8 +147,20 @@ public final class Places {
     return stream;
   }
 
-  public static void rankHiddenGems(Set<PlacesSearchResult> hiddenGems) {
+  /**
+   * This function returns the hidden gems ranked by rating (descending order)
+   * @param hiddenGems                      This takes as parameter the set of hiddenGems to be sorted. 
+   * @return ArrayList<PlacesSearchResult>  This returns an arrayList of the hidden gems ranked by rating.
+   */
+  public static ArrayList<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
     // Array List of ranked hidden gems (switch to Array List to keep the ordering)
-    ArrayList<PlacesSearchResult> sortedHiddenGems = new ArrayList<>(hiddenGems);
+    ArrayList<PlacesSearchResult> sortedHiddenGems = new ArrayList<PlacesSearchResult>(hiddenGems);
+    Collections.sort(sortedHiddenGems, new Comparator<PlacesSearchResult>() {
+      @Override
+      public int compare(PlacesSearchResult hiddenGem_1, PlacesSearchResult hiddenGem_2) {
+        return Float.compare(hiddenGem_2.rating, hiddenGem_1.rating);
+      }
+    });
+    return sortedHiddenGems;
   }
 }

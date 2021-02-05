@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,6 +83,17 @@ public final class PlacesTest {
       for (PlacesSearchResult hiddenGem : hiddenGems) {
         assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
           && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
+      }
+    }
+  }
+
+  @Test 
+  public void getRankedHiddenGemsBasedOnRatings() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      ArrayList<PlacesSearchResult> rankedHiddenGems = Places.getRankedHiddenGems(hiddenGems);
+      for (int i = 0; i < rankedHiddenGems.size()-1; i++) {
+        assertTrue(rankedHiddenGems.get(i).rating >= rankedHiddenGems.get(i + 1).rating);
       }
     }
   }
