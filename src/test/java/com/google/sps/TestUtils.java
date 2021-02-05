@@ -19,7 +19,13 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/** This class contains function used for testing. */
 public class TestUtils {
+  /**
+   * This function retrieves the content/body of a given file.
+   * @param filename This is a string of the filename from which we want to retrieve content.
+   * @return String This returns a String of the file body.
+   */
   public static String retrieveBody(String filename) {
     InputStream input = TestUtils.class.getResourceAsStream(filename);
     try (Scanner s = new java.util.Scanner(input, StandardCharsets.UTF_8.name())) {

@@ -38,11 +38,16 @@ import com.google.sps.GetConfigProperties;
  * file when there will be no more need for the hidden gems dummy data.
  */
 public final class Places {
-  private static final double hiddenGemsRating = 3.5;
-  private static final int hiddenGemsNumberOfRatingsMin = 10;
-  private static final int hiddenGemsNumberOfRatingsMax = 50;
+  private static final double HIDDEN_GEMS_RATINGS_MIN = 3.5;
+  private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN = 10;
+  private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX = 50;
   private static final int NUM_RESULTS_PAGES = 3;
-  
+
+  /**
+   * This function getAllPlaces retrieved from a Places Search API using the API
+   * and the user's location.
+   * @return Set<PlacesSearchResult[]> This returns a set of arrays of Places Search Results.
+   */
   public static Set<PlacesSearchResult[]> getAllPlaces() {
     GeoApiContext context = new GeoApiContext.Builder()
       .apiKey(GetConfigProperties.getApiKey())
@@ -55,8 +60,12 @@ public final class Places {
   }
 
   /**
-   * This function return all places (restaurants and cafes) near the given location.
-   * @return Set<PlacesSearchResult[]> This return a set of a list of Places Search Results.
+   * This function return all places (restaurants and cafes) near the given
+   * location.
+   * @param context                    The GeoApiContext to be used for the Nearby Search Query.
+   * @param location                   The location to be used for the Nearby Search Query.
+   * @return Set<PlacesSearchResult[]> This return a set of arrays of Places
+   *                                   Search Results.
    */
   public static Set<PlacesSearchResult[]> fetchAllPlacesFromApi(GeoApiContext context, LatLng location) {
     PlacesSearchResponse restaurant_results = new PlacesSearchResponse();
@@ -104,17 +113,29 @@ public final class Places {
     return all_results;
   }
 
+   /**
+   * This returns a set of hidden gems and their information given a set of places.
+   * @param all_places                  The places search results to be filtered as hidden gems.
+   * @return Set<PlacesSearchResult>    This returns a set of Places Search Results, which are the
+   *                                    hidden gems and their information.
+   */
   public static Set<PlacesSearchResult> getAllHiddenGems(Set<PlacesSearchResult[]> all_places) {
     Set<PlacesSearchResult> hiddenGems = new HashSet<>();
     hiddenGems = flatten(all_places)
       .filter(x -> 
-        x.rating >= hiddenGemsRating && x.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
-        && x.userRatingsTotal <= hiddenGemsNumberOfRatingsMax)
+        x.rating >= HIDDEN_GEMS_RATINGS_MIN && x.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
+        && x.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX)
       .collect(Collectors.toSet());
     
     return hiddenGems;
   }
 
+   /**
+   * This flatten a given set of arrays of places search results.
+   * @param <T>                           This is a generic method.
+   * @param all_places                    This is a set of arrays of PlacesSearchResult to be flatten.
+   * @return Stream<PlacesSearchResult>   This return a flatten stream of PlacesSearchResult.
+   */
   public static <T> Stream<PlacesSearchResult> flatten(Set<PlacesSearchResult[]> all_places) {
     Stream<PlacesSearchResult> stream = Stream.of();
     for (PlacesSearchResult[] arrayOfPlaces: all_places) {
