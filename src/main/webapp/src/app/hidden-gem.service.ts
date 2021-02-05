@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HiddenGem } from './hidden-gem';
 import { catchError } from 'rxjs/operators';
 
@@ -17,8 +17,10 @@ export class HiddenGemService {
       .pipe(catchError(this.handleError))
   }
 
-  handleError(error: HttpErrorResponse) {
-    return throwError('A data error occured, please try again.');
+  getRankedHiddenGems() : Observable<HiddenGem[]> {
+    return this.httpClient
+      .get<HiddenGem[]>('/ranking')
+      .pipe(catchError(this.handleError))
   }
 
   // TODO: MVP - params with user preference data from form to be used in request.
@@ -29,5 +31,8 @@ export class HiddenGemService {
       .get<HiddenGem[]>('/recommendation', {params})
       .pipe(catchError(this.handleError))
   }
-  
+
+  handleError(error: HttpErrorResponse) {
+    return throwError('A data error occured, please try again.');
+  }
 }

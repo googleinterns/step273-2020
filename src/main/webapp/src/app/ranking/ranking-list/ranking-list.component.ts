@@ -13,7 +13,7 @@ export class RankingListComponent implements OnInit {
   constructor(private hiddenGemService: HiddenGemService) { }
 
   ngOnInit() {
-    this.hiddenGemService.getAllHiddenGems()
+    this.hiddenGemService.getRankedHiddenGems()
       .subscribe(hiddenGems => {
         this.hiddenGems = hiddenGems;
     })

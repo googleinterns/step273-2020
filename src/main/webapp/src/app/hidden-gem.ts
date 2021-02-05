@@ -1,9 +1,14 @@
 export interface HiddenGem {
-  id: number;
+  geometry: object;
   name: string;
-  business_type: string;
-  address: string;
-  price_level: number;
+  icon: string;
+  placeId: string;
   rating: number;
-  photo: string;
+  types: string[];
+  openingHours: object;
+  photos: object[];
+  vicinity: string;
+  permanentlyClosed: boolean;
+  userRatingsTotal: number;
+  businessStatus: string;
 }
