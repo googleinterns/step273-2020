@@ -34,25 +34,26 @@ export class LocationComponent{
     this.setLocation();
   }
 
-  locationError(error : PositionError): void {
-
-		var message:string;
-    message = "An unknown error occured/"
+  // Switch statement code from 
+  // https://www.w3schools.com/html/html5_geolocation.asp
+  locationError(error: PositionError): void {
     
-		switch(error.code) {
-			case error.PERMISSION_DENIED:
-				message = "User denied the request for Geolocation."
-				break;
-			case error.POSITION_UNAVAILABLE:
-				message = "Location information is unavailable."
-				break;
-			case error.TIMEOUT:
-				message = "The request to get user location timed out."
-				break;
-		}
-    this.handleLocationError(true, message);
-	}
-	
+    var message = "An unknown error occured."
+
+    switch(error.code){
+      case error.PERMISSION_DENIED:
+        message = "User denied the request for Geolocation."
+        break;
+      case error.POSITION_UNAVAILABLE:
+        message = "Location information is unavailable."
+        break;
+      case error.TIMEOUT:
+        message = "The request to get user location timed out."
+        break;
+    }
+    this.handleLocationError(true, message)
+  }
+
   enableNavigatorLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
