@@ -16,6 +16,7 @@
 package com.google.sps.data;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -142,5 +143,10 @@ public final class Places {
       stream = Stream.concat(stream, Arrays.stream(arrayOfPlaces));
     }
     return stream;
+  }
+
+  public static void rankHiddenGems(Set<PlacesSearchResult> hiddenGems) {
+    // Array List of ranked hidden gems (switch to Array List to keep the ordering)
+    ArrayList<PlacesSearchResult> sortedHiddenGems = new ArrayList<>(hiddenGems);
   }
 }
