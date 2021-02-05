@@ -36,10 +36,7 @@ import com.google.maps.model.PlacesSearchResult;
 import com.google.maps.model.RankBy;
 import com.google.sps.GetConfigProperties;
 
-/**
- * This is a temporary class. Everything will be be moved to the HiddenGems.java
- * file when there will be no more need for the hidden gems dummy data.
- */
+/** Places which are retrieved from the Places API and which are used to filter hidden gems. */
 public final class Places {
   private static final double HIDDEN_GEMS_RATINGS_MIN = 3.5;
   private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN = 10;
