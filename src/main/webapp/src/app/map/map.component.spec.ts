@@ -27,6 +27,5 @@ describe('MapComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to Maps!');
-  });
-  
+  }); 
 });
