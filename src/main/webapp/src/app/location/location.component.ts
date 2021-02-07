@@ -1,7 +1,6 @@
-import { Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from '../location';
-import { string } from 'prop-types';
 
 @Component({
   selector: 'app-location',
@@ -10,10 +9,9 @@ import { string } from 'prop-types';
 })
 export class LocationComponent{
 
-  readonly GEO_LOCATION_TIMEOUT_MS = 10000;
+  readonly GEO_LOCATION_TIMEOUT_MS = 12000;
 
-	location = {} as Location;
-	locationFound = false;
+  location = {} as Location;
 
   @ViewChild("errorMessage", { static: false })
   errorMessage!: ElementRef;
@@ -21,7 +19,6 @@ export class LocationComponent{
   constructor(private locationService: LocationService) { }
 
   handleLocationError(browserHasGeolocation: boolean, message: string): void {
-
     browserHasGeolocation
       ? this.errorMessage.nativeElement.innerText = "Geolocation services have failed. Try a default location. " + message
       : this.errorMessage.nativeElement.innerText = "Geolocation is not supported by this browser. Try a default location."  
@@ -29,6 +26,7 @@ export class LocationComponent{
   }
 
   locationSuccess(position: Position): void {
+    console.log("ahhhhh");
     this.location.lat = position.coords.latitude;
     this.location.lng = position.coords.longitude;
     this.setLocation();
@@ -37,9 +35,8 @@ export class LocationComponent{
   // Switch statement code from 
   // https://www.w3schools.com/html/html5_geolocation.asp
   locationError(error: PositionError): void {
-    
+    console.log("errorhhhhh");
     var message = "An unknown error occured."
-
     switch(error.code){
       case error.PERMISSION_DENIED:
         message = "User denied the request for Geolocation."
@@ -57,14 +54,22 @@ export class LocationComponent{
   enableNavigatorLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        this.locationSuccess = this.locationSuccess.bind(this),
-        this.locationError = this.locationError.bind(this),
-        {timeout:this.GEO_LOCATION_TIMEOUT_MS});
+        this.locationSuccess = this.locationSuccess.bind(this),	
+        this.locationError = this.locationError.bind(this),	
+        {maximumAge:60000, timeout:10000});
     } else {
       this.handleLocationError(false, "");
 		}
   }
 
+  getLocation(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position: Position) => {
+        console.log("lat " + position.coords.latitude + " lng " +  position.coords.longitude);
+        this.setLocation;
+      });
+    }
+  }
   getSydneyLocation(): void {
     this.location.lat = -33.8688;
     this.location.lng = 151.2093;
@@ -80,5 +85,6 @@ export class LocationComponent{
   setLocation(){
     // store in location service
     this.locationService.setLocation(this.location);
+    console.log( "map" + this.location.lat + "plz" + this.location.lng);
   }
 }
