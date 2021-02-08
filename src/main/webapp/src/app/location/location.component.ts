@@ -26,7 +26,6 @@ export class LocationComponent{
   }
 
   locationSuccess(position: Position): void {
-    console.log("ahhhhh");
     this.location.lat = position.coords.latitude;
     this.location.lng = position.coords.longitude;
     this.setLocation();
@@ -35,7 +34,6 @@ export class LocationComponent{
   // Switch statement code from 
   // https://www.w3schools.com/html/html5_geolocation.asp
   locationError(error: PositionError): void {
-    console.log("errorhhhhh");
     var message = "An unknown error occured."
     switch(error.code){
       case error.PERMISSION_DENIED:
@@ -61,15 +59,7 @@ export class LocationComponent{
       this.handleLocationError(false, "");
 		}
   }
-
-  getLocation(): void {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position: Position) => {
-        console.log("lat " + position.coords.latitude + " lng " +  position.coords.longitude);
-        this.setLocation;
-      });
-    }
-  }
+  
   getSydneyLocation(): void {
     this.location.lat = -33.8688;
     this.location.lng = 151.2093;
@@ -85,6 +75,5 @@ export class LocationComponent{
   setLocation(){
     // store in location service
     this.locationService.setLocation(this.location);
-    console.log( "map" + this.location.lat + "plz" + this.location.lng);
   }
 }
