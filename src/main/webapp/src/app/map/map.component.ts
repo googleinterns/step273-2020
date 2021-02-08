@@ -37,7 +37,10 @@ export class MapComponent implements AfterViewInit {
       map: map,
       title: "Hello World!"
     });
-
+    // const markers = [
+    //   { },
+    //   { }
+    // ];
     const markers = [
       {
         position: new google.maps.LatLng(40.73061, 73.935242),
