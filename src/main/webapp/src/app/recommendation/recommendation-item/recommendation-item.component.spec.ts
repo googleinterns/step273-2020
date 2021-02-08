@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecommendationItemComponent } from './recommendation-item.component';
-import { HiddenGem } from '../hidden-gem';
+import { HiddenGem } from 'src/app/hidden-gem';
 
 describe('RecommendationItemComponent', () => {
   let component: RecommendationItemComponent;
