@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from 
-  '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import { LocationService } from '../location.service';
+import { Location } from 'src/app/location';
 
 @Component({
   selector: 'app-map',
@@ -12,23 +13,27 @@ export class MapComponent implements AfterViewInit {
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
   map!: google.maps.Map;
-  // Set initial location to Sydney coordinates.
-  lat = -33.865143;
-  lng = 154;
-  
-  // Coordinates to set the center of the map.
-  centerOfMapCoordinates = new google.maps.LatLng(this.lat, this.lng);
 
-  mapOptions: google.maps.MapOptions = {
-    center: this.centerOfMapCoordinates,
-    zoom: 10
-  };
+  location = {} as Location;
+
+  constructor(private locationService: LocationService) { 
+      this.locationService.getLocation
+      .subscribe(location => {
+        this.location = location;
+    })
+  }
 
   ngAfterViewInit(): void {
     this.mapInitializer();
   }
 
   mapInitializer(): void {
-    this.map = new google.maps.Map(this.mapContainer.nativeElement, this.mapOptions);
+    let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
+
+    let mapOptions: google.maps.MapOptions = {
+      center: centerOfMapCoordinates,
+      zoom: 10
+    };
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
   }
 }
