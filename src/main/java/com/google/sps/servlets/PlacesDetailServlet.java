@@ -61,7 +61,7 @@ public class PlacesDetailServlet extends HttpServlet {
     //String jsonResponse = gson.toJason("hello")
 
     // PlaceDetails restaurantDetails = new PlaceDetails();
-    String jsonResponse = gson.toJson("boo");
+    String jsonResponse = gson.toJson("");
     
     Set<PlacesSearchResult> getAllHiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
     //System.out.println(getAllHiddenGems);
