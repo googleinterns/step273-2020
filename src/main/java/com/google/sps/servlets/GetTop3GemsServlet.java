@@ -41,5 +41,4 @@ public class GetTop3GemsServlet extends HttpServlet {
     response.setContentType("application/json");
     response.getWriter().println(jsonResponse);
   }
-
 }
