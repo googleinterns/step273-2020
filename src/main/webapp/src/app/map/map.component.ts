@@ -14,7 +14,7 @@ export class MapComponent implements AfterViewInit {
   map!: google.maps.Map;
   // Set initial location to Sydney coordinates.
   lat = -33.865143;
-  lng = 154;
+  lng = 151.2093;
   
   // Coordinates to set the center of the map.
   centerOfMapCoordinates = new google.maps.LatLng(this.lat, this.lng);
