@@ -5,10 +5,14 @@
       <mat-card-title id="name">{{hiddenGem.name}}</mat-card-title>
       <mat-card-subtitle id="address">{{hiddenGem.vicinity}}</mat-card-subtitle>
     </mat-card-header>
-    <!-- <img mat-card-image height="200" src={{hiddenGem.photo}} alt={{hiddenGem.name}}> -->
+    <img mat-card-image height="200" src={{photoUrl}} alt={{hiddenGem.name}}>
     <mat-card-content>
+      <!-- TODO: Price level to be added after Places Details Request -->
       <!-- <p id="price">Price Level (💲): {{hiddenGem.price_level}}</p> -->
+      <p id="business_type">Business type: {{hiddenGem.types[0]}}</p>
+      <p id="number_of_reviews">Number of Reviews: {{hiddenGem.userRatingsTotal}}</p>
       <p id="rating">Star Rating (⭐️): {{hiddenGem.rating}}</p>
+      <p id="opening_hours"><span *ngIf="hiddenGem.openingHours">Open Now</span><span *ngIf="!hiddenGem.openingHours">Currently closed</span></p>
     </mat-card-content>
   </mat-card>
 </div>
