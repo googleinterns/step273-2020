@@ -154,7 +154,7 @@ public final class Places {
    * @return List<PlacesSearchResult>       This returns an List of the hidden gems ranked by rating.
    */
   public static List<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
-    // Array List of ranked hidden gems (switch to Array List to keep the ordering)
+    // List of ranked hidden gems (switch to List to keep the ordering)
     List<PlacesSearchResult> sortedHiddenGems = new ArrayList<PlacesSearchResult>(hiddenGems);
     Collections.sort(sortedHiddenGems, new Comparator<PlacesSearchResult>() {
       @Override
