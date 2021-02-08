@@ -19,6 +19,7 @@ import { RecommendationItemComponent } from './recommendation-item/recommendatio
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
 import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
+import { LocationComponent } from './location/location.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -34,6 +35,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     RecommendationComponent,
     RankingListComponent,
     RankingItemComponent,
+    LocationComponent,
     HomepageComponent
   ],
   imports: [
