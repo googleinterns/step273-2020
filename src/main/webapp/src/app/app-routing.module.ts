@@ -3,14 +3,20 @@ import { RecommendationComponent  } from './recommendation/recommendation.compon
 import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
+import { LocationComponent } from './location/location.component';
 
 export const routes: Routes = [
   { path: '' ,
-    component: HomepageComponent
+    component: LocationComponent,
   },
   { path: 'recommendation' ,
-    component: RecommendationComponent
-  }
+    component: RecommendationComponent,
+  },
+  { path: 'home' ,
+    component: HomepageComponent,
+  },
+  { path: '**', 
+    redirectTo: 'home' }
 ];
 
 @NgModule({
