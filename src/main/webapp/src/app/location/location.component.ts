@@ -57,9 +57,9 @@ export class LocationComponent{
         {maximumAge:60000, timeout:10000});
     } else {
       this.handleLocationError(false, "");
-		}
+    }
   }
-  
+
   getSydneyLocation(): void {
     this.location.lat = -33.8688;
     this.location.lng = 151.2093;

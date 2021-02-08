@@ -35,13 +35,6 @@ describe('MapComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to Maps!');
   });
 
-  // it('should render the image', () => {
-  //   const fixture = TestBed.createComponent(MapComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.debugElement.nativeElement;
-  //   expect(compiled.querySelector('div.image>img').src).toContain('map.jpg');
-  // });
-
   it('should store the initial location', () => {
 
     const defaultSydneyLocation: Location = {

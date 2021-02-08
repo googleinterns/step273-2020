@@ -8,18 +8,6 @@ import { Location } from 'src/app/location';
   styleUrls: ['./map.component.css']
 })
 
-// export class MapComponent implements OnInit {
-
-//   location = {} as Location;
-
-//   constructor(private locationService: LocationService) {  }
-
-//   ngOnInit() {  
-
-//     this.locationService.getLocation
-//       .subscribe(location => {
-//         this.location = location;
-//     })
 export class MapComponent implements AfterViewInit {
 
   @ViewChild("mapContainer", { static: false })
@@ -34,7 +22,6 @@ export class MapComponent implements AfterViewInit {
         this.location = location;
     })
   }
-
 
   ngAfterViewInit(): void {  
     this.mapInitializer();
