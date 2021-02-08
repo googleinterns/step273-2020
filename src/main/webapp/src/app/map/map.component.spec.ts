@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MapComponent } from './map.component';
-import { LocationService } from '../location.service';
+import { LocationService } from 'src/app/location.service';
 import { Location } from 'src/app/location';
 
 describe('MapComponent', () => {

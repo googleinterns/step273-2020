@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NavBarComponent } from './nav-bar.component';
 import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
-import { routes } from '../app-routing.module'
+import { routes } from 'src/app/app-routing.module'
 
 describe('NavBarComponent', () => {
  

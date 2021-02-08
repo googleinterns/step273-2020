@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RankingItemComponent } from './ranking-item.component';
-import { HiddenGem } from '../../hidden-gem';
+import { HiddenGem } from 'src/app/hidden-gem';
 
 describe('RankingItemComponent', () => {
   let component: RankingItemComponent;
