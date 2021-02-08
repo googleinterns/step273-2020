@@ -1,16 +1,19 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {  FormBuilder, Validators} from '@angular/forms';
 import { HiddenGemService } from '../hidden-gem.service';
 import { HiddenGem } from '../hidden-gem';
+import { LocationService } from '../location.service';
+import { Location } from 'src/app/location';
 
 @Component({
   selector: 'app-recommendation-form',
   templateUrl: './recommendation-form.component.html',
   styleUrls: ['./recommendation-form.component.css']
 })
-export class RecommendationFormComponent{
+export class RecommendationFormComponent implements OnInit{
 
-  @Output() hiddenGemRecommendation = new EventEmitter<HiddenGem[]>()
+  @Output() hiddenGemRecommendation = new EventEmitter<HiddenGem[]>();
+  location = {} as Location;
 
   // Build preference form
   preferenceForm = this.formBuilder.group({
@@ -19,8 +22,18 @@ export class RecommendationFormComponent{
     type: ["", Validators.required]
   });
 
-  constructor(private readonly formBuilder: FormBuilder, private hiddenGemService: HiddenGemService) { }
+  constructor(private readonly formBuilder: FormBuilder, private hiddenGemService: HiddenGemService,
+  private locationService: LocationService) { }
 
+  ngOnInit() {  
+
+    this.locationService.getLocation
+      .subscribe(location => {
+        this.location = location;
+        
+    })
+    
+  }
   // Submit user's preference form
   // Send hidden gem recommendation as output
   onSubmit(): void {
