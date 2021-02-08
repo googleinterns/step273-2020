@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/location';
+import { HiddenGemService } from '../hidden-gem.service';
 
 @Component({
   selector: 'app-map',
@@ -46,10 +47,14 @@ export class MapComponent implements AfterViewInit {
 
   loadAllMarkers(): void {
    
-    const markersJson = [
-      { },
-      { }
-    ];
+    // const markersJson = [
+    //   {
+    //     position: new google.maps.LatLng( -33.513059, 151.1234),
+    //     map: this.map,
+    //     title: HiddenGemService.name,
+    //   },
+    //   {}
+    // ];
     const markers = [
       {
         position: new google.maps.LatLng( -33.513059, 151.1234),
