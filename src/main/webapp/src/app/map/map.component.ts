@@ -23,7 +23,7 @@ export class MapComponent implements AfterViewInit {
     })
   }
 
-  ngAfterViewInit(): void {  
+  ngAfterViewInit(): void {
     this.mapInitializer();
   }
 
