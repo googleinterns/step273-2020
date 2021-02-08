@@ -75,7 +75,7 @@ public class PlacesDetailServlet extends HttpServlet {
             PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
             PlaceDetailsRequest.FieldMask.WEBSITE)
         .await();
-        jsonResponse = jsonResponse.concat(gson.toJson(placeDetails));
+        jsonResponse = jsonResponse.concat(gson.toJson(hiddenGem.concat(placeDetails));
       } catch (ApiException | InterruptedException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
