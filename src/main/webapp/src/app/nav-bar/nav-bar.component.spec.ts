@@ -38,7 +38,7 @@ describe('NavBarComponent', () => {
   it('should go to home url', async(() => {
     fixture.nativeElement.querySelector("#home-navbar").click();
     fixture.whenStable().then(() => {
-      expect(location.path()).toEqual('/');
+      expect(location.path()).toEqual('/home');
     });
   }));
 
@@ -51,6 +51,6 @@ describe('NavBarComponent', () => {
   it('home route should be rendered correctly', () => {
       let href = fixture.nativeElement.querySelector("#home-navbar")
         .getAttribute('href');
-    expect(href).toEqual('/');
+    expect(href).toEqual('/home');
   });
 })
