@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor(private hiddenGemService: HiddenGemService) { }
 
-  getHiddenGems() {
+  getRankedHiddenGems() {
     return new Promise((resolve, reject) => {
       this.hiddenGemService.getRankedHiddenGems()
         .subscribe(hiddenGems => {

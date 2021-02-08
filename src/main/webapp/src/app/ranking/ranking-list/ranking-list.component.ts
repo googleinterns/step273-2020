@@ -22,14 +22,14 @@ export class RankingListComponent implements OnInit {
       .subscribe(location => {
         this.location = location;
       })
-    this.getHiddenGems();
+    this.getRankedHiddenGems();
   }
 
   ngDoCheck() {
     this.hiddenGems = this.appComponent.hiddenGems;
   }
 
-  async getHiddenGems() {
-    return await this.appComponent.getHiddenGems();
+  async getRankedHiddenGems() {
+    return await this.appComponent.getRankedHiddenGems();
   }
 }
