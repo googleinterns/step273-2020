@@ -16,6 +16,7 @@
 package com.google.sps.data;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -150,11 +151,11 @@ public final class Places {
   /**
    * This function returns the hidden gems ranked by rating (descending order)
    * @param hiddenGems                      This takes as parameter the set of hiddenGems to be sorted. 
-   * @return ArrayList<PlacesSearchResult>  This returns an arrayList of the hidden gems ranked by rating.
+   * @return List<PlacesSearchResult>       This returns an List of the hidden gems ranked by rating.
    */
-  public static ArrayList<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
+  public static List<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
     // Array List of ranked hidden gems (switch to Array List to keep the ordering)
-    ArrayList<PlacesSearchResult> sortedHiddenGems = new ArrayList<PlacesSearchResult>(hiddenGems);
+    List<PlacesSearchResult> sortedHiddenGems = new ArrayList<PlacesSearchResult>(hiddenGems);
     Collections.sort(sortedHiddenGems, new Comparator<PlacesSearchResult>() {
       @Override
       public int compare(PlacesSearchResult hiddenGem_1, PlacesSearchResult hiddenGem_2) {
