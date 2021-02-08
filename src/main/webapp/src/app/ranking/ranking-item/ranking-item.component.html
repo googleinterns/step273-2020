@@ -7,12 +7,13 @@
     <mat-grid-list cols="2" rowHeight="200px">
       <mat-grid-tile>
         <div id="business-info">
-          <!-- <p class="mat-subheading-2" id="business_type"><b>Business type:</b> {{hiddenGem.types[0]}}</p> -->
+          <p class="mat-subheading-2" id="business_type"><b>Business type:</b> {{hiddenGem.types[0]}}</p>
           <p class="mat-subheading-2" id="number_of_reviews"><b>Number of reviews:</b> {{hiddenGem.userRatingsTotal}}</p>
           <p class="mat-subheading-2" id="rating"><b>Rating:</b> {{hiddenGem.rating}}</p>
+          <p class="mat-subheading-2" id="opening_hours"><b *ngIf="hiddenGem.openingHours">Open Now</b><b *ngIf="!hiddenGem.openingHours">Currently closed</b></p>
         </div>
       </mat-grid-tile>
-      <!-- <mat-grid-tile><img height="200" src={{hiddenGem.photos}} alt={{hiddenGem.name}}></mat-grid-tile> -->
+      <mat-grid-tile *ngIf="hiddenGem.photos"><img height="200" src="{{photoUrl}}" alt={{hiddenGem.name}}></mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
 </mat-card>

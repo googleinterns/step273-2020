@@ -26,14 +26,24 @@ describe('RankingItemComponent', () => {
 
   it('should render hidden gem details', () => {
     const hiddenGem: HiddenGem = {
-      geometry: {},
+      geometry: {
+        location: {lat: -33.8655823, lng: 151.2078192},
+        viewport:{
+          northeast: {lat: -33.8655823, lng: 151.2078192},
+          southwest: {lat: -33.8655823, lng: 151.2078192}
+        }
+      },
       name: 'Fratelli Fresh',
       icon: '',
       placeId: '1',
       rating: 3.6,
       types: ['restaurant'],
-      openingHours: {},
-      photos: [{}],
+      openingHours: {openNow: true},
+      photos: [{
+        photoReference: "photoReference",
+        height: 0,
+        width: 0,
+        htmlAttributions: ["htmlAttributions"]}],
       vicinity: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
       permanentlyClosed: false,
       userRatingsTotal: 30,
