@@ -17,28 +17,50 @@ describe('HiddenGemService', () => {
     const expectedHiddenGems: HiddenGem[] =
       [
         {
-          geometry: {},
+          geometry: {
+            location: {lat: -33.8655823, lng: 151.2078192},
+            viewport:{
+              northeast: {lat: -33.8655823, lng: 151.2078192},
+              southwest: {lat: -33.8655823, lng: 151.2078192}
+            }
+          },
           name: 'Fratelli Fresh',
           icon: '',
           placeId: '1',
           rating: 3.6,
           types: ['restaurant'],
-          openingHours: {},
-          photos: [{}],
+          openingHours: {openNow: true},
+          photos: [{
+            photoReference: "photoReference",
+            height: 0,
+            width: 0,
+            htmlAttributions: ["htmlAttributions"]
+          }],
           vicinity: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
           permanentlyClosed: false,
           userRatingsTotal: 30,
           businessStatus: ''
         },
         {
-          geometry: {},
+          geometry: {
+            location: {lat: -33.8655823, lng: 151.2078192},
+            viewport:{
+              northeast: {lat: -33.8655823, lng: 151.2078192},
+              southwest: {lat: -33.8655823, lng: 151.2078192}
+            }
+          },
           name: 'Cafe Sydney',
           icon: '',
           placeId: '2',
           rating: 4.5,
           types: ['cafe'],
-          openingHours: {},
-          photos: [{}],
+          openingHours: {openNow: true},
+          photos: [{
+            photoReference: "photoReference",
+            height: 0,
+            width: 0,
+            htmlAttributions: ["htmlAttributions"]
+          }],
           vicinity: '31 Alfred St, Sydney NSW 2000',
           permanentlyClosed: false,
           userRatingsTotal: 30,
@@ -86,14 +108,25 @@ describe('HiddenGemService', () => {
     const expectedTopGems: HiddenGem[] =
       [
         {
-          geometry: {},
+          geometry: {
+            location: {lat: -33.8655823, lng: 151.2078192},
+            viewport:{
+              northeast: {lat: -33.8655823, lng: 151.2078192},
+              southwest: {lat: -33.8655823, lng: 151.2078192}
+            }
+          },
           name: 'The best restaurant',
           icon: '',
           placeId: '3',
           rating: 4.5,
           types: ['restaurant'],
-          openingHours: {},
-          photos: [{}],
+          openingHours: {openNow: true},
+          photos: [{
+            photoReference: "photoReference",
+            height: 0,
+            width: 0,
+            htmlAttributions: ["htmlAttributions"]
+          }],
           vicinity: 'An address located within Sydney, Sydney NSW 2000',
           permanentlyClosed: false,
           userRatingsTotal: 30,
