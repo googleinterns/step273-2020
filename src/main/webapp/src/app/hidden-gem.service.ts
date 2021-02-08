@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { HiddenGem } from './hidden-gem';
+import { HiddenGem } from './models/hidden-gem';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({

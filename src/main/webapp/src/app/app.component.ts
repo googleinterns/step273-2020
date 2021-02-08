@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { HiddenGem } from './hidden-gem';
+import { HiddenGem } from './models/hidden-gem';
 import { HiddenGemService } from './hidden-gem.service';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HiddenGem } from 'src/app/hidden-gem';
+import { HiddenGem } from 'src/app/models/hidden-gem';
 import { AppComponent } from 'src/app/app.component';
 import { LocationService } from '../../location.service';
-import { Location } from 'src/app/location';
+import { Location } from 'src/app/models/location';
 
 
 @Component({

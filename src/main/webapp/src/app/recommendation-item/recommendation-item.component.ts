@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HiddenGem } from '../hidden-gem';
+import { HiddenGem } from '../models/hidden-gem';
 
 
 @Component({

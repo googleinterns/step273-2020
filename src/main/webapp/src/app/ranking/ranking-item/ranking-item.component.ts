@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HiddenGem } from 'src/app/hidden-gem';
+import { HiddenGem } from 'src/app/models/hidden-gem';
 
 @Component({
   selector: 'app-ranking-item',
