@@ -13,9 +13,7 @@ export class MapComponent implements AfterViewInit {
 
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
-  
   map!: google.maps.Map;
-
   location = {} as Location;
 
   constructor(private locationService: LocationService) { 
@@ -56,22 +54,22 @@ export class MapComponent implements AfterViewInit {
     ];
 
     markers.forEach(markerInfo => {
-      // //Creating a new marker object
+      // Creating a new marker object.
       const markerObj = new google.maps.Marker({
         ...markerInfo
       });
 
-      //creating a new info window with markers info
+      // Creating a new info window with markers info.
       const infoWindow = new google.maps.InfoWindow({
         content: markerInfo.title,
       });
 
-      //Add click event to open info window on marker
+      // Add click event to open info window on marker.
       markerObj.addListener("click", () => {
         infoWindow.open(markerInfo.map, markerObj);
       });
 
-      //Adding marker to google map
+      // Adding marker to google map.
       markerObj.setMap(this.map);
     });
   }
