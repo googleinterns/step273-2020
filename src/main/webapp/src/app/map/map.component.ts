@@ -49,25 +49,28 @@ export class MapComponent implements AfterViewInit {
 
     for (var i = 0, length = this.hiddenGems.length; i < length; i++) {
       var data = this.hiddenGems[i],
-      latLng = new google.maps.LatLng( -33.513059, 151.1234+i);//(data.geometry.lat, data.geometry.lng); 
+      latLng = new google.maps.LatLng( -33.513059, 151.1234+i);  //(data.geometry.lat, data.geometry.lng); 
 
       // Creating a marker and putting it on the map
-      var marker = new google.maps.Marker({
+      var markerObj = new google.maps.Marker({
         position: latLng,
         map: this.map,
         title: data.name + data.address + 
           "star rating:" + data.rating
       });
     
-    	// Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
-			(function(marker, data) {
-				// Attaching a click event to the current marker
-				google.maps.event.addListener(marker, "click", function(e) {
-					infoWindow.setContent(data.name);
-					infoWindow.open(this.map, marker);
-				});
-      })
-      (marker, data);
+      // const infoWindow = new google.maps.InfoWindow({
+      //   content: markerObj.getTitle(),
+      // });
+
+      // Add click event to open info window on marker.
+      // markerObj.addListener("click", () => {
+      //   infoWindow.open(markerObj.map, markerObj);
+      // });
+
+      // Adding marker to google map.
+      markerObj.setMap(this.map);
+    //});
 		}
   }
 }
