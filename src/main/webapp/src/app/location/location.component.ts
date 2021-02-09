@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { LocationService } from 'src/app/location.service';
-import { Location } from 'src/app/location';
+import { LocationService } from '../location.service';
+import { Location } from '../models/location';
 
 @Component({
   selector: 'app-location',
