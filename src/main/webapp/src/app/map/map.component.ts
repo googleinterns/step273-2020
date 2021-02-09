@@ -40,38 +40,37 @@ export class MapComponent implements AfterViewInit {
     };
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
 
-    //Adding other markers
-     this.loadAllMarkers();
+     this.loadMarkers();
   }
 
 
-  loadAllMarkers(): void {
+  loadMarkers(): void {
    
     // Fetch data from json string from Hidden Gems object.
-    const json = HiddenGemService.toString;
+    //const json = HiddenGemService.toString;
     for (var i = 0, length = json.length; i < length; i++) {
       var data = json[i],
       latLng = new google.maps.LatLng(data.lat, data.lng); 
 
       // Creating a marker and putting it on the map
-      var marker = new google.maps.Marker({
+      var markers[i] = new google.maps.Marker({
         position: latLng,
         map: this.map,
-        title: data.title
+        title: data.name
       });
     }
-    const markers = [
-      {
-        position: new google.maps.LatLng( -33.513059, 151.1234),
-        map: this.map,
-        title: "Quay restaurant"
-      },
-      {
-        position: new google.maps.LatLng(-33.47,151.865),
-        map: this.map,
-        title: "Food Van cafe"
-      }
-    ];
+    // const markers = [
+    //   {
+    //     position: new google.maps.LatLng( -33.513059, 151.1234),
+    //     map: this.map,
+    //     title: "Quay restaurant"
+    //   },
+    //   {
+    //     position: new google.maps.LatLng(-33.47,151.865),
+    //     map: this.map,
+    //     title: "Food Van cafe"
+    //   }
+    // ];
 
     markers.forEach(markerInfo => {
       // //Creating a new marker object
@@ -81,7 +80,7 @@ export class MapComponent implements AfterViewInit {
 
       //creating a new info window with markers info
       const infoWindow = new google.maps.InfoWindow({
-        content: markerInfo.title
+        content: markerInfo.title,
       });
 
       //Add click event to open info window on marker
