@@ -3,10 +3,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { RankingListComponent } from './ranking-list.component';
-import { HiddenGemService } from '../../hidden-gem.service';
-import { HiddenGem } from '../../hidden-gem';
+import { HiddenGemService } from 'src/app/hidden-gem.service';
+import { HiddenGem } from 'src/app/hidden-gem';
 import { RouterTestingModule } from '@angular/router/testing';
-import { LocationService } from '../../location.service';
+import { LocationService } from 'src/app/location.service';
 import { Location } from 'src/app/location';
 
 describe('RankingListComponent', () => {

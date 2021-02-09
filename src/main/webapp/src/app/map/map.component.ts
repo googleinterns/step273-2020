@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
-import { LocationService } from '../location.service';
+import { LocationService } from 'src/app/location.service';
 import { Location } from 'src/app/location';
 import { HiddenGemService } from '../hidden-gem.service';
 
