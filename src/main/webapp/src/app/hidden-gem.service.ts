@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HiddenGem } from './hidden-gem';
 import { catchError } from 'rxjs/operators';
 
@@ -29,5 +29,5 @@ export class HiddenGemService {
       .get<HiddenGem[]>('/recommendation', {params})
       .pipe(catchError(this.handleError))
   }
-  
+
 }
