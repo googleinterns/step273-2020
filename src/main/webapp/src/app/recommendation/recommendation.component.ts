@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HiddenGem } from '../hidden-gem';
+import { HiddenGem } from '../models/hidden-gem';
 
 @Component({
   selector: 'app-recommendation',
@@ -17,5 +17,5 @@ export class RecommendationComponent  {
   onFormSubmit(hiddenGems: HiddenGem[]){
     this.formSubmitted = true;
     this.hiddenGems = hiddenGems;
-  } 
+  }
 }

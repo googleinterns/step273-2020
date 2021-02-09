@@ -10,6 +10,7 @@ import { HiddenGem } from 'src/app/models/hidden-gem';
 export class RankingItemComponent implements OnInit{
   @Input() hiddenGem = {} as HiddenGem;
   photoUrl!: string;
+  type!: string;
 
   ngOnInit() {
     if (this.hiddenGem.photos != null) {
@@ -19,6 +20,11 @@ export class RankingItemComponent implements OnInit{
     }
     else {
       this.photoUrl = "https://www.flaticon.com/svg/vstatic/svg/3716/3716538.svg?token=exp=1612753174~hmac=f38de8989e705031bdecb2da1464c379"
+    }
+
+    // This prevent the tests from failing with "Cannot read property '0' of undefined"
+    if (this.hiddenGem.types != null) {
+      this.type = this.hiddenGem.types[0];
     }
   }
 }

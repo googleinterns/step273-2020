@@ -9,7 +9,7 @@
     <mat-card-content>
       <!-- TODO: Price level to be added after Places Details Request -->
       <!-- <p id="price">Price Level (💲): {{hiddenGem.price_level}}</p> -->
-      <p id="business_type">Business type: {{hiddenGem.types[0]}}</p>
+      <p id="business_type">Business type: {{type}}</p>
       <p id="number_of_reviews">Number of Reviews: {{hiddenGem.userRatingsTotal}}</p>
       <p id="rating">Star Rating (⭐️): {{hiddenGem.rating}}</p>
       <p id="opening_hours"><span *ngIf="hiddenGem.openingHours">Open Now</span><span *ngIf="!hiddenGem.openingHours">Currently closed</span></p>

@@ -1,5 +1,5 @@
 import { HiddenGemService } from "./hidden-gem.service";
-import { HiddenGem } from './hidden-gem';
+import { HiddenGem } from './models/hidden-gem';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { fakeAsync } from '@angular/core/testing';

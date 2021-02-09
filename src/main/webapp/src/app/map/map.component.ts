@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import { LocationService } from '../location.service';
-import { Location } from 'src/app/location';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'app-map',
@@ -16,7 +16,7 @@ export class MapComponent implements AfterViewInit {
 
   location = {} as Location;
 
-  constructor(private locationService: LocationService) { 
+  constructor(private locationService: LocationService) {
       this.locationService.getLocation
       .subscribe(location => {
         this.location = location;

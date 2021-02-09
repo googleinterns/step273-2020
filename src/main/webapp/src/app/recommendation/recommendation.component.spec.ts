@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RecommendationComponent } from './recommendation.component';
-import { HiddenGem } from '../hidden-gem';
+import { HiddenGem } from '../models/hidden-gem';
 
 describe('RecommendationComponent', () => {
   let component: RecommendationComponent;
@@ -31,13 +31,13 @@ describe('RecommendationComponent', () => {
     expect(component.onFormSubmit).not.toHaveBeenCalled();
     expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeDefined;
     expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeNull;
-    
+
   });
 
   it('should display recommendation form and list after form submission', () => {
     expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeTruthy;
     expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeFalsy;
-    
+
     const hiddenGems: HiddenGem[] = [];
     component.onFormSubmit(hiddenGems);
     fixture.detectChanges();

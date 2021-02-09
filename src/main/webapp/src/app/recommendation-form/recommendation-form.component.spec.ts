@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LocationService } from '../location.service';
-import { Location } from 'src/app/location';
+import { Location } from 'src/app/models/location';
 
 import { RecommendationFormComponent } from './recommendation-form.component';
 
@@ -83,7 +83,7 @@ describe('RecommendationFormComponent', () => {
     expect(component.preferenceForm.controls['price'].value).toEqual('');
     expect(component.preferenceForm.controls['rating'].value).toEqual('');
     expect(component.preferenceForm.controls['type'].value).toEqual('');
-    
+
     expect(component.preferenceForm.status).toEqual("INVALID");
 
     let submitBtn = fixture.debugElement.query(By.css('#submit')).nativeElement;

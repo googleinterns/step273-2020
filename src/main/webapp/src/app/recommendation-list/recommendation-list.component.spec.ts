@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecommendationListComponent } from './recommendation-list.component';
 import { HiddenGemService } from '../hidden-gem.service';
-import { HiddenGem } from '../hidden-gem';
+import { HiddenGem } from '../models/hidden-gem';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
