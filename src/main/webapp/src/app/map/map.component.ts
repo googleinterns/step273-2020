@@ -47,14 +47,19 @@ export class MapComponent implements AfterViewInit {
 
   loadAllMarkers(): void {
    
-    // const markersJson = [
-    //   {
-    //     position: new google.maps.LatLng( -33.513059, 151.1234),
-    //     map: this.map,
-    //     title: HiddenGemService.name,
-    //   },
-    //   {}
-    // ];
+    // Fetch data from json string from Hidden Gems object.
+    const json = HiddenGemService.toString;
+    for (var i = 0, length = json.length; i < length; i++) {
+      var data = json[i],
+      latLng = new google.maps.LatLng(data.lat, data.lng); 
+
+      // Creating a marker and putting it on the map
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: this.map,
+        title: data.title
+      });
+    }
     const markers = [
       {
         position: new google.maps.LatLng( -33.513059, 151.1234),
