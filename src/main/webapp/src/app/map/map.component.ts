@@ -30,19 +30,15 @@ export class MapComponent implements AfterViewInit {
   }
 
   mapInitializer(): void {
-    
     // Coordinates fetched from the user's location to set the center of the map.
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
-
     let mapOptions: google.maps.MapOptions = {
       center: centerOfMapCoordinates,
       zoom: 10
     };
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
-
-     this.loadMarkers();
+    this.loadMarkers();
   }
-
 
   loadMarkers(): void {
     // Hard-coded dummy markers.
