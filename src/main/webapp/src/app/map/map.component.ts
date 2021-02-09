@@ -46,12 +46,12 @@ export class MapComponent implements AfterViewInit {
       {
         position: new google.maps.LatLng( -33.513059, 151.1234),
         map: this.map,
-        title: "Quay restaurant"
+        title: "name: Quay restaurant, address: 123 Sydney Street, Sydney, star rating: 3"
       },
       {
         position: new google.maps.LatLng(-33.47,151.865),
         map: this.map,
-        title: "Food Van cafe"
+        title: "name: Food Van cafe, address: 123 Sydney Street, Sydney, star rating: 3"
       }
     ];
 
