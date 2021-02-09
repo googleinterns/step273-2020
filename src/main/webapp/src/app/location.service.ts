@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { Location } from './location';
 import { Router } from '@angular/router';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -18,16 +18,23 @@ export class LocationService {
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
-  // store location on client side
+  // store location on client side, then on the server side
   // redirect to homepage component.
   setLocation(userLocation: Location) {
     this.location.next(userLocation);
+    this.sendLocationToBackend(userLocation);
     this.router.navigateByUrl('home');
   }
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    })
+  };
+
   sendLocationToBackend(userLocation: Location) : Observable<Location> {
     return this.httpClient
-      .post<Location>('/location', userLocation)
+      .post<Location>('/location', userLocation, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
