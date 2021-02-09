@@ -3,7 +3,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { RankingListComponent } from './ranking-list.component';
 import { HiddenGemService } from '../../hidden-gem.service';
-import { HiddenGem } from '../../models/hidden-gem';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LocationService } from '../../location.service';
 import { Location } from 'src/app/models/location';

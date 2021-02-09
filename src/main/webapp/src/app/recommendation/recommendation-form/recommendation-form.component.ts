@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {  FormBuilder, Validators} from '@angular/forms';
-import { HiddenGemService } from '../hidden-gem.service';
-import { HiddenGem } from '../models/hidden-gem';
-import { LocationService } from '../location.service';
+import { HiddenGemService } from '../../hidden-gem.service';
+import { HiddenGem } from '../../models/hidden-gem';
+import { LocationService } from '../../location.service';
 import { Location } from 'src/app/models/location';
 
 @Component({

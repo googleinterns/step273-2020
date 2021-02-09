@@ -13,10 +13,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { RecommendationFormComponent } from './recommendation-form/recommendation-form.component';
-import { RecommendationListComponent } from './recommendation-list/recommendation-list.component';
-import { RecommendationItemComponent } from './recommendation-item/recommendation-item.component';
-import { RecommendationComponent } from './recommendation/recommendation.component';
+import { RecommendationFormComponent } from './recommendation/recommendation-form/recommendation-form.component';
+import { RecommendationListComponent } from './recommendation/recommendation-list/recommendation-list.component';
+import { RecommendationItemComponent } from './recommendation/recommendation-item/recommendation-item.component';
+import { RecommendationPageComponent } from './recommendation/recommendation-page/recommendation-page.component';
 import { RankingListComponent } from './ranking/ranking-list/ranking-list.component';
 import { RankingItemComponent } from './ranking/ranking-item/ranking-item.component';
 import { LocationComponent } from './location/location.component';
@@ -32,7 +32,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     RecommendationListComponent,
     MapComponent,
     NavBarComponent,
-    RecommendationComponent,
+    RecommendationPageComponent,
     RankingListComponent,
     RankingItemComponent,
     LocationComponent,

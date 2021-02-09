@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { LocationService } from '../location.service';
+import { LocationService } from '../../location.service';
 import { Location } from 'src/app/models/location';
 
 import { RecommendationFormComponent } from './recommendation-form.component';
