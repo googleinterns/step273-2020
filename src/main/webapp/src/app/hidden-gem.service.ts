@@ -11,6 +11,7 @@ import { catchError } from 'rxjs/operators';
 export class HiddenGemService {
   constructor(private httpClient: HttpClient) { }
 
+  // TODO: Remove function when not needed anymore (and update spec.ts file). Function kept for debugging purposes.
   getAllHiddenGems() : Observable<HiddenGem[]> {
     return this.httpClient
       .get<HiddenGem[]>('/hiddengems')

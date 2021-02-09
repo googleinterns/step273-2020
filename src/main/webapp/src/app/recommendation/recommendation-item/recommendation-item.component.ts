@@ -23,7 +23,7 @@ export class RecommendationItemComponent implements OnInit{
     }
 
     // This prevent the tests from failing with "Cannot read property '0' of undefined"
-    if (this.hiddenGem.types != null) {
+    if (this.hiddenGem.types != null && this.hiddenGem.types[0] != null) {
       this.type = this.hiddenGem.types[0];
     }
   }
