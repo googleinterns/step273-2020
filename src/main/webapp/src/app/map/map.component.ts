@@ -59,14 +59,9 @@ export class MapComponent implements AfterViewInit {
 
     for (var i = 0; i < length; i++) {
       
-      // This prevent the tests from failing with "Cannot read property '0' of undefined"
-      if (this.hiddenGems[i].types != null && this.hiddenGems[i].types[0] != null) {
-        this.type = this.hiddenGems[i].types[0];
-      }
-
       var data = this.hiddenGems[i],
       latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
-      //console.log(data.name);
+      
       // Creating a marker and putting it on the map.
       const marker = new google.maps.Marker({
 				position: latLng,
