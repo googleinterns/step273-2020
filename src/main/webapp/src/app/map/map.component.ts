@@ -63,7 +63,7 @@ export class MapComponent implements AfterViewInit {
 
       var data = this.hiddenGems[i],
       latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
-      console.log(data.name);
+      //console.log(data.name);
       // Creating a marker and putting it on the map.
       const marker = [{
         position: latLng,
@@ -72,9 +72,12 @@ export class MapComponent implements AfterViewInit {
           "star rating:" + data.rating
       }];
       markers.push(marker);
+      console.log("markers pushed");
     }
     
     markers.forEach(markerInfo => {
+      
+      console.log(markerInfo);
       //Creating a new marker object
       const markerObj = new google.maps.Marker({
         ...markerInfo
@@ -82,12 +85,12 @@ export class MapComponent implements AfterViewInit {
 
       //creating a new info window with markers info
       const infoWindow = new google.maps.InfoWindow({
-        content: markerInfo.getTitle()
+        content: markerInfo.title
       });
 
       //Add click event to open info window on marker
       markerObj.addListener("click", () => {
-        infoWindow.open(markerInfo.getMap(), markerObj);
+        infoWindow.open(markerInfo.map, markerObj);
       });
 
       //Adding marker to google map
