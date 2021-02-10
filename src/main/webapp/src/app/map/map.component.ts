@@ -1,9 +1,8 @@
-import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
-import { HiddenGemService } from '../hidden-gem.service';
-import { HiddenGem } from 'src/app/hidden-gem';
-
+import { HiddenGem } from 'src/app/models/hidden-gem';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-map',
@@ -12,6 +11,8 @@ import { HiddenGem } from 'src/app/hidden-gem';
 })
 
 export class MapComponent implements AfterViewInit {
+  //@Input() hiddenGem = {} as HiddenGem;
+  type!: string;
 
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
@@ -19,17 +20,17 @@ export class MapComponent implements AfterViewInit {
   hiddenGems! : HiddenGem[];
   location = {} as Location;
 
-  constructor(private hiddenGemService: HiddenGemService, private locationService: LocationService) {
+  constructor( private appComponent: AppComponent, private locationService: LocationService) {
     this.locationService.getLocation
       .subscribe(location => {
         this.location = location;
       })
-    this.hiddenGemService.getAllHiddenGems()
-      .subscribe(hiddenGems => {
-        this.hiddenGems = hiddenGems;
-      })
   }
 
+  ngDoCheck() {
+    this.hiddenGems = this.appComponent.hiddenGems;
+  }
+  
   ngAfterViewInit(): void {
     this.mapInitializer();
   }
@@ -49,17 +50,21 @@ export class MapComponent implements AfterViewInit {
     // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
     var markers = new Array();
 
-    for (var i = 0, length = this.hiddenGems.length; i < length; i++) {
+    var length = 10;//this.hiddenGems.length;
+    for (var i = 0; i < length; i++) {
+      // This prevent the tests from failing with "Cannot read property '0' of undefined"
+      if (this.hiddenGems[i].types != null && this.hiddenGems[i].types[0] != null) {
+        this.type = this.hiddenGems[i].types[0];
+      }
+
       var data = this.hiddenGems[i],
-      latLng = new google.maps.LatLng( -33.513059, 151.1234+i);  
-      // The coordinates above are dummy coordinates, once switchToRealData is merged to master I will be able to use
-      //(data.geometry.lat, data.geometry.lng); 
+      latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
 
       // Creating a marker and putting it on the map.
       const marker = [{
         position: latLng,
         map: this.map,
-        title: data.name + data.address + 
+        title: data.name + 
           "star rating:" + data.rating
       }];
       markers.push(marker);
