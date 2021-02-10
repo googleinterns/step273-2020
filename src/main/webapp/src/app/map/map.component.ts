@@ -29,11 +29,11 @@ export class MapComponent implements AfterViewInit {
   ngDoCheck() {
     if (this.hiddenGems !== this.appComponent.hiddenGems) {
       this.hiddenGems = this.appComponent.hiddenGems;
+      this.mapInitializer();
     }
   }
   
   ngAfterViewInit(): void {
-    this.mapInitializer();
   }
 
   mapInitializer(): void {
@@ -53,8 +53,9 @@ export class MapComponent implements AfterViewInit {
     // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
     var markers = new Array();
 
-    var length = 10;//this.hiddenGems.length;
+    var length = this.hiddenGems.length;
     for (var i = 0; i < length; i++) {
+      
       // This prevent the tests from failing with "Cannot read property '0' of undefined"
       if (this.hiddenGems[i].types != null && this.hiddenGems[i].types[0] != null) {
         this.type = this.hiddenGems[i].types[0];
@@ -62,7 +63,7 @@ export class MapComponent implements AfterViewInit {
 
       var data = this.hiddenGems[i],
       latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
-
+      console.log(data.name);
       // Creating a marker and putting it on the map.
       const marker = [{
         position: latLng,
