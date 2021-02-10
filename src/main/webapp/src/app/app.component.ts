@@ -16,8 +16,9 @@ providedIn: 'root'
 
 export class AppComponent implements OnInit{
   title = 'Hidden Gems';
-  hiddenGems! : HiddenGem[];
+  hiddenGems!: HiddenGem[];
   location = {} as Location;
+  previousLocation = {} as Location;
 
   constructor(private hiddenGemService: HiddenGemService, private locationService: LocationService) {
     this.locationService.getLocation
@@ -28,6 +29,14 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.getRankedHiddenGems();
+    this.previousLocation = this.location;
+  }
+
+  ngDoCheck() {
+    if (this.location !== this.previousLocation) {
+      this.previousLocation = this.location;
+      this.getRankedHiddenGems();
+    }
   }
 
   getRankedHiddenGems() {

@@ -1,5 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { HiddenGem } from 'src/app/models/hidden-gem';
+import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { LocationService } from '../../location.service';
 import { Location } from 'src/app/models/location';
