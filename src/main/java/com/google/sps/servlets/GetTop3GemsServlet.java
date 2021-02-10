@@ -25,13 +25,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.sps.data.HiddenGem;
 
 /** Servlet that return the hidden gems dummy data. */
 @WebServlet("/recommendation")
 public class GetTop3GemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
+    Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces()));
     Gson gson = new Gson();
     
     // TODO: replace rankedHiddenGems with the recommendations from user's preference 

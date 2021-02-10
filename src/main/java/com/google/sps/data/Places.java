@@ -191,15 +191,15 @@ public final class Places {
 
   /**
    * This function returns the hidden gems ranked by rating (descending order)
-   * @param hiddenGems                      This takes as parameter the set of hiddenGems to be sorted. 
-   * @return List<PlacesSearchResult>       This returns an List of the hidden gems ranked by rating.
+   * @param hiddenGems             This takes as parameter the set of hiddenGems to be sorted. 
+   * @return List<HiddenGem>       This returns an List of the hidden gems ranked by rating.
    */
-  public static List<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
+  public static List<HiddenGem> getRankedHiddenGems(Set<HiddenGem> hiddenGems) {
     // List of ranked hidden gems (switch to List to keep the ordering)
-    List<PlacesSearchResult> sortedHiddenGems = new ArrayList<PlacesSearchResult>(hiddenGems);
-    Collections.sort(sortedHiddenGems, new Comparator<PlacesSearchResult>() {
+    List<HiddenGem> sortedHiddenGems = new ArrayList<HiddenGem>(hiddenGems);
+    Collections.sort(sortedHiddenGems, new Comparator<HiddenGem>() {
       @Override
-      public int compare(PlacesSearchResult hiddenGem_1, PlacesSearchResult hiddenGem_2) {
+      public int compare(HiddenGem hiddenGem_1, HiddenGem hiddenGem_2) {
         return Float.compare(hiddenGem_2.rating, hiddenGem_1.rating);
       }
     });

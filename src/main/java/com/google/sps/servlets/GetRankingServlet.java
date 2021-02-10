@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.sps.data.HiddenGem;
 
 /**
  * This is a temporary servlet to check the responses from Places API.
@@ -35,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GetRankingServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
+    Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces()));
     Gson gson = new Gson();
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 

@@ -51,15 +51,12 @@ import java.util.Set;
 @WebServlet("/details")
 public class PlacesDetailServlet extends HttpServlet {
 
-  GeoApiContext context = new GeoApiContext.Builder()
-  .apiKey(GetConfigProperties.getApiKey())
-  .build();
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Gson gson = new Gson();
+    Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces()));
 
-    String jsonResponse = gson.toJson(Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces())));
+    Gson gson = new Gson();
+    String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 
     // Send the JSON back as the response
     response.setContentType("application/json");
