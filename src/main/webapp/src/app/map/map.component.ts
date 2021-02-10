@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, ElementRef,  SimpleChanges} from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
 import { HiddenGem } from 'src/app/models/hidden-gem';
@@ -11,13 +11,12 @@ import { AppComponent } from 'src/app/app.component';
 })
 
 export class MapComponent implements AfterViewInit {
-  //@Input() hiddenGem = {} as HiddenGem;
-  type!: string;
-
+  
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
   map!: google.maps.Map;
-  hiddenGems! : HiddenGem[];
+  hiddenGems = this.appComponent.hiddenGems;
+  type!: string;
   location = {} as Location;
 
   constructor( private appComponent: AppComponent, private locationService: LocationService) {
@@ -28,7 +27,9 @@ export class MapComponent implements AfterViewInit {
   }
 
   ngDoCheck() {
-    this.hiddenGems = this.appComponent.hiddenGems;
+    if (this.hiddenGems !== this.appComponent.hiddenGems) {
+      this.hiddenGems = this.appComponent.hiddenGems;
+    }
   }
   
   ngAfterViewInit(): void {
@@ -36,6 +37,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   mapInitializer(): void {
+
     // Coordinates fetched from the user's location to set the center of the map.
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
     let mapOptions: google.maps.MapOptions = {
@@ -43,6 +45,7 @@ export class MapComponent implements AfterViewInit {
       zoom: 10
     };
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+
     this.loadMarkers();
   }
 
@@ -64,7 +67,7 @@ export class MapComponent implements AfterViewInit {
       const marker = [{
         position: latLng,
         map: this.map,
-        title: data.name + 
+        title: data.name + data.vicinity +
           "star rating:" + data.rating
       }];
       markers.push(marker);
