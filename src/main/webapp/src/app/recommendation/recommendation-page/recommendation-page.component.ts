@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HiddenGem } from '../../models/hidden-gem';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-recommendation-page',
@@ -9,13 +10,16 @@ import { HiddenGem } from '../../models/hidden-gem';
 export class RecommendationPageComponent  {
 
   hiddenGems: HiddenGem[] = [];
+  formData!: FormGroup;
   formSubmitted = false;
 
   constructor() { }
 
   // Form submitted so can display hidden gem recommendations.
-  onFormSubmit(hiddenGems: HiddenGem[]){
+  onFormSubmit(formData: FormGroup){
     this.formSubmitted = true;
-    this.hiddenGems = hiddenGems;
+    this.formData = formData;
+    console.log("the form is subimtted yall")
+    console.log(formData)
   }
 }
