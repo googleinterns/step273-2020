@@ -58,39 +58,8 @@ public class PlacesDetailServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
-    //String jsonResponse = gson.toJson(Places.getAllHiddenGems(Places.getAllPlaces()));
-    //String jsonResponse = gson.toJason("hello")
-
-    // PlaceDetails restaurantDetails = new PlaceDetails();
-    // String jsonResponse = gson.toJson("");
-    
-    // Set<PlacesSearchResult> getAllHiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
 
     String jsonResponse = gson.toJson(Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces())));
-    //System.out.println(getAllHiddenGems);
-
-    // for(PlacesSearchResult hiddenGem : getAllHiddenGems){
-    //   try {
-    //     //restaurantDetails = PlacesApi.placeDetails(context, "ChIJWRCjiT-uEmsRuW0JjCuisyw").await();
-    //     PlaceDetails placeDetails = PlacesApi.placeDetails(context, hiddenGem.placeId)
-    //     .fields(
-    //         PlaceDetailsRequest.FieldMask.FORMATTED_ADDRESS,
-    //         PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
-    //         PlaceDetailsRequest.FieldMask.WEBSITE)
-    //     .await();
-    //     String jsonGem = hiddenGem.toString();
-
-    //     String jsonDetail = placeDetails.toString();
-    //     String info = jsonGem + jsonDetail;
-    //     jsonResponse = jsonResponse.concat(gson.toJson(info));
-    //   } catch (ApiException | InterruptedException e) {
-    //     // TODO Auto-generated catch block
-    //     e.printStackTrace();
-    // }
-    //}
-    //restaurantDetails = PlacesApi.placeDetails(context, "ChIJWRCjiT-uEmsRuW0JjCuisyw").await();
-
-
 
     // Send the JSON back as the response
     response.setContentType("application/json");

@@ -14,7 +14,7 @@
 
 package com.google.sps.servlets;
 
-import com.google.sps.data.HiddenGems;
+import com.google.sps.data.Places;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -28,9 +28,8 @@ public class GetHiddenGemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
-    //String jsonResponse = gson.toJson(HiddenGems.hiddenGems);
+    String jsonResponse = gson.toJson(Places.getAllHiddenGems(Places.getAllPlaces()));
 
-    String jsonResponse = gson.toJson("test");
     // Send the JSON back as the response
     response.setContentType("application/json");
     response.getWriter().println(jsonResponse);

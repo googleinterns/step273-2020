@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {  FormBuilder, Validators} from '@angular/forms';
-import { HiddenGemService } from '../hidden-gem.service';
-import { HiddenGem } from '../hidden-gem';
-import { LocationService } from '../location.service';
-import { Location } from 'src/app/location';
+import { HiddenGemService } from '../../hidden-gem.service';
+import { HiddenGem } from '../../models/hidden-gem';
+import { LocationService } from '../../location.service';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'app-recommendation-form',
@@ -25,14 +25,14 @@ export class RecommendationFormComponent implements OnInit{
   constructor(private readonly formBuilder: FormBuilder, private hiddenGemService: HiddenGemService,
   private locationService: LocationService) { }
 
-  ngOnInit() {  
+  ngOnInit() {
 
     this.locationService.getLocation
       .subscribe(location => {
         this.location = location;
-        
+
     })
-    
+
   }
   // Submit user's preference form
   // Send hidden gem recommendation as output
@@ -40,7 +40,7 @@ export class RecommendationFormComponent implements OnInit{
     this.hiddenGemService.findHiddenGemRecommendation(this.preferenceForm.value)
       .subscribe(hiddenGems => {
         this.hiddenGemRecommendation.emit(hiddenGems);
-    })   
+    })
   }
 
 }

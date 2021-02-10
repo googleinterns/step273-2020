@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { LocationService } from 'src/app/location.service';
-import { Location } from 'src/app/location';
+import { Location } from '../models/location';
 
 const GEO_LOCATION_TIMEOUT_MS = 12000;
 
@@ -22,7 +22,7 @@ export class LocationComponent{
   handleLocationError(browserHasGeolocation: boolean, message: string): void {
     browserHasGeolocation
       ? this.errorMessage.nativeElement.innerText = "Geolocation services have failed. Try a default location. " + message
-      : this.errorMessage.nativeElement.innerText = "Geolocation is not supported by this browser. Try a default location."  
+      : this.errorMessage.nativeElement.innerText = "Geolocation is not supported by this browser. Try a default location."
 
   }
 
@@ -32,7 +32,7 @@ export class LocationComponent{
     this.setLocation();
   }
 
-  // Switch statement code from 
+  // Switch statement code from
   // https://www.w3schools.com/html/html5_geolocation.asp
   locationError(error: PositionError): void {
     var message = "An unknown error occured."

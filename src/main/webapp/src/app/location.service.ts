@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, Subject, throwError} from 'rxjs';
-import { Location } from './location';
+import { BehaviorSubject} from 'rxjs';
+import { Location } from './models/location';
 import { Router } from '@angular/router';
 
 @Injectable({

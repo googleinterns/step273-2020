@@ -14,13 +14,12 @@
 
 package com.google.sps.servlets;
 
-import com.google.sps.data.HiddenGem;
-import com.google.sps.data.HiddenGems;
+import com.google.sps.data.Places;
 import com.google.gson.Gson;
+import com.google.maps.model.PlacesSearchResult;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,16 +31,15 @@ import javax.servlet.http.HttpServletResponse;
 public class GetTop3GemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
     Gson gson = new Gson();
     
-    //List<HiddenGem> top3Gems = Arrays.asList(HiddenGems.hiddenGems).subList(0,3);
+    // TODO: replace rankedHiddenGems with the recommendations from user's preference 
+    // TODO: remove this servlet.
+    String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems).subList(0, 3));
 
-    //String jsonResponse = gson.toJson(top3Gems);
-    String jsonResponse = gson.toJson("top3Gems");
-    
     // Send the JSON back as the response
     response.setContentType("application/json");
     response.getWriter().println(jsonResponse);
   }
-
 }

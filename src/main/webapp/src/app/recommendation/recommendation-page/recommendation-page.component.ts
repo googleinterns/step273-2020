@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { HiddenGem } from '../hidden-gem';
+import { HiddenGem } from '../../models/hidden-gem';
 
 @Component({
-  selector: 'app-recommendation',
-  templateUrl: './recommendation.component.html',
-  styleUrls: ['./recommendation.component.css']
+  selector: 'app-recommendation-page',
+  templateUrl: './recommendation-page.component.html',
+  styleUrls: ['./recommendation-page.component.css']
 })
-export class RecommendationComponent  {
+export class RecommendationPageComponent  {
 
   hiddenGems: HiddenGem[] = [];
   formSubmitted = false;
@@ -17,5 +17,5 @@ export class RecommendationComponent  {
   onFormSubmit(hiddenGems: HiddenGem[]){
     this.formSubmitted = true;
     this.hiddenGems = hiddenGems;
-  } 
+  }
 }
