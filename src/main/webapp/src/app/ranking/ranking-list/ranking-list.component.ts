@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { HiddenGem } from 'src/app/models/hidden-gem';
 import { AppComponent } from 'src/app/app.component';
 import { LocationService } from '../../location.service';
@@ -12,7 +12,7 @@ import { Location } from 'src/app/models/location';
 })
 export class RankingListComponent implements OnInit {
 
-  hiddenGems! : HiddenGem[];
+  hiddenGems = this.appComponent.hiddenGems;
   location = {} as Location;
 
   constructor(private locationService: LocationService, private appComponent: AppComponent) { }
@@ -25,6 +25,8 @@ export class RankingListComponent implements OnInit {
   }
 
   ngDoCheck() {
-    this.hiddenGems = this.appComponent.hiddenGems;
+    if (this.hiddenGems !== this.appComponent.hiddenGems) {
+      this.hiddenGems = this.appComponent.hiddenGems;
+    }
   }
 }
