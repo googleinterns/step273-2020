@@ -51,9 +51,12 @@ export class MapComponent implements AfterViewInit {
 
   loadMarkers(): void {
     // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
-    var markers = new Array();
-
+    
+    var content : string;
+    // Creating a global infoWindow object that will be reused by all markers
+		var infoWindow = new google.maps.InfoWindow();
     var length = this.hiddenGems.length;
+
     for (var i = 0; i < length; i++) {
       
       // This prevent the tests from failing with "Cannot read property '0' of undefined"
@@ -65,36 +68,21 @@ export class MapComponent implements AfterViewInit {
       latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
       //console.log(data.name);
       // Creating a marker and putting it on the map.
-      const marker = [{
-        position: latLng,
-        map: this.map,
-        title: data.name + data.vicinity +
-          "star rating:" + data.rating
-      }];
-      markers.push(marker);
-      console.log("markers pushed");
-    }
-    
-    markers.forEach(markerInfo => {
+      const marker = new google.maps.Marker({
+				position: latLng,
+				map: this.map,
+        title: data.name
+      });
       
-      console.log(markerInfo);
-      //Creating a new marker object
-      const markerObj = new google.maps.Marker({
-        ...markerInfo
+      content = data.name + data.vicinity +
+          ", Star rating:" + data.rating;
+       
+      // Attaching a click event to the current marker
+      google.maps.event.addListener(marker, "click", () => {
+        infoWindow.setContent(content);
+        infoWindow.open(this.map, marker);
       });
+    }
 
-      //creating a new info window with markers info
-      const infoWindow = new google.maps.InfoWindow({
-        content: markerInfo.title
-      });
-
-      //Add click event to open info window on marker
-      markerObj.addListener("click", () => {
-        infoWindow.open(markerInfo.map, markerObj);
-      });
-
-      //Adding marker to google map
-      markerObj.setMap(this.map);
-    });
   }
 }
