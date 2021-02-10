@@ -15,7 +15,6 @@
 package com.google.sps.data;
 
 import java.net.URL;
-import com.google.maps.model.PriceLevel;
 import com.google.maps.model.OpeningHours;
 
 /** Hidden Gems are restaurants or cafes in Australia which have 10-50 reviews and a rating of at least 3.5/5. */
