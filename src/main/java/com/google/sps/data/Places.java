@@ -150,67 +150,23 @@ public final class Places {
 
 
   /**
-   * This returns a set of hidden gems and their formatted adress, price and website info.
-   * @param hiddenGems                 The hidden gems to find extra details about.
-   * @return Set<PlacesSearchResult>    This returns a set of Places Search Results, which are the
-   *                                    hidden gems and their information.
-   */
-  // public static Set<PlaceDetails> fetchDetailsFromApi(Set<PlacesSearchResult> hiddenGems) {
-
-
-  //   // Set up API key
-  //   GeoApiContext context = new GeoApiContext.Builder()
-  //     .apiKey(GetConfigProperties.getApiKey())
-  //     .build();
-
-  //   PlaceDetails placedetails = new PlaceDetails();
-
-  //   Set<PlaceDetails[]> all_details = new HashSet<>();
-  //   for(PlacesSearchResult hiddenGem : hiddenGems) {
-
-  //     try {
-  //       PlaceDetails placeDetails = PlacesApi.placeDetails(context, hiddenGem.placeId)
-  //       .fields(
-  //         PlaceDetailsRequest.FieldMask.FORMATTED_ADDRESS,
-  //         PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
-  //         PlaceDetailsRequest.FieldMask.WEBSITE)
-  //       .await();
-
-        
-  //     } catch (ApiException | InterruptedException e) {
-  //       // TODO Auto-generated catch block
-  //       e.printStackTrace();
-      
-  //     }
-
-
-
- 
-      
-  //   }
-  //   return hiddenGems;
-  // }
-
-  /**
-   * This returns a set of hidden gems and their information given a set of places.
-   * @param all_places                  The places search results to be filtered as hidden gems.
-   * @return Set<PlacesSearchResult>    This returns a set of Places Search Results, which are the
-   *                                    hidden gems and their information.
+   * This converts a set of places into a set of hidden gems. 
+   * Iterate over the set of places and find the additional details, then create
+   * the hidden gem object by populating all the relevant data in the constructor.
+   * @param places            The set of places search results to be converted.
+   * @return Set<HiddenGem>   This returns a set of Hidden Gems with all information populated
+   *                          from the place search and place details results. 
    */
   public static Set<HiddenGem> convertToHiddenGem(Set<PlacesSearchResult> places) {
 
     GeoApiContext context = new GeoApiContext.Builder()
       .apiKey(GetConfigProperties.getApiKey())
       .build();
-    // loop for places
-    // for each id
+
     Set<HiddenGem> hiddenGems = new HashSet<>();
 
-    //HiddenGem gem; 
-    //Set<HiddenGem> hiddenGems = null;
     for(PlacesSearchResult place : places){
       try {
-        //restaurantDetails = PlacesApi.placeDetails(context, "ChIJWRCjiT-uEmsRuW0JjCuisyw").await();
         PlaceDetails placeDetails = PlacesApi.placeDetails(context, place.placeId)
         .fields(
             PlaceDetailsRequest.FieldMask.FORMATTED_ADDRESS,
@@ -218,33 +174,11 @@ public final class Places {
             PlaceDetailsRequest.FieldMask.WEBSITE)
         .await();
 
-      //  HiddenGem gem = new HiddenGem(place.placeId, place.name, place.types[0],  place.formattedAddress, place.geometry.location.lat, 
-      //     place.geometry.location.lng, placeDetails.priceLevel.toString(), place.rating, place.userRatingsTotal, placeDetails.website, place.openingHours.openNow, 
-      //     place.photos[0].photoReference, place.photos[0].htmlAttributions, place.permanentlyClosed, place.businessStatus);
-        // System.out.println(place.placeId + place.name + place.types[0] + placeDetails.formattedAddress + place.geometry.location.lat +
-        //   place.geometry.location.lng + placeDetails.priceLevel + place.rating + place.userRatingsTotal + place.openingHours.openNow +
-        //   place.photos[0].photoReference + place.photos[0].htmlAttributions + place.permanentlyClosed + place.businessStatus);
-
-
-         //System.out.println(placeDetails.priceLevel.toString());
-         System.out.println(place.types);
-         System.out.println(String.valueOf(placeDetails.priceLevel));
-         //System.out.println()
-
-        //System.out.println(place.photos[0].photoReference );
-
-        //System.out.println(place.photos[0].htmlAttributions );
-       
-        //System.out.println(place.openingHours);
-        //System.out.println(placeDetails.website);
-
-        //HiddenGem gem = new HiddenGem();
         hiddenGems.add(new HiddenGem(place.placeId, place.name, place.types,  placeDetails.formattedAddress, place.geometry.location.lat, 
-         place.geometry.location.lng, String.valueOf(placeDetails.priceLevel), place.rating, place.userRatingsTotal, placeDetails.website, place.openingHours, 
-         place.photos[0].photoReference, place.photos[0].htmlAttributions, place.permanentlyClosed, place.businessStatus));
+          place.geometry.location.lng, String.valueOf(placeDetails.priceLevel), place.rating, place.userRatingsTotal, placeDetails.website, place.openingHours, 
+          place.photos[0].photoReference, place.photos[0].htmlAttributions, place.permanentlyClosed, place.businessStatus));
 
       } catch (ApiException | InterruptedException | IOException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace(); 
       }  
 

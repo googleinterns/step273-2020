@@ -15,7 +15,6 @@
 package com.google.sps.data;
 
 import java.net.URL;
-import com.google.maps.model.PriceLevel;
 import com.google.maps.model.OpeningHours;
 
 /** Hidden Gems are restaurants or cafes in Australia which have 10-50 reviews and a rating of at least 3.5/5. */
@@ -38,21 +37,21 @@ public final class HiddenGem {
   public final String businessStatus;
 
   /** Create a new Hidden Gem. 
-   *  @param id             the id the of the hidden gem.
-   *  @param name           the name of the hidden gem.
-   *  @param types  the business type of the hidden gem, either restaurant or cafe.
-   *  @param address        the address of the hidden gem.
-   *  @param lat  
-   *  @param lng        
-   *  @param price_level    the price range of the hidden gem. From 0 (free) to 4 (very expensive).
-   *  @param rating         the google star rating of the hidden gem. From 1 (poor rating) to 5 (excellent rating).
-   *  @param userRatingsTotal
-   *  @param website
-   *  @param openingHours
-   *  @param photoReference the photo url of the hidden gem.
-   *  @param htmlAttributions
-   *  @param permanentlyClosed
-   *  @param businessStatus     
+   *  @param id                the id the of the hidden gem.
+   *  @param name              the name of the hidden gem.
+   *  @param types             the business types of the hidden gem, e.g. restaurant or cafe.
+   *  @param address           the address of the hidden gem.
+   *  @param lat               the latitude of the hidden gem's location.
+   *  @param lng               the longitude of the hidden gem's location.
+   *  @param price_level       the price range of the hidden gem. From 0 (free) to 4 (very expensive).
+   *  @param rating            the google star rating of the hidden gem. From 1 (poor rating) to 5 (excellent rating).
+   *  @param userRatingsTotal  the total number of ratings provided by user's.
+   *  @param website           the website of the hidden gem.
+   *  @param openingHours      the hours when the hidden gem is open now.
+   *  @param photoReference    the photo url of the hidden gem.
+   *  @param htmlAttributions  the attributions about the hidden gem which must be displayed to the user.
+   *  @param permanentlyClosed the state is true if the hidden gem has permanently closed.
+   *  @param businessStatus    the current status of the hidden gem   
   */
   public HiddenGem(String placeId, String name, String[] types, String address, double lat, 
     double lng, String price_level, float rating, int userRatingsTotal, URL website, OpeningHours openingHours, 
@@ -75,3 +74,4 @@ public final class HiddenGem {
       this.businessStatus = businessStatus;    
   }
 }
+
