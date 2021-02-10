@@ -31,8 +31,8 @@ import javax.servlet.http.HttpServletResponse;
  * When we won't need the dummy hidden gems data anymore, all code here will be 
  * moved to the GetHiddenGems servlet. 
 */
-@WebServlet("/places")
-public class PlacesServlet extends HttpServlet {
+@WebServlet("/ranking")
+public class GetRankingServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());

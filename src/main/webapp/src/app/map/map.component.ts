@@ -1,8 +1,9 @@
 import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
-import { LocationService } from 'src/app/location.service';
-import { Location } from 'src/app/location';
+import { LocationService } from '../location.service';
+import { Location } from 'src/app/models/location';
 import { HiddenGemService } from '../hidden-gem.service';
 import { HiddenGem } from 'src/app/hidden-gem';
+
 
 @Component({
   selector: 'app-map',
