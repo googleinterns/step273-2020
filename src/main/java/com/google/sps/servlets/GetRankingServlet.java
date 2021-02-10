@@ -35,6 +35,10 @@ import javax.servlet.http.HttpServletResponse;
 public class GetRankingServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String lat = request.getParameter("lat");
+    System.out.println(lat);
+    String lng = request.getParameter("lng");
+    System.out.println(lng);
     Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
     Gson gson = new Gson();
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));

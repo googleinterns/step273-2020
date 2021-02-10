@@ -25,18 +25,6 @@ export class LocationService {
     this.router.navigateByUrl('home');
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-    })
-  };
-
-  sendLocationToBackend(userLocation: Location) : Observable<Location> {
-    return this.httpClient
-      .post<Location>('/location', userLocation, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-
   handleError(error: HttpErrorResponse) {
     return throwError('A data error occured, please try again.');
   }
