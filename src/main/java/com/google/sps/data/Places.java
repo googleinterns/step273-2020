@@ -226,7 +226,10 @@ public final class Places {
         //   place.photos[0].photoReference + place.photos[0].htmlAttributions + place.permanentlyClosed + place.businessStatus);
 
 
-         //System.out.println(placeDetails.priceLevel);
+         //System.out.println(placeDetails.priceLevel.toString());
+         System.out.println(place.types);
+         System.out.println(String.valueOf(placeDetails.priceLevel));
+         //System.out.println()
 
         //System.out.println(place.photos[0].photoReference );
 
@@ -236,9 +239,9 @@ public final class Places {
         //System.out.println(placeDetails.website);
 
         //HiddenGem gem = new HiddenGem();
-        //hiddenGems.add(new HiddenGem(place.placeId, place.name, place.types[0],  place.formattedAddress, place.geometry.location.lat, 
-        //  place.geometry.location.lng, placeDetails.priceLevel, place.rating, place.userRatingsTotal, placeDetails.website, place.openingHours.openNow, 
-        //  place.photos[0].photoReference, place.photos[0].htmlAttributions, place.permanentlyClosed, place.businessStatus));
+        hiddenGems.add(new HiddenGem(place.placeId, place.name, place.types,  placeDetails.formattedAddress, place.geometry.location.lat, 
+         place.geometry.location.lng, String.valueOf(placeDetails.priceLevel), place.rating, place.userRatingsTotal, placeDetails.website, place.openingHours, 
+         place.photos[0].photoReference, place.photos[0].htmlAttributions, place.permanentlyClosed, place.businessStatus));
 
       } catch (ApiException | InterruptedException | IOException e) {
         // TODO Auto-generated catch block

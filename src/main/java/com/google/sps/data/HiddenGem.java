@@ -15,13 +15,15 @@
 package com.google.sps.data;
 
 import java.net.URL;
+import com.google.maps.model.PriceLevel;
+import com.google.maps.model.OpeningHours;
 
 /** Hidden Gems are restaurants or cafes in Australia which have 10-50 reviews and a rating of at least 3.5/5. */
 public final class HiddenGem {
 
   private final String placeId;
   public final String name;
-  public final String business_type;
+  public final String[] types;
   public final String address;
   public final double lat;
   public final double lng;
@@ -29,7 +31,7 @@ public final class HiddenGem {
   public final float rating;
   public final int userRatingsTotal;
   public final URL website;
-  public final boolean openNow;
+  public final OpeningHours openingHours;
   public final String photoReference;
   public final String[] htmlAttributions;
   public final boolean permanentlyClosed;
@@ -38,7 +40,7 @@ public final class HiddenGem {
   /** Create a new Hidden Gem. 
    *  @param id             the id the of the hidden gem.
    *  @param name           the name of the hidden gem.
-   *  @param business_type  the business type of the hidden gem, either restaurant or cafe.
+   *  @param types  the business type of the hidden gem, either restaurant or cafe.
    *  @param address        the address of the hidden gem.
    *  @param lat  
    *  @param lng        
@@ -46,19 +48,19 @@ public final class HiddenGem {
    *  @param rating         the google star rating of the hidden gem. From 1 (poor rating) to 5 (excellent rating).
    *  @param userRatingsTotal
    *  @param website
-   *  @param openNow
+   *  @param openingHours
    *  @param photoReference the photo url of the hidden gem.
    *  @param htmlAttributions
    *  @param permanentlyClosed
    *  @param businessStatus     
   */
-  public HiddenGem(String placeId, String name, String business_type, String address, double lat, 
-    double lng, String price_level, float rating, int userRatingsTotal, URL website, boolean openNow, 
+  public HiddenGem(String placeId, String name, String[] types, String address, double lat, 
+    double lng, String price_level, float rating, int userRatingsTotal, URL website, OpeningHours openingHours, 
     String photoReference, String[] htmlAttributions, boolean permanentlyClosed, String businessStatus) {
 
       this.placeId = placeId;
       this.name = name;
-      this.business_type = business_type;
+      this.types = types;
       this.address = address;
       this.lat = lat;
       this.lng = lng;
@@ -66,7 +68,7 @@ public final class HiddenGem {
       this.rating = rating;
       this.userRatingsTotal = userRatingsTotal;
       this.website = website;
-      this.openNow = openNow;
+      this.openingHours = openingHours;
       this.photoReference = photoReference;
       this.htmlAttributions = htmlAttributions;
       this.permanentlyClosed = permanentlyClosed;
