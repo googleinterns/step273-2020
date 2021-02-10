@@ -3,7 +3,6 @@ import { LocationService } from 'src/app/location.service';
 import { Location } from 'src/app/location';
 import { HiddenGemService } from '../hidden-gem.service';
 import { HiddenGem } from 'src/app/hidden-gem';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -19,11 +18,15 @@ export class MapComponent implements AfterViewInit {
   hiddenGems! : HiddenGem[];
   location = {} as Location;
 
-  constructor(private locationService: LocationService) { 
-      this.locationService.getLocation
+  constructor(private hiddenGemService: HiddenGemService, private locationService: LocationService) {
+    this.locationService.getLocation
       .subscribe(location => {
         this.location = location;
-    })
+      })
+    this.hiddenGemService.getAllHiddenGems()
+      .subscribe(hiddenGems => {
+        this.hiddenGems = hiddenGems;
+      })
   }
 
   ngAfterViewInit(): void {
@@ -42,35 +45,43 @@ export class MapComponent implements AfterViewInit {
   }
 
   loadMarkers(): void {
-    // Fetch data from json string from Hidden Gems object.
-
-    // Creating a global infoWindow object that will be reused by all markers
-		var infoWindow = new google.maps.InfoWindow();
+    // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
+    var markers = new Array();
 
     for (var i = 0, length = this.hiddenGems.length; i < length; i++) {
       var data = this.hiddenGems[i],
-      latLng = new google.maps.LatLng( -33.513059, 151.1234+i);  //(data.geometry.lat, data.geometry.lng); 
+      latLng = new google.maps.LatLng( -33.513059, 151.1234+i);  
+      // The coordinates above are dummy coordinates, once switchToRealData is merged to master I will be able to use
+      //(data.geometry.lat, data.geometry.lng); 
 
-      // Creating a marker and putting it on the map
-      var markerObj = new google.maps.Marker({
+      // Creating a marker and putting it on the map.
+      const marker = [{
         position: latLng,
         map: this.map,
         title: data.name + data.address + 
           "star rating:" + data.rating
-      });
+      }];
+      markers.push(marker);
+    }
     
-      // const infoWindow = new google.maps.InfoWindow({
-      //   content: markerObj.getTitle(),
-      // });
+    markers.forEach(markerInfo => {
+      //Creating a new marker object
+      const markerObj = new google.maps.Marker({
+        ...markerInfo
+      });
 
-      // Add click event to open info window on marker.
-      // markerObj.addListener("click", () => {
-      //   infoWindow.open(markerObj.map, markerObj);
-      // });
+      //creating a new info window with markers info
+      const infoWindow = new google.maps.InfoWindow({
+        content: markerInfo.getTitle()
+      });
 
-      // Adding marker to google map.
+      //Add click event to open info window on marker
+      markerObj.addListener("click", () => {
+        infoWindow.open(markerInfo.getMap(), markerObj);
+      });
+
+      //Adding marker to google map
       markerObj.setMap(this.map);
-    //});
-		}
+    });
   }
 }
