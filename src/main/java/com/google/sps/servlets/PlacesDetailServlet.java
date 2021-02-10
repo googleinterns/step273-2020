@@ -64,6 +64,8 @@ public class PlacesDetailServlet extends HttpServlet {
     String jsonResponse = gson.toJson("");
     
     Set<PlacesSearchResult> getAllHiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
+
+    //String jsonResponse = gson.toJson(Places.fetchDetailsFromApi(Places.getAllHiddenGems(Places.getAllPlaces())));
     //System.out.println(getAllHiddenGems);
 
     for(PlacesSearchResult hiddenGem : getAllHiddenGems){
@@ -75,7 +77,11 @@ public class PlacesDetailServlet extends HttpServlet {
             PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
             PlaceDetailsRequest.FieldMask.WEBSITE)
         .await();
-        jsonResponse = jsonResponse.concat(gson.toJson(hiddenGem.concat(placeDetails));
+        String jsonGem = hiddenGem.toString();
+
+        String jsonDetail = placeDetails.toString();
+        String info = jsonGem + jsonDetail;
+        jsonResponse = jsonResponse.concat(gson.toJson(info));
       } catch (ApiException | InterruptedException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();

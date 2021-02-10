@@ -30,6 +30,10 @@ import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
 import com.google.maps.model.PlacesSearchResult;
+import com.google.maps.model.PlaceDetails;
+import com.google.maps.model.PriceLevel;
+import com.google.maps.PlaceDetailsRequest;
+import com.google.maps.PlaceDetailsRequest.FieldMask;
 import com.google.maps.model.RankBy;
 import com.google.sps.GetConfigProperties;
 
@@ -143,4 +147,48 @@ public final class Places {
     }
     return stream;
   }
+
+
+  /**
+   * This returns a set of hidden gems and their formatted adress, price and website info.
+   * @param hiddenGems                 The hidden gems to find extra details about.
+   * @return Set<PlacesSearchResult>    This returns a set of Places Search Results, which are the
+   *                                    hidden gems and their information.
+   */
+  public static Set<PlaceDetails> fetchDetailsFromApi(Set<PlacesSearchResult> hiddenGems) {
+
+
+    // Set up API key
+    GeoApiContext context = new GeoApiContext.Builder()
+      .apiKey(GetConfigProperties.getApiKey())
+      .build();
+
+    PlaceDetails placedetails = new PlaceDetails();
+
+    Set<PlaceDetails[]> all_details = new HashSet<>();
+    for(PlacesSearchResult hiddenGem : hiddenGems) {
+
+      try {
+        PlaceDetails placeDetails = PlacesApi.placeDetails(context, hiddenGem.placeId)
+        .fields(
+          PlaceDetailsRequest.FieldMask.FORMATTED_ADDRESS,
+          PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
+          PlaceDetailsRequest.FieldMask.WEBSITE)
+        .await();
+
+        
+      } catch (ApiException | InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      
+      }
+
+
+
+ 
+      
+    }
+    return hiddenGems;
+  }
+
 }

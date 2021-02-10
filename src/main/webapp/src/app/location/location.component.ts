@@ -1,15 +1,16 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { LocationService } from '../location.service';
-import { Location } from '../location';
+import { LocationService } from 'src/app/location.service';
+import { Location } from 'src/app/location';
+
+const GEO_LOCATION_TIMEOUT_MS = 12000;
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.css']
 })
-export class LocationComponent{
 
-  readonly GEO_LOCATION_TIMEOUT_MS = 12000;
+export class LocationComponent{
 
   location = {} as Location;
 
@@ -54,7 +55,7 @@ export class LocationComponent{
       navigator.geolocation.getCurrentPosition(
         this.locationSuccess = this.locationSuccess.bind(this),	
         this.locationError = this.locationError.bind(this),	
-        {maximumAge:60000, timeout:10000});
+        {timeout: GEO_LOCATION_TIMEOUT_MS});
     } else {
       this.handleLocationError(false, "");
     }
