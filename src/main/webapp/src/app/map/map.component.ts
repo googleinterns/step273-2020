@@ -1,7 +1,8 @@
 import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
-import { LocationService } from 'src/app/location.service';
-import { Location } from 'src/app/location';
+import { LocationService } from '../location.service';
+import { Location } from 'src/app/models/location';
 import { HiddenGemService } from '../hidden-gem.service';
+
 
 @Component({
   selector: 'app-map',
@@ -16,7 +17,7 @@ export class MapComponent implements AfterViewInit {
   map!: google.maps.Map;
   location = {} as Location;
 
-  constructor(private locationService: LocationService) { 
+  constructor(private locationService: LocationService) {
       this.locationService.getLocation
       .subscribe(location => {
         this.location = location;
