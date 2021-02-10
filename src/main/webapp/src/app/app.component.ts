@@ -12,11 +12,15 @@ import { HiddenGemService } from './hidden-gem.service';
 providedIn: 'root'
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Hidden Gems';
   hiddenGems! : HiddenGem[];
 
   constructor(private hiddenGemService: HiddenGemService) { }
+
+  ngOnInit() {
+    this.getRankedHiddenGems();
+  }
 
   getRankedHiddenGems() {
     return new Promise((resolve, reject) => {
