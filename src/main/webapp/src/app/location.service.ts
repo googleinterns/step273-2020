@@ -18,11 +18,10 @@ export class LocationService {
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
-  // store location on client side, then on the server side
+  // store location on client side
   // redirect to homepage component.
   setLocation(userLocation: Location) {
     this.location.next(userLocation);
-    this.sendLocationToBackend(userLocation);
     this.router.navigateByUrl('home');
   }
 
