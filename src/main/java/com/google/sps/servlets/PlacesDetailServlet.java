@@ -40,6 +40,7 @@ import com.google.maps.model.PriceLevel;
 import com.google.maps.PlaceDetailsRequest;
 import com.google.maps.PlaceDetailsRequest.FieldMask;
 import com.google.maps.model.PlacesSearchResult;
+import com.google.sps.data.HiddenGem;
 import java.util.Set;
 
 /**
@@ -61,40 +62,34 @@ public class PlacesDetailServlet extends HttpServlet {
     //String jsonResponse = gson.toJason("hello")
 
     // PlaceDetails restaurantDetails = new PlaceDetails();
-    String jsonResponse = gson.toJson("");
+    // String jsonResponse = gson.toJson("");
     
-    Set<PlacesSearchResult> getAllHiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
+    // Set<PlacesSearchResult> getAllHiddenGems = Places.getAllHiddenGems(Places.getAllPlaces());
 
-    //String jsonResponse = gson.toJson(Places.fetchDetailsFromApi(Places.getAllHiddenGems(Places.getAllPlaces())));
+    String jsonResponse = gson.toJson(Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces())));
     //System.out.println(getAllHiddenGems);
 
-    for(PlacesSearchResult hiddenGem : getAllHiddenGems){
-      try {
-        //restaurantDetails = PlacesApi.placeDetails(context, "ChIJWRCjiT-uEmsRuW0JjCuisyw").await();
-        PlaceDetails placeDetails = PlacesApi.placeDetails(context, hiddenGem.placeId)
-        .fields(
-            PlaceDetailsRequest.FieldMask.FORMATTED_ADDRESS,
-            PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
-            PlaceDetailsRequest.FieldMask.WEBSITE)
-        .await();
-        String jsonGem = hiddenGem.toString();
+    // for(PlacesSearchResult hiddenGem : getAllHiddenGems){
+    //   try {
+    //     //restaurantDetails = PlacesApi.placeDetails(context, "ChIJWRCjiT-uEmsRuW0JjCuisyw").await();
+    //     PlaceDetails placeDetails = PlacesApi.placeDetails(context, hiddenGem.placeId)
+    //     .fields(
+    //         PlaceDetailsRequest.FieldMask.FORMATTED_ADDRESS,
+    //         PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
+    //         PlaceDetailsRequest.FieldMask.WEBSITE)
+    //     .await();
+    //     String jsonGem = hiddenGem.toString();
 
-        String jsonDetail = placeDetails.toString();
-        String info = jsonGem + jsonDetail;
-        jsonResponse = jsonResponse.concat(gson.toJson(info));
-      } catch (ApiException | InterruptedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-    }
+    //     String jsonDetail = placeDetails.toString();
+    //     String info = jsonGem + jsonDetail;
+    //     jsonResponse = jsonResponse.concat(gson.toJson(info));
+    //   } catch (ApiException | InterruptedException e) {
+    //     // TODO Auto-generated catch block
+    //     e.printStackTrace();
+    // }
+    //}
     //restaurantDetails = PlacesApi.placeDetails(context, "ChIJWRCjiT-uEmsRuW0JjCuisyw").await();
 
-  
-    // PlacesApi.nearbySearchQuery(context, location)
-    //       .rankby(RankBy.DISTANCE)
-    //       .type(PlaceType.RESTAURANT)
-    //       .pageToken(restaurantNextPageToken)
-    //       .await();
 
 
     // Send the JSON back as the response

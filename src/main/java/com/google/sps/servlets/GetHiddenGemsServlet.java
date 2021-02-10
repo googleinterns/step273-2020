@@ -28,8 +28,9 @@ public class GetHiddenGemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson gson = new Gson();
-    String jsonResponse = gson.toJson(HiddenGems.hiddenGems);
+    //String jsonResponse = gson.toJson(HiddenGems.hiddenGems);
 
+    String jsonResponse = gson.toJson("test");
     // Send the JSON back as the response
     response.setContentType("application/json");
     response.getWriter().println(jsonResponse);
