@@ -9,7 +9,7 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./map.component.css']
 })
 
-export class MapComponent implements AfterViewInit {
+export class MapComponent {
   
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
@@ -32,10 +32,7 @@ export class MapComponent implements AfterViewInit {
     }
   }
   
-  ngAfterViewInit(): void {}
-
   mapInitializer(): void {
-    
     // Coordinates fetched from the user's location to set the center of the map.
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
     let mapOptions: google.maps.MapOptions = {
