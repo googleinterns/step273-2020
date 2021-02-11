@@ -49,4 +49,15 @@ describe('RankingListComponent', () => {
     };
     expect(component.location).toEqual(defaultSydneyLocation);
   });
+
+  it('should display the spinner only when fetching', () => {
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    if (!component.hiddenGems) {
+      expect(compiled.querySelector('mat-spinner').src).toBeDefined;
+    }
+    else {
+      expect(compiled.querySelector('mat-spinner').src).toBeUndefined;
+    }
+  })
 })

@@ -104,4 +104,12 @@ describe('LocationComponent', () => {
     expect(compiled.querySelector('p').textContent).toContain('Geolocation services have failed. Try a default location. User denied the request for Geolocation.');
   });
 
+  it('should display the spinner only when fetching', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('mat-spinner')).toBeNull;
+    const button = fixture.debugElement.query(By.css('#geolocationButton')).nativeElement;
+    button.click();
+    fixture.detectChanges();
+    expect(compiled.querySelector('mat-spinner').src).not.toBeNull;
+  })
 });
