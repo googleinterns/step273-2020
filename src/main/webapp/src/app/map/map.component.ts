@@ -41,7 +41,7 @@ export class MapComponent {
     };
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
     var androidImg = '../../assets/images/android.png';
-    //Default Marker
+   
     let userMarker = new google.maps.Marker({
       position: centerOfMapCoordinates,
       map: this.map,
@@ -49,7 +49,7 @@ export class MapComponent {
       icon : androidImg
     });
 
-    //Adding Click event to default marker
+    //Adding Click event to user marker
     userMarker.addListener("click", () => {
       const infoWindow = new google.maps.InfoWindow({
         content: "You Are Here!"
@@ -62,22 +62,22 @@ export class MapComponent {
   loadMarkers(): void {
     var diamondIcon = '../../assets/images/gem.png';
 
-    // Declare array of markers to keep the fetched data from json string from Hidden Gems object.    let length = this.hiddenGems.length;
-    let length = this.hiddenGems.length;
-    for (let i = 0; i < length; i++) {
-      let data = this.hiddenGems[i],
-      latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
+    // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
+    for (let i = 0; i < this.hiddenGems.length; i++) {
+      let currentHiddenGem = this.hiddenGems[i],
+      latLng = new google.maps.LatLng(currentHiddenGem.geometry.location.lat, 
+        currentHiddenGem.geometry.location.lng); 
       
       // Creating a marker and putting it on the map.
       let marker = new google.maps.Marker({
-				position: latLng,
-				map: this.map,
-        title: data.name,
+        position: latLng,
+        map: this.map,
+        title: currentHiddenGem.name,
         icon: diamondIcon
       });
       
-      let contentString = data.name + data.vicinity +
-          ", Star rating:" + data.rating;
+      let contentString = currentHiddenGem.name + " " + currentHiddenGem.vicinity +
+          ", Star rating: " + currentHiddenGem.rating;
 
       let infoWindow = new google.maps.InfoWindow();
       
