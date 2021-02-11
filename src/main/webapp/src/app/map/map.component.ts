@@ -3,6 +3,9 @@ import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
 import { AppComponent } from 'src/app/app.component';
 
+const DEFAULT_MAP_ZOOM = 15;
+const ON_MARKER_MAP_ZOOM = 17;
+
 @Component({
   selector: 'app-map',
   templateUrl: `map.component.html`,
@@ -36,7 +39,7 @@ export class MapComponent {
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
     let mapOptions: google.maps.MapOptions = {
       center: centerOfMapCoordinates,
-      zoom: 15
+      zoom: DEFAULT_MAP_ZOOM
     };
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
     var androidImg = '../../assets/images/android.png';
@@ -61,7 +64,7 @@ export class MapComponent {
   loadMarkers(): void {
     var diamondIcon = '../../assets/images/gem.png';
     
-    // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
+    // For loop to go through all gems and retrieve information about them.
     for (let i = 0; i < this.hiddenGems.length; i++) {
       let currentHiddenGem = this.hiddenGems[i],
       latLng = new google.maps.LatLng(currentHiddenGem.geometry.location.lat, 
@@ -81,7 +84,7 @@ export class MapComponent {
       let infoWindow = new google.maps.InfoWindow();
       
       marker.addListener("click", () => {
-        this.map.setZoom(17);
+        this.map.setZoom(ON_MARKER_MAP_ZOOM);
         this.map.setCenter(latLng);
         infoWindow.setContent(contentString);
         infoWindow.setPosition(latLng);
