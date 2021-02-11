@@ -90,7 +90,7 @@ public final class PlacesTest {
   @Test 
   public void getRankedHiddenGemsBasedOnRatings() throws IOException {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION)), sc.context);
+      Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(sc.context, Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION)));
       List<HiddenGem> rankedHiddenGems = Places.getRankedHiddenGems(hiddenGems);
       for (int i = 0; i < rankedHiddenGems.size()-1; i++) {
         assertTrue(rankedHiddenGems.get(i).rating >= rankedHiddenGems.get(i + 1).rating);
