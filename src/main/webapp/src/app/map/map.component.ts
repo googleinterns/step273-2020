@@ -15,7 +15,6 @@ export class MapComponent {
   mapContainer!: ElementRef;
   map!: google.maps.Map;
   hiddenGems = this.appComponent.hiddenGems;
-  type!: string;
   location = {} as Location;
 
   constructor( private appComponent: AppComponent, private locationService: LocationService) {
@@ -61,7 +60,7 @@ export class MapComponent {
 
   loadMarkers(): void {
     var diamondIcon = '../../assets/images/gem.png';
-
+    
     // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
     for (let i = 0; i < this.hiddenGems.length; i++) {
       let currentHiddenGem = this.hiddenGems[i],
