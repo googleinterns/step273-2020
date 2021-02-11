@@ -49,13 +49,10 @@ public final class Places {
    * and the user's location.
    * @return Set<PlacesSearchResult[]> This returns a set of arrays of Places Search Results.
    */
-  public static Set<PlacesSearchResult[]> getAllPlaces() {
+  public static Set<PlacesSearchResult[]> getAllPlaces(LatLng location) {
     GeoApiContext context = new GeoApiContext.Builder()
       .apiKey(GetConfigProperties.getApiKey())
       .build();
-
-    // TODO: Replace hardcoded location with user's location for MVP.
-    LatLng location = new LatLng(-33.865143, 151.209900);
 
     return fetchAllPlacesFromApi(context, location);
   }

@@ -14,21 +14,31 @@
 
 package com.google.sps.servlets;
 
-import com.google.sps.data.Places;
 import com.google.gson.Gson;
+import com.google.maps.model.LatLng;
+import com.google.maps.model.PlacesSearchResult;
+import com.google.sps.data.Places;
+
 import java.io.IOException;
+import java.util.Set;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that return the hidden gems dummy data. */
-@WebServlet("/hiddengems")
-public class GetHiddenGemsServlet extends HttpServlet {
+/** Servlet that returns the hidden gems ranked based on rating (descending order). */
+@WebServlet("/ranked-hidden-gems")
+public class GetRankedHiddenGemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String lat = request.getParameter("lat");
+    String lng = request.getParameter("lng");
+    LatLng location = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+
+    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces(location));
     Gson gson = new Gson();
-    String jsonResponse = gson.toJson(Places.getAllHiddenGems(Places.getAllPlaces()));
+    String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 
     // Send the JSON back as the response
     response.setContentType("application/json");
