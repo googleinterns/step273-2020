@@ -36,7 +36,7 @@ import com.google.sps.data.HiddenGem;
 public class GetRankingServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces()));
+    Set<HiddenGem> hiddenGems = Places.getHiddenPlaces(Places.getAllHiddenGems(Places.getAllPlaces()));
     Gson gson = new Gson();
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 

@@ -32,7 +32,7 @@ import com.google.sps.data.HiddenGem;
 public class GetTop3GemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(Places.getAllHiddenGems(Places.getAllPlaces()));
+    Set<HiddenGem> hiddenGems = Places.getHiddenPlaces(Places.getAllHiddenGems(Places.getAllPlaces()));
     Gson gson = new Gson();
     
     // TODO: replace rankedHiddenGems with the recommendations from user's preference 

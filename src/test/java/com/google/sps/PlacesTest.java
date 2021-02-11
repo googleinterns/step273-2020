@@ -27,6 +27,7 @@ import com.google.maps.model.LatLng;
 import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
 import com.google.sps.testData.LocalTestServerContext;
+import com.google.sps.data.HiddenGem;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -89,8 +90,8 @@ public final class PlacesTest {
   @Test 
   public void getRankedHiddenGemsBasedOnRatings() throws IOException {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
-      List<PlacesSearchResult> rankedHiddenGems = Places.getRankedHiddenGems(hiddenGems);
+      Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION)), sc.context);
+      List<HiddenGem> rankedHiddenGems = Places.getRankedHiddenGems(hiddenGems);
       for (int i = 0; i < rankedHiddenGems.size()-1; i++) {
         assertTrue(rankedHiddenGems.get(i).rating >= rankedHiddenGems.get(i + 1).rating);
       }

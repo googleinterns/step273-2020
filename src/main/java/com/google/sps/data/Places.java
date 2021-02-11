@@ -149,6 +149,18 @@ public final class Places {
     return stream;
   }
 
+  /**
+   * This function getAllPlaces retrieved from a Places Search API using the API
+   * and the user's location.
+   * @return Set<PlacesSearchResult[]> This returns a set of arrays of Places Search Results.
+   */
+  public static Set<HiddenGem> getHiddenPlaces(Set<PlacesSearchResult> places) {
+    GeoApiContext context = new GeoApiContext.Builder()
+      .apiKey(GetConfigProperties.getApiKey())
+      .build();
+
+    return convertToHiddenGem(context, places);
+  }
 
   /**
    * This converts a set of places into a set of hidden gems. 
@@ -158,11 +170,7 @@ public final class Places {
    * @return Set<HiddenGem>   This returns a set of Hidden Gems with all information populated
    *                          from the place search and place details results. 
    */
-  public static Set<HiddenGem> convertToHiddenGem(Set<PlacesSearchResult> places) {
-
-    GeoApiContext context = new GeoApiContext.Builder()
-      .apiKey(GetConfigProperties.getApiKey())
-      .build();
+  public static Set<HiddenGem> convertToHiddenGem(GeoApiContext context, Set<PlacesSearchResult> places) {
 
     Set<HiddenGem> hiddenGems = new HashSet<>();
 
@@ -183,10 +191,8 @@ public final class Places {
         e.printStackTrace(); 
       }  
 
-    }
-    
+    }  
     return hiddenGems;
-
   }
 
   /**
