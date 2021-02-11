@@ -57,8 +57,7 @@ export class MapComponent implements AfterViewInit {
     //var infoWindow = new google.maps.InfoWindow();
     
     var length = this.hiddenGems.length;
-    var markers = new Array;
-    markers=[];
+   
     for (var i = 0; i < length; i++) {
       
       var data = this.hiddenGems[i],
@@ -70,8 +69,7 @@ export class MapComponent implements AfterViewInit {
 				map: this.map,
         title: data.name
       });
-      
-      markers.push(marker);
+
       var contentString = data.name + data.vicinity +
           ", Star rating:" + data.rating;
       console.log(contentString); 
@@ -81,9 +79,9 @@ export class MapComponent implements AfterViewInit {
         position: latLng
       });
       
-      google.maps.event.addListener(markers[i], "click", () => {
-      //markers[i].addListener("click", () => {
-        infoWindow.open(this.map, markers[i]);
+      google.maps.event.addListener(marker, "click", () => {
+      //marker.addListener("click", () => {
+        infoWindow.open(this.map, marker);
       });
 
     }
