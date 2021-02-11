@@ -51,6 +51,8 @@ export class LocationComponent{
   }
 
   enableNavigatorLocation(): void {
+    // After the location has been fetched, the page is refreshed and directed to '/home'
+    // So, isLocationButtonClicked does not need to be switch to false.
     this.isLocationButtonClicked = true;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
