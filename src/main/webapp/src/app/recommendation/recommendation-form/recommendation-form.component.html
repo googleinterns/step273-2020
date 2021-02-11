@@ -9,21 +9,25 @@
   
   <div  class="price-group">
     <h3>Price Range</h3>
-    <label for="low">
+    <label for="0">
+      Any
+      <input type="radio" formControlName="price" value="0" >
+    </label>
+    <label for="1">
       💲
-      <input type="radio" formControlName="price" value="low" >
+      <input type="radio" formControlName="price" value="1" >
     </label>
-    <label for="medium">
+    <label for="2">
       💲💲
-      <input type="radio" formControlName="price" value="medium" >
+      <input type="radio" formControlName="price" value="2" >
     </label>
-    <label for="high">
+    <label for="3">
       💲💲💲
-      <input type="radio" formControlName="price" value="high" >
+      <input type="radio" formControlName="price" value="3" >
     </label>
-    <label for="extreme">
+    <label for="4">
       💲💲💲💲
-      <input type="radio" formControlName="price"value="extreme" >
+      <input type="radio" formControlName="price"value="4" >
     </label>
   </div>
 
@@ -31,23 +35,23 @@
     <h3>Minimum star rating preferred</h3> 
     <label for="1">
       ⭐️
-      <input type="radio" formControlName="rating" value="1">
+      <input type="radio" formControlName="rating" value=1>
     </label>
     <label for="2">
       ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="2">
+      <input type="radio" formControlName="rating" value=2>
     </label>
     <label for="3">
       ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="3" >
+      <input type="radio" formControlName="rating" value=3 >
     </label>
     <label for="4">
       ⭐️ ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="4" >
+      <input type="radio" formControlName="rating" value=4 >
     </label>
     <label for="5">
       ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="5" >
+      <input type="radio" formControlName="rating" value=5 >
     </label>
   </div>
 
@@ -56,8 +60,9 @@
       <label>Restaurant Type</label>
     </h3>
     <select formControlName="type">
-      <option value="Restaurant">Restaurant</option>
-      <option value="Cafe">Cafe</option>
+      <option value="restaurant">Restaurant</option>
+      <option value="cafe">Cafe</option>
+      <option value="any">Any</option>
     </select>
   </div>
 

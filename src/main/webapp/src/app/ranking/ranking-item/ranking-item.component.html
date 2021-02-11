@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z2">
   <mat-card-header>
     <mat-card-title id="name">{{hiddenGem.name}}</mat-card-title>
-    <mat-card-subtitle id="address">{{hiddenGem.vicinity}}</mat-card-subtitle>
+    <mat-card-subtitle id="address">{{hiddenGem.address}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <mat-grid-list cols="2" rowHeight="200px">
@@ -13,7 +13,7 @@
           <p class="mat-subheading-2" id="opening_hours"><b *ngIf="hiddenGem.openingHours">Open Now</b><b *ngIf="!hiddenGem.openingHours">Currently closed</b></p>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile *ngIf="hiddenGem.photos"><img height="200" src="{{photoUrl}}" alt={{hiddenGem.name}}></mat-grid-tile>
+      <mat-grid-tile *ngIf="hiddenGem.photoReference"><img height="200" src="{{photoUrl}}" alt={{hiddenGem.name}}></mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
 </mat-card>

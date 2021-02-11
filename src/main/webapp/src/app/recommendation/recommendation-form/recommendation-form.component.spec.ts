@@ -45,10 +45,10 @@ describe('RecommendationFormComponent', () => {
   it('should set price button correctly ', () => {
     let priceRange = component.preferenceForm.controls['price'];
     expect(priceRange.value).toEqual("");
-    priceRange.setValue('low');
+    priceRange.setValue('1');
     component.onSubmit();
     expect(priceRange.errors).toBeNull();
-    expect(priceRange.value).toEqual("low");
+    expect(priceRange.value).toEqual("1");
     expect(priceRange.valueChanges).toBeTruthy();
   });
 
