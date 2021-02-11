@@ -12,6 +12,7 @@ export class LocationComponent{
   readonly GEO_LOCATION_TIMEOUT_MS = 12000;
 
   location = {} as Location;
+  isLocationButtonClicked = false;
 
   @ViewChild("errorMessage", { static: false })
   errorMessage!: ElementRef;
@@ -50,6 +51,7 @@ export class LocationComponent{
   }
 
   enableNavigatorLocation(): void {
+    this.isLocationButtonClicked = true;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         this.locationSuccess = this.locationSuccess.bind(this),
