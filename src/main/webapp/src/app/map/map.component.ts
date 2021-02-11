@@ -56,35 +56,31 @@ export class MapComponent implements AfterViewInit {
     // Creating a global infoWindow object that will be reused by all markers
     //var infoWindow = new google.maps.InfoWindow();
     
-    var length = this.hiddenGems.length;
-   
-    for (var i = 0; i < length; i++) {
+    let length = this.hiddenGems.length;
+
+    for (let i = 0; i < length; i++) {
       
-      var data = this.hiddenGems[i],
+      let data = this.hiddenGems[i],
       latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
       
       // Creating a marker and putting it on the map.
-      var marker = new google.maps.Marker({
+      let marker = new google.maps.Marker({
 				position: latLng,
 				map: this.map,
         title: data.name
       });
-
-      var contentString = data.name + data.vicinity +
+      
+      let contentString = data.name + data.vicinity +
           ", Star rating:" + data.rating;
-      console.log(contentString); 
+
+      let infoWindow = new google.maps.InfoWindow();
       
-      var infoWindow = new google.maps.InfoWindow({
-        content: contentString,
-        position: latLng
-      });
-      
-      google.maps.event.addListener(marker, "click", () => {
-      //marker.addListener("click", () => {
+      marker.addListener("click", () => {
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(latLng);
         infoWindow.open(this.map, marker);
       });
-
+      
     }
   }
-  
 }
