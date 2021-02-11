@@ -36,6 +36,7 @@ export class RecommendationFormComponent implements OnInit {
   }
   // Submit user's preference form
   // Send hidden gem recommendation as output
+  // TODO: function will need to be updated after findHiddenGemRecommendation will be deleted.
   onSubmit(): void {
     this.hiddenGemService.findHiddenGemRecommendation(this.preferenceForm.value)
       .subscribe(hiddenGems => {

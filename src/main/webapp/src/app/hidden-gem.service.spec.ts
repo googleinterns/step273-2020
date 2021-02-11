@@ -4,6 +4,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { fakeAsync } from '@angular/core/testing';
 
+const LOCATION = { lat: -33.8688, lng: 151.2093 };
+
 describe('HiddenGemService', () => {
   let httpClientSpy: { get: jasmine.Spy };
   let hiddenGemService: HiddenGemService;
@@ -70,7 +72,7 @@ describe('HiddenGemService', () => {
 
     httpClientSpy.get.and.returnValue(of(expectedHiddenGems));
 
-    hiddenGemService.getAllHiddenGems().subscribe(
+    hiddenGemService.getRankedHiddenGems(LOCATION).subscribe(
       hiddenGems => expect(hiddenGems).toEqual(expectedHiddenGems, 'expected hidden gems'),
       fail
     );
@@ -85,7 +87,7 @@ describe('HiddenGemService', () => {
 
     httpClientSpy.get.and.returnValue(of(errorResponse));
 
-    hiddenGemService.getAllHiddenGems().subscribe(
+    hiddenGemService.getRankedHiddenGems(LOCATION).subscribe(
       {
         error: error => {
           expect(error).toEqual({ error: 'A data error occured, please try again.' });
@@ -96,7 +98,7 @@ describe('HiddenGemService', () => {
 
   it('should return an empty list if there are no hidden gems (HttpClient called once)', () => {
     httpClientSpy.get.and.returnValue(of([]));
-    hiddenGemService.getAllHiddenGems().subscribe(
+    hiddenGemService.getRankedHiddenGems(LOCATION).subscribe(
       hiddenGems => expect(hiddenGems).toEqual([], 'expected hidden gems'),
       fail
     );
