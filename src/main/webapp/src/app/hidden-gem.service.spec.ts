@@ -4,6 +4,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { fakeAsync } from '@angular/core/testing';
 
+const LOCATION = { lat: -33.8688, lng: 151.2093 };
+
 describe('HiddenGemService', () => {
   let httpClientSpy: { get: jasmine.Spy };
   let hiddenGemService: HiddenGemService;
@@ -12,8 +14,6 @@ describe('HiddenGemService', () => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
     hiddenGemService = new HiddenGemService(httpClientSpy as any);
   });
-
-  const LOCATION = { lat: -33.8688, lng: 151.2093 };
 
   it('should return expected hidden gems (HttpClient called once)', () => {
     const expectedHiddenGems: HiddenGem[] =

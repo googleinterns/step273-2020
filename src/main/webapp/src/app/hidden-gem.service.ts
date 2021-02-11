@@ -20,12 +20,11 @@ export class HiddenGemService {
       .set('lng', lng.toString());
 
     return this.httpClient
-      .get<HiddenGem[]>('/ranking', {params})
+      .get<HiddenGem[]>('/ranked-hidden-gems', {params})
       .pipe(catchError(this.handleError))
   }
 
-  // TODO: MVP - params with user preference data from form to be used in request.
-  // TODO: MVP - convert back to a httpClient.post request
+  // TODO: Get rid of this function when the /recommendation servlet will be deleted.
   findHiddenGemRecommendation(data: any) : Observable<HiddenGem[]> {
     const params = new HttpParams().append("preferences", data);
     return this.httpClient

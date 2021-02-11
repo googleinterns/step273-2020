@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';1
+import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
 

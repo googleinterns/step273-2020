@@ -32,6 +32,8 @@ export class AppComponent implements OnInit{
     this.previousLocation = this.location;
   }
 
+  // Necessary to update the location of the user
+  // Otherwise, only consider the default location (Sydney)
   ngDoCheck() {
     if (this.location !== this.previousLocation) {
       this.previousLocation = this.location;
