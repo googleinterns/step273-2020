@@ -35,7 +35,7 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {}
 
   mapInitializer(): void {
-
+    
     // Coordinates fetched from the user's location to set the center of the map.
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
     let mapOptions: google.maps.MapOptions = {
@@ -59,7 +59,6 @@ export class MapComponent implements AfterViewInit {
       });
       infoWindow.open(this.map, userMarker);
     });
-
     this.loadMarkers();
   }
 
@@ -92,7 +91,6 @@ export class MapComponent implements AfterViewInit {
         infoWindow.setPosition(latLng);
         infoWindow.open(this.map, marker);
       });
-      
     }
   }
 }
