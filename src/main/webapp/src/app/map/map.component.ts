@@ -1,9 +1,7 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef,  SimpleChanges} from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
-import { HiddenGem } from 'src/app/models/hidden-gem';
 import { AppComponent } from 'src/app/app.component';
-import { string } from 'prop-types';
 
 @Component({
   selector: 'app-map',
@@ -34,8 +32,7 @@ export class MapComponent implements AfterViewInit {
     }
   }
   
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 
   mapInitializer(): void {
 
@@ -43,23 +40,35 @@ export class MapComponent implements AfterViewInit {
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
     let mapOptions: google.maps.MapOptions = {
       center: centerOfMapCoordinates,
-      zoom: 10
+      zoom: 15
     };
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+    var androidImg = '../../assets/images/android.png';
+    //Default Marker
+    let userMarker = new google.maps.Marker({
+      position: centerOfMapCoordinates,
+      map: this.map,
+      title: "user location",
+      icon : androidImg
+    });
+
+    //Adding Click event to default marker
+    userMarker.addListener("click", () => {
+      const infoWindow = new google.maps.InfoWindow({
+        content: "You Are Here!"
+      });
+      infoWindow.open(this.map, userMarker);
+    });
 
     this.loadMarkers();
   }
 
   loadMarkers(): void {
-    // Declare array of markers to keep the fetched data from json string from Hidden Gems object.
+    var diamondIcon = '../../assets/images/gem.png';
 
-    // Creating a global infoWindow object that will be reused by all markers
-    //var infoWindow = new google.maps.InfoWindow();
-    
+    // Declare array of markers to keep the fetched data from json string from Hidden Gems object.    let length = this.hiddenGems.length;
     let length = this.hiddenGems.length;
-
     for (let i = 0; i < length; i++) {
-      
       let data = this.hiddenGems[i],
       latLng = new google.maps.LatLng(data.geometry.location.lat, data.geometry.location.lng); 
       
@@ -67,7 +76,8 @@ export class MapComponent implements AfterViewInit {
       let marker = new google.maps.Marker({
 				position: latLng,
 				map: this.map,
-        title: data.name
+        title: data.name,
+        icon: diamondIcon
       });
       
       let contentString = data.name + data.vicinity +
@@ -76,6 +86,8 @@ export class MapComponent implements AfterViewInit {
       let infoWindow = new google.maps.InfoWindow();
       
       marker.addListener("click", () => {
+        this.map.setZoom(17);
+        this.map.setCenter(latLng);
         infoWindow.setContent(contentString);
         infoWindow.setPosition(latLng);
         infoWindow.open(this.map, marker);
