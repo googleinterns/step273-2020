@@ -24,7 +24,7 @@ import { LocationComponent } from './location/location.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { HomepageComponent } from './homepage/homepage.component';
-import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatIconModule,
     MatCardModule,
     MatGridListModule,
-    MatMenuModule,
+    MatSelectModule,
     MatProgressSpinnerModule
   ],
   providers: [],

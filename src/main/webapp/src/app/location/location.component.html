@@ -7,11 +7,13 @@
     </mat-card>
 
     <mat-card>
-      <button mat-button [matMenuTriggerFor]="menu">Select your city ⬇️</button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item id="sydneyButton" (click)="getSydneyLocation()" type="button"><i></i>Sydney</button>
-        <button mat-menu-item id="adelaideButton" (click)="getAdelaideLocation()" type="button"><i></i>Adelaide</button>
-      </mat-menu>
+      <mat-form-field appearance="fill">
+        <mat-label>Select your city</mat-label>
+        <mat-select disableRipple>
+          <mat-option id="sydneyButton" (click)="getSydneyLocation()" value="Sydney"><i></i>Sydney</mat-option>
+          <mat-option id="adelaideButton" (click)="getAdelaideLocation()" value="Adelaide"><i></i>Adelaide</mat-option>
+        </mat-select>
+      </mat-form-field>
     </mat-card>
    
     <p id="errorMessage" #errorMessage> </p>
