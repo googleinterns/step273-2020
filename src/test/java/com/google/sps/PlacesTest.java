@@ -69,7 +69,7 @@ public final class PlacesTest {
   @Test 
   public void getOnlyPlacesWithExpectedRatingAsHiddenGems() throws IOException {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
       for (PlacesSearchResult hiddenGem : hiddenGems) {
         assertTrue(hiddenGem.rating >= hiddenGemsRating);
       }
@@ -79,7 +79,7 @@ public final class PlacesTest {
   @Test 
   public void getOnlyPlacesWithExpectedNumberOfRatingsAsHiddenGems() throws IOException {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
       for (PlacesSearchResult hiddenGem : hiddenGems) {
         assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
           && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
@@ -90,7 +90,7 @@ public final class PlacesTest {
   @Test 
   public void getRankedHiddenGemsBasedOnRatings() throws IOException {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<HiddenGem> hiddenGems = Places.convertToHiddenGem(sc.context, Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION)));
+      Set<HiddenGem> hiddenGems = Places.fetchHiddenGemsFromApi(sc.context, Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(sc.context, LOCATION)));
       List<HiddenGem> rankedHiddenGems = Places.getRankedHiddenGems(hiddenGems);
       for (int i = 0; i < rankedHiddenGems.size()-1; i++) {
         assertTrue(rankedHiddenGems.get(i).rating >= rankedHiddenGems.get(i + 1).rating);

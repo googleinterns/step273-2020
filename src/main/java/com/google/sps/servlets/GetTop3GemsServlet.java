@@ -37,7 +37,7 @@ public class GetTop3GemsServlet extends HttpServlet {
     //TODO: For now, a hardcoded location is used. Later on, this servlet will probably be deleted as the filtering
     // based on the user's preferences will probably be done in the frontend. 
     LatLng hardcodedLocation = new LatLng(-33.8688, 151.2093);
-    Set<HiddenGem> hiddenGems = Places.getHiddenPlaces(Places.getAllHiddenGems(Places.getAllPlaces(hardcodedLocation)));
+    Set<HiddenGem> hiddenGems = Places.convertToHiddenGems(Places.getAllHiddenPlaces(Places.getAllPlaces(hardcodedLocation)));
     Gson gson = new Gson();
     
     // TODO: replace rankedHiddenGems with the recommendations from user's preference 
