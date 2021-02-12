@@ -5,4 +5,5 @@
     <button id="sydneyButton" (click)="getSydneyLocation()" type="button"><i></i>Sydney</button>
     <button id="adelaideButton" (click)="getAdelaideLocation()" type="button"><i></i>Adelaide</button>
     <p id="errorMessage" #errorMessage> </p>
+    <mat-spinner *ngIf="isLocationButtonClicked"></mat-spinner>
 </div>
