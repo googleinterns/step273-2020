@@ -35,9 +35,10 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public final class PlacesTest {
   private static final LatLng LOCATION = new LatLng(-33.865143, 151.209900);
-  private static final double hiddenGemsRating = 3.5;
-  private static final int hiddenGemsNumberOfRatingsMin = 10;
-  private static final int hiddenGemsNumberOfRatingsMax = 50;
+  private static final double HIDDEN_GEMS_RATINGS_MIN = 3.5;
+  private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN = 10;
+  private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX = 50;
+  private static final String BUSINESS_STATUS_OPERATIONAL = "OPERATIONAL";
   private final String AllPlacesApiNearbySearchRequest;
 
   public PlacesTest() {
@@ -70,7 +71,7 @@ public final class PlacesTest {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
       Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
       for (PlacesSearchResult hiddenGem : hiddenGems) {
-        assertTrue(hiddenGem.rating >= hiddenGemsRating);
+        assertTrue(hiddenGem.rating >= HIDDEN_GEMS_RATINGS_MIN);
       }
     }
   }
@@ -80,8 +81,18 @@ public final class PlacesTest {
     try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
       Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
       for (PlacesSearchResult hiddenGem : hiddenGems) {
-        assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
-          && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
+        assertTrue(hiddenGem.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
+          && hiddenGem.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX);
+      }
+    }
+  }
+
+  @Test 
+  public void getOnlyPlacesWithExpectedBusinessStatusAsHiddenGems() throws IOException {
+    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+      for (PlacesSearchResult hiddenGem : hiddenGems) {
+        assertEquals(BUSINESS_STATUS_OPERATIONAL, hiddenGem.businessStatus);
       }
     }
   }

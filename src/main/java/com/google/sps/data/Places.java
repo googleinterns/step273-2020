@@ -17,13 +17,17 @@ package com.google.sps.data;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,6 +47,9 @@ public final class Places {
   private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN = 10;
   private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX = 50;
   private static final int NUM_RESULTS_PAGES = 3;
+  private static final String BUSINESS_STATUS_OPERATIONAL = "OPERATIONAL";
+  private static final String TYPE_RESTAURANT = "restaurant";
+  private static final String TYPE_CAFE = "cafe";
 
   /**
    * This function getAllPlaces retrieved from a Places Search API using the API
@@ -121,8 +128,15 @@ public final class Places {
     Set<PlacesSearchResult> hiddenGems = new HashSet<>();
     hiddenGems = flatten(all_places)
       .filter(place -> 
-        place.rating >= HIDDEN_GEMS_RATINGS_MIN && place.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
-        && place.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX)
+        place.rating >= HIDDEN_GEMS_RATINGS_MIN 
+        && place.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
+        && place.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX
+        && place.businessStatus.equals(BUSINESS_STATUS_OPERATIONAL)
+        && (
+          (place.types[0].equals(TYPE_CAFE) || place.types[0].equals(TYPE_RESTAURANT))
+          || (place.types[1].equals(TYPE_CAFE) || place.types[1].equals(TYPE_RESTAURANT))
+        )
+      )
       .collect(Collectors.toSet());
     
     return hiddenGems;
@@ -145,7 +159,7 @@ public final class Places {
   /**
    * This function returns the hidden gems ranked by rating (descending order)
    * @param hiddenGems                      This takes as parameter the set of hiddenGems to be sorted. 
-   * @return List<PlacesSearchResult>       This returns an List of the hidden gems ranked by rating.
+   * @return List<PlacesSearchResult>       This returns a List of the hidden gems ranked by rating.
    */
   public static List<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
     // List of ranked hidden gems (switch to List to keep the ordering)
@@ -156,6 +170,31 @@ public final class Places {
         return Float.compare(hiddenGem_2.rating, hiddenGem_1.rating);
       }
     });
-    return sortedHiddenGems;
+    return removeDuplicates(sortedHiddenGems);
+  }
+
+  /**
+   * This function returns the list of hidden gems without the duplicates.
+   * @param hiddenGems                 This takes as parameter the set of hidden gems to be filtered.
+   * @return List<PlacesSearchResult>  This return a list of hidden gems without the duplicates.
+   */
+  public static List<PlacesSearchResult> removeDuplicates(List<PlacesSearchResult> hiddenGems) {
+    List<PlacesSearchResult> distinctHiddenGems = hiddenGems.stream() 
+      .filter(distinctByKey(hiddenGem -> hiddenGem.placeId))
+      .collect(Collectors.toList());
+      
+    return distinctHiddenGems;
+  }
+  
+  /**
+   * Utility function to filter a list by class field.
+   * Resource used: https://howtodoinjava.com/java8/java-stream-distinct-examples/ 
+   * @param <T>             This is a generic method.
+   * @param keyExtractor    This is the class field with with we want to filter the list.
+   * @return Predicate<T>   This returns a boolean value (generic functional interface).
+   */
+  public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+    Map<Object, Boolean> map = new ConcurrentHashMap<>();
+    return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
   }
 }
