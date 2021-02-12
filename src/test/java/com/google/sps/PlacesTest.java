@@ -47,16 +47,16 @@ public final class PlacesTest {
 
   @Test
   public void getSixArraysOfPlacesSearchResults() throws Exception {
-    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context, LOCATION);
+    try (LocalTestServerContext server  = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(server.context, LOCATION);
       assertEquals(6, places.size());
     }
   }
 
   @Test
   public void getOnlyRestaurantsAndCafes() throws IOException {
-    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(sc.context, LOCATION);
+    try (LocalTestServerContext server  = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult[]> places = Places.fetchAllPlacesFromApi(server.context, LOCATION);
       for (PlacesSearchResult[] arrayOfPlaces : places) {
         for (int i = 0; i < arrayOfPlaces.length; i++) {
           List<String> types = Arrays.asList(arrayOfPlaces[i].types);	
@@ -68,8 +68,8 @@ public final class PlacesTest {
 
   @Test 
   public void getOnlyPlacesWithExpectedRatingAsHiddenGems() throws IOException {
-    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+    try (LocalTestServerContext server  = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(server .context, LOCATION));
       for (PlacesSearchResult hiddenGem : hiddenGems) {
         assertTrue(hiddenGem.rating >= hiddenGemsRating);
       }
@@ -78,8 +78,8 @@ public final class PlacesTest {
 
   @Test 
   public void getOnlyPlacesWithExpectedNumberOfRatingsAsHiddenGems() throws IOException {
-    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(sc.context, LOCATION));
+    try (LocalTestServerContext server = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(server.context, LOCATION));
       for (PlacesSearchResult hiddenGem : hiddenGems) {
         assertTrue(hiddenGem.userRatingsTotal >= hiddenGemsNumberOfRatingsMin
           && hiddenGem.userRatingsTotal <= hiddenGemsNumberOfRatingsMax);
@@ -89,8 +89,8 @@ public final class PlacesTest {
 
   @Test 
   public void getRankedHiddenGemsBasedOnRatings() throws IOException {
-    try (LocalTestServerContext sc = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
-      Set<HiddenGem> hiddenGems = Places.fetchHiddenGemsFromApi(sc.context, Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(sc.context, LOCATION)));
+    try (LocalTestServerContext server = new LocalTestServerContext(AllPlacesApiNearbySearchRequest)) {
+      Set<HiddenGem> hiddenGems = Places.fetchHiddenGemsFromApi(server.context, Places.getAllHiddenPlaces(Places.fetchAllPlacesFromApi(server.context, LOCATION)));
       List<HiddenGem> rankedHiddenGems = Places.getRankedHiddenGems(hiddenGems);
       for (int i = 0; i < rankedHiddenGems.size()-1; i++) {
         assertTrue(rankedHiddenGems.get(i).rating >= rankedHiddenGems.get(i + 1).rating);
