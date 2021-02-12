@@ -2,3 +2,9 @@
   height: 500px;
   width: 100%;
 }
+
+mat-spinner {
+  position: absolute;
+  margin-left: 50%;
+  margin-top:10px;
+}
