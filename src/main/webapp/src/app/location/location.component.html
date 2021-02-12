@@ -1,8 +1,13 @@
 <div id="location-container">
     <h1>Welcome to Hidden Gems!</h1>
     <h4>To use Hidden Gems, please allow location services. If not possible select a default location [Sydney, Adelaide].</h4>
-    <button id="geolocationButton" (click)="enableNavigatorLocation()" type="button"><i></i>Find My Location</button>
-    <button id="sydneyButton" (click)="getSydneyLocation()" type="button"><i></i>Sydney</button>
-    <button id="adelaideButton" (click)="getAdelaideLocation()" type="button"><i></i>Adelaide</button>
+  
+    <button mat-raised-button color="primary" id="geolocationButton" (click)="enableNavigatorLocation()" type="button"><i></i>Find My Location</button>
+    <button mat-button [matMenuTriggerFor]="menu">Select your city</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item id="sydneyButton" (click)="getSydneyLocation()" type="button"><i></i>Sydney</button>
+      <button mat-menu-item id="adelaideButton" (click)="getAdelaideLocation()" type="button"><i></i>Adelaide</button>
+    </mat-menu>
+    
     <p id="errorMessage" #errorMessage> </p>
 </div>
