@@ -183,9 +183,22 @@ public final class Places {
             PlaceDetailsRequest.FieldMask.WEBSITE)
         .await();
 
-        hiddenGems.add(new HiddenGem(place.placeId, place.name, place.types,  placeDetails.formattedAddress, place.geometry.location.lat, 
-          place.geometry.location.lng, String.valueOf(placeDetails.priceLevel), place.rating, place.userRatingsTotal, placeDetails.website, place.openingHours, 
-          place.photos[0].photoReference, place.photos[0].htmlAttributions, place.permanentlyClosed, place.businessStatus));
+        hiddenGems.add(new HiddenGem(
+          place.placeId, 
+          place.name, 
+          place.types,  
+          placeDetails.formattedAddress, 
+          place.geometry.location.lat, 
+          place.geometry.location.lng, 
+          String.valueOf(placeDetails.priceLevel), 
+          place.rating, 
+          place.userRatingsTotal, 
+          placeDetails.website, 
+          place.openingHours, 
+          place.photos[0].photoReference, 
+          place.photos[0].htmlAttributions, 
+          place.permanentlyClosed, 
+          place.businessStatus));
 
       } catch (ApiException | InterruptedException | IOException e) {
         e.printStackTrace(); 
