@@ -46,33 +46,35 @@ export class RecommendationFormComponent implements OnInit{
 
   // Submit user's preference form
   // Send hidden gem recommendation as output
-  onSubmit(): void {
+  async onSubmit() {
     // filter hidden gems by preference form criteria.
-    let recommendationGems = this.filterGems(this.hiddenGems, this.preferenceForm);
+    let result = this.filterGems(this.hiddenGems, this.preferenceForm);
 
     // send top 3 recommendation gems to display in list.
-    this.hiddenGemRecommendation.emit(recommendationGems);
+    this.hiddenGemRecommendation.emit(result);
 
   }
 
   filterGems(hiddenGems: HiddenGem[], preferenceForm: FormGroup): HiddenGem[] {
 
-    for (let i = 0; i < hiddenGems.length; i++) {
-      let gem = hiddenGems[i];
-      hiddenGems[i].matchScore = 0;
-      if(preferenceForm.controls["price"].value == hiddenGems[i].priceLevel){
-        hiddenGems[i].matchScore = hiddenGems[i].matchScore + 1;
+    let recommendationGems: HiddenGem[] = hiddenGems.slice(0);
+
+    for (let i = 0; i < recommendationGems.length; i++) {
+      let gem = recommendationGems[i];
+      recommendationGems[i].matchScore = 0;
+      if(preferenceForm.controls["price"].value == recommendationGems[i].priceLevel){
+        recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
       }
-      if(preferenceForm.controls["rating"].value >= hiddenGems[i].rating){
-        hiddenGems[i].matchScore = hiddenGems[i].matchScore + 1;
+      if(preferenceForm.controls["rating"].value >= recommendationGems[i].rating){
+        recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
       }
       if(preferenceForm.controls["type"].value == "any") {
-        hiddenGems[i].matchScore = hiddenGems[i].matchScore + 1;
+        recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
-      } else if (preferenceForm.controls["type"].value == hiddenGems[i].types[0] || preferenceForm.controls["type"].value == hiddenGems[i].types[1]){
-        hiddenGems[i].matchScore = hiddenGems[i].matchScore + 1;
+      } else if (preferenceForm.controls["type"].value == recommendationGems[i].types[0] || preferenceForm.controls["type"].value == recommendationGems[i].types[1]){
+        recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
       }
 
@@ -80,10 +82,10 @@ export class RecommendationFormComponent implements OnInit{
   
     // shuffle list so recommendation doesn't give a preference to gems with high rating
     // randomise the pool of matching gems for selecting recommendation 
-    let recommendationGems: HiddenGem[] = this.shuffleGems(hiddenGems);
-
+    //let recommendationGems: HiddenGem[] = this.shuffleGems(hiddenGems);
+    recommendationGems = this.shuffleGems(recommendationGems);
     // sort list, gems with highest score populate to the top.
-    recommendationGems = hiddenGems.sort((n1,n2) => n2.matchScore - n1.matchScore);
+    recommendationGems.sort((n1,n2) => n2.matchScore - n1.matchScore);
 
     return recommendationGems.slice(0,3);
 

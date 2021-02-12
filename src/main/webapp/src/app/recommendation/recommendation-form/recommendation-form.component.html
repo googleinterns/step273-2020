@@ -11,7 +11,7 @@
     <h3>Price Range</h3>
     <label for="0">
       Any
-      <input type="radio" formControlName="price" value="0" >
+      <input type="radio" formControlName="price" value=null >
     </label>
     <label for="1">
       💲
@@ -32,29 +32,16 @@
   </div>
 
   <div class="rating-group">
-    <h3>Minimum star rating preferred</h3> 
-    <label for="1">
-      ⭐️
-      <input type="radio" formControlName="rating" value=1>
-    </label>
-    <label for="2">
-      ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value=2>
-    </label>
-    <label for="3">
-      ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value=3 >
-    </label>
-    <label for="4">
-      ⭐️ ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value=4 >
-    </label>
-    <label for="5">
-      ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value=5 >
-    </label>
+    <h3>
+      <label>Minimum star rating preferred</label>
+    </h3>
+    <select formControlName="type">
+      <option value=3>★★★☆☆</option>
+      <option value=4>★★★★☆</option>
+      <option value=5>★★★★★</option>
+    </select>
   </div>
-
+  
   <div class="restaurant-type-group">
     <h3>
       <label>Restaurant Type</label>
