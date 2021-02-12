@@ -15,6 +15,7 @@
 package com.google.sps.servlets;
 
 import com.google.gson.Gson;
+import com.google.maps.model.LatLng;
 import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
 
@@ -27,16 +28,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.sps.data.HiddenGem;
 
-/**
- * This is a temporary servlet to check the responses from Places API.
- * When we won't need the dummy hidden gems data anymore, all code here will be 
- * moved to the GetHiddenGems servlet. 
-*/
-@WebServlet("/ranking")
-public class GetRankingServlet extends HttpServlet {
+/** Servlet that returns the hidden gems ranked based on rating (descending order). */
+@WebServlet("/ranked-hidden-gems")
+public class GetRankedHiddenGemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Set<HiddenGem> hiddenGems = Places.getHiddenPlaces(Places.getAllHiddenGems(Places.getAllPlaces()));
+    
+
+
+    String lat = request.getParameter("lat");
+    String lng = request.getParameter("lng");
+    LatLng location = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+
+    Set<HiddenGem> hiddenGems = Places.getHiddenPlaces(Places.getAllHiddenGems(Places.getAllPlaces(location)));
     Gson gson = new Gson();
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 
