@@ -10,7 +10,7 @@ import { Location } from 'src/app/models/location';
   templateUrl: './recommendation-form.component.html',
   styleUrls: ['./recommendation-form.component.css']
 })
-export class RecommendationFormComponent implements OnInit{
+export class RecommendationFormComponent implements OnInit {
 
   @Output() hiddenGemRecommendation = new EventEmitter<HiddenGem[]>();
   location = {} as Location;
@@ -41,7 +41,7 @@ export class RecommendationFormComponent implements OnInit{
     this.hiddenGemService.findHiddenGemRecommendation(this.preferenceForm.value)
       .subscribe(hiddenGems => {
         this.hiddenGemRecommendation.emit(hiddenGems);
-    })
+      })
   }
 
 }

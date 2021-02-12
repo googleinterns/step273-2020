@@ -1,6 +1,11 @@
 #geolocationButton {
   margin-right: 8px;
 }
-.mat-card{
-  centre
+mat-card{
+  position: centre;
+}
+mat-spinner {
+  position: absolute;
+  margin-left: 50%;
+  margin-top:10px;
 }
