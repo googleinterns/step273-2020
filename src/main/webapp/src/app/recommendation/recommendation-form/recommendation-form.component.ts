@@ -1,9 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
-import { HiddenGemService } from '../../hidden-gem.service';
 import { HiddenGem } from '../../models/hidden-gem';
-import { LocationService } from '../../location.service';
-import { Location } from 'src/app/models/location';
 import { AppComponent } from "src/app/app.component"
 
 @Component({
@@ -11,11 +8,9 @@ import { AppComponent } from "src/app/app.component"
   templateUrl: './recommendation-form.component.html',
   styleUrls: ['./recommendation-form.component.css']
 })
-export class RecommendationFormComponent implements OnInit {
+export class RecommendationFormComponent {
 
-  // ToDo change to recommendationGems
   @Output() hiddenGemRecommendation = new EventEmitter<HiddenGem[]>();
-  location = {} as Location;
   hiddenGems = this.appComponent.hiddenGems;
   
   @ViewChild("errorMessage", { static: false })
@@ -28,15 +23,7 @@ export class RecommendationFormComponent implements OnInit {
     type: ["", Validators.required]
   });
 
-  constructor(private readonly formBuilder: FormBuilder, private hiddenGemService: HiddenGemService,
-  private locationService: LocationService, private appComponent: AppComponent) { }
-
-  ngOnInit() {
-    this.locationService.getLocation
-      .subscribe(location => {
-        this.location = location;
-    })
-  }
+  constructor(private readonly formBuilder: FormBuilder, private appComponent: AppComponent) { }
 
   ngDoCheck(){
     if(this.hiddenGems !== this.appComponent.hiddenGems){
