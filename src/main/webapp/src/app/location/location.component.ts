@@ -13,6 +13,7 @@ const GEO_LOCATION_TIMEOUT_MS = 12000;
 export class LocationComponent{
 
   location = {} as Location;
+  isLocationButtonClicked = false;
 
   @ViewChild("errorMessage", { static: false })
   errorMessage!: ElementRef;
@@ -51,6 +52,9 @@ export class LocationComponent{
   }
 
   enableNavigatorLocation(): void {
+    // After the location has been fetched, the page is refreshed and directed to '/home'
+    // So, isLocationButtonClicked does not need to be switch to false.
+    this.isLocationButtonClicked = true;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         this.locationSuccess = this.locationSuccess.bind(this),	
