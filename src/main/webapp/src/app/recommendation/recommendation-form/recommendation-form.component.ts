@@ -11,7 +11,7 @@ import { AppComponent } from "src/app/app.component"
   templateUrl: './recommendation-form.component.html',
   styleUrls: ['./recommendation-form.component.css']
 })
-export class RecommendationFormComponent implements OnInit{
+export class RecommendationFormComponent implements OnInit {
 
   // ToDo change to recommendationGems
   @Output() hiddenGemRecommendation = new EventEmitter<HiddenGem[]>();
