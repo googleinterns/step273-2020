@@ -24,6 +24,7 @@ import { LocationComponent } from './location/location.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { HomepageComponent } from './homepage/homepage.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatIconModule,
     MatCardModule,
     MatGridListModule,
+    MatSelectModule,
     MatProgressSpinnerModule
   ],
   providers: [],
