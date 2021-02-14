@@ -69,15 +69,14 @@ export class RecommendationFormComponent implements OnInit {
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
       }
-      if(recommendationGems[i].types.includes(preferenceForm.controls["type"].value)){
-        console.log("match on type")
+      if(preferenceForm.controls["rating"].value <= recommendationGems[i].rating){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
       }
       if(preferenceForm.controls["type"].value == "any") {
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
-      } else if (preferenceForm.controls["type"].value == recommendationGems[i].types[0] || preferenceForm.controls["type"].value == recommendationGems[i].types[1]){
+      } else if (recommendationGems[i].types.includes(preferenceForm.controls["type"].value)){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
       }
