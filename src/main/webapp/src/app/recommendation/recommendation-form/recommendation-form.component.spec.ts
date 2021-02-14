@@ -120,4 +120,11 @@ describe('RecommendationFormComponent', () => {
     };
     expect(component.location).toEqual(defaultSydneyLocation);
   });
+
+
+  // TODO after demo
+  // Test filter function sorts list in decreasing matchscore
+  // Test result from filter function has length three
+  // Test an empty set of hidden gems triggers the error message
+  // Test recommendationGems is shuffled
 });
