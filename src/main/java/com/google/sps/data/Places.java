@@ -121,7 +121,7 @@ public final class Places {
    * @return Set<PlacesSearchResult>    This returns a set of Places Search Results, which are the
    *                                    hidden gems and their information.
    */
-  public static Set<PlacesSearchResult> getAllHiddenGems(Set<PlacesSearchResult[]> all_places) {
+  public static Set<PlacesSearchResult> getAllHiddenPlaces(Set<PlacesSearchResult[]> all_places) {
     Set<PlacesSearchResult> hiddenGems = new HashSet<>();
     hiddenGems = flatten(all_places)
       .filter(place -> 
@@ -147,27 +147,30 @@ public final class Places {
   }
 
   /**
-   * This function getAllPlaces retrieved from a Places Search API using the API
-   * and the user's location.
-   * @return Set<PlacesSearchResult[]> This returns a set of arrays of Places Search Results.
+   * This function getHiddenGems converts the Set<PlaceSearchResult> of hidden places
+   * to the type Set<HiddenGem> of hidden gems. It finds additional relevant
+   * information on the hidden gems using the Place's API.
+   * @param places           The Set of PlaceSearchResults of hidden gems to be converted.
+   * @return Set<HiddenGem>  This returns a set of Hidden Gems.
    */
-  public static Set<HiddenGem> getHiddenPlaces(Set<PlacesSearchResult> places) {
+  public static Set<HiddenGem> convertToHiddenGems(Set<PlacesSearchResult> places) {
     GeoApiContext context = new GeoApiContext.Builder()
       .apiKey(GetConfigProperties.getApiKey())
       .build();
 
-    return convertToHiddenGem(context, places);
+    return fetchHiddenGemsFromApi(context, places);
   }
 
   /**
    * This converts a set of places into a set of hidden gems. 
    * Iterate over the set of places and find the additional details, then create
    * the hidden gem object by populating all the relevant data in the constructor.
-   * @param places            The set of places search results to be converted.
+   * @param context           The GeoApiContext to be used for the Place Details Request
+   * @param places            The set of PlaceSearch results to be converted.
    * @return Set<HiddenGem>   This returns a set of Hidden Gems with all information populated
    *                          from the place search and place details results. 
    */
-  public static Set<HiddenGem> convertToHiddenGem(GeoApiContext context, Set<PlacesSearchResult> places) {
+  public static Set<HiddenGem> fetchHiddenGemsFromApi(GeoApiContext context, Set<PlacesSearchResult> places) {
 
     Set<HiddenGem> hiddenGems = new HashSet<>();
 
@@ -180,14 +183,26 @@ public final class Places {
             PlaceDetailsRequest.FieldMask.WEBSITE)
         .await();
 
-        hiddenGems.add(new HiddenGem(place.placeId, place.name, place.types,  placeDetails.formattedAddress, place.geometry.location.lat, 
-          place.geometry.location.lng, String.valueOf(placeDetails.priceLevel), place.rating, place.userRatingsTotal, placeDetails.website, place.openingHours, 
-          place.photos[0].photoReference, place.photos[0].htmlAttributions, place.permanentlyClosed, place.businessStatus));
+        hiddenGems.add(new HiddenGem(
+          place.placeId, 
+          place.name, 
+          place.types,  
+          placeDetails.formattedAddress, 
+          place.geometry.location.lat, 
+          place.geometry.location.lng, 
+          String.valueOf(placeDetails.priceLevel), 
+          place.rating, 
+          place.userRatingsTotal, 
+          placeDetails.website, 
+          place.openingHours, 
+          place.photos[0].photoReference, 
+          place.photos[0].htmlAttributions, 
+          place.permanentlyClosed, 
+          place.businessStatus));
 
       } catch (ApiException | InterruptedException | IOException e) {
         e.printStackTrace(); 
       }  
-
     }  
     return hiddenGems;
   }

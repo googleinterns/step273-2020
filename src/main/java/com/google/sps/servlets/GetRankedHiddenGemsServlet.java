@@ -38,7 +38,8 @@ public class GetRankedHiddenGemsServlet extends HttpServlet {
     String lng = request.getParameter("lng");
     LatLng location = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
 
-    Set<HiddenGem> hiddenGems = Places.getHiddenPlaces(Places.getAllHiddenGems(Places.getAllPlaces(location)));
+    Set<HiddenGem> hiddenGems = Places.convertToHiddenGems(Places.getAllHiddenPlaces(Places.getAllPlaces(location)));
+
     Gson gson = new Gson();
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 
