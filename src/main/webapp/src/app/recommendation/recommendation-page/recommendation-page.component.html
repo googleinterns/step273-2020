@@ -1,2 +1,6 @@
+<h3 id="change-location">
+  Want to check get recommendations of hidden gems from a different location? Click here:
+  <span><a href=""><button mat-fab color="primary"><mat-icon>location_on</mat-icon></button></a></span>
+</h3>
 <app-recommendation-form (hiddenGemRecommendation)="onFormSubmit($event)" ></app-recommendation-form>
 <app-recommendation-list *ngIf="formSubmitted" [hiddenGems]="hiddenGems"></app-recommendation-list>
