@@ -13,9 +13,9 @@ export class RankingItemComponent implements OnInit{
   type!: string;
 
   ngOnInit() {
-    if (this.hiddenGem.photos != null) {
+    if (this.hiddenGem.photoReference != null) {
       this.photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="
-        + this.hiddenGem.photos[0].photoReference
+        + this.hiddenGem.photoReference
         + "&key=AIzaSyCBb8QQBQal9jDNl3ZG6f3bS6ROX2MtYIM";
     }
     else {

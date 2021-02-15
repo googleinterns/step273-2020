@@ -39,6 +39,10 @@ import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
 import com.google.maps.model.PlacesSearchResult;
+import com.google.maps.model.PlaceDetails;
+import com.google.maps.model.PriceLevel;
+import com.google.maps.PlaceDetailsRequest;
+import com.google.maps.PlaceDetailsRequest.FieldMask;
 import com.google.maps.model.RankBy;
 import com.google.sps.GetConfigProperties;
 
@@ -125,7 +129,7 @@ public final class Places {
    * @return Set<PlacesSearchResult>    This returns a set of Places Search Results, which are the
    *                                    hidden gems and their information.
    */
-  public static Set<PlacesSearchResult> getAllHiddenGems(Set<PlacesSearchResult[]> all_places) {
+  public static Set<PlacesSearchResult> getAllHiddenPlaces(Set<PlacesSearchResult[]> all_places) {
     Set<PlacesSearchResult> hiddenGems = new HashSet<>();
     hiddenGems = flatten(all_places)
       .filter(place -> 
@@ -158,16 +162,77 @@ public final class Places {
   }
 
   /**
-   * This function returns the hidden gems ranked by rating (descending order)
-   * @param hiddenGems                      This takes as parameter the set of hiddenGems to be sorted. 
-   * @return List<PlacesSearchResult>       This returns a List of the hidden gems ranked by rating.
+   * This function getHiddenGems converts the Set<PlaceSearchResult> of hidden places
+   * to the type Set<HiddenGem> of hidden gems. It finds additional relevant
+   * information on the hidden gems using the Place's API.
+   * @param places           The Set of PlaceSearchResults of hidden gems to be converted.
+   * @return Set<HiddenGem>  This returns a set of Hidden Gems.
    */
-  public static List<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
+  public static Set<HiddenGem> convertToHiddenGems(Set<PlacesSearchResult> places) {
+    GeoApiContext context = new GeoApiContext.Builder()
+      .apiKey(GetConfigProperties.getApiKey())
+      .build();
+
+    return fetchHiddenGemsFromApi(context, places);
+  }
+
+  /**
+   * This converts a set of places into a set of hidden gems. 
+   * Iterate over the set of places and find the additional details, then create
+   * the hidden gem object by populating all the relevant data in the constructor.
+   * @param context           The GeoApiContext to be used for the Place Details Request
+   * @param places            The set of PlaceSearch results to be converted.
+   * @return Set<HiddenGem>   This returns a set of Hidden Gems with all information populated
+   *                          from the place search and place details results. 
+   */
+  public static Set<HiddenGem> fetchHiddenGemsFromApi(GeoApiContext context, Set<PlacesSearchResult> places) {
+
+    Set<HiddenGem> hiddenGems = new HashSet<>();
+
+    for(PlacesSearchResult place : places){
+      try {
+        PlaceDetails placeDetails = PlacesApi.placeDetails(context, place.placeId)
+        .fields(
+            PlaceDetailsRequest.FieldMask.FORMATTED_ADDRESS,
+            PlaceDetailsRequest.FieldMask.PRICE_LEVEL,
+            PlaceDetailsRequest.FieldMask.WEBSITE)
+        .await();
+
+        hiddenGems.add(new HiddenGem(
+          place.placeId, 
+          place.name, 
+          place.types,  
+          placeDetails.formattedAddress, 
+          place.geometry.location.lat, 
+          place.geometry.location.lng, 
+          String.valueOf(placeDetails.priceLevel), 
+          place.rating, 
+          place.userRatingsTotal, 
+          placeDetails.website, 
+          place.openingHours, 
+          place.photos[0].photoReference, 
+          place.photos[0].htmlAttributions, 
+          place.permanentlyClosed, 
+          place.businessStatus));
+
+      } catch (ApiException | InterruptedException | IOException e) {
+        e.printStackTrace(); 
+      }  
+    }  
+    return hiddenGems;
+  }
+
+  /**
+   * This function returns the hidden gems ranked by rating (descending order)
+   * @param hiddenGems             This takes as parameter the set of hiddenGems to be sorted. 
+   * @return List<HiddenGem>       This returns an List of the hidden gems ranked by rating.
+   */
+  public static List<HiddenGem> getRankedHiddenGems(Set<HiddenGem> hiddenGems) {
     // List of ranked hidden gems (switch to List to keep the ordering)
-    List<PlacesSearchResult> sortedHiddenGems = removeDuplicates(hiddenGems);
-    Collections.sort(sortedHiddenGems, new Comparator<PlacesSearchResult>() {
+    List<HiddenGem> sortedHiddenGems = removeDuplicates(hiddenGems);
+    Collections.sort(sortedHiddenGems, new Comparator<HiddenGem>() {
       @Override
-      public int compare(PlacesSearchResult hiddenGem_1, PlacesSearchResult hiddenGem_2) {
+      public int compare(HiddenGem hiddenGem_1, HiddenGem hiddenGem_2) {
         return Float.compare(hiddenGem_2.rating, hiddenGem_1.rating);
       }
     });
@@ -177,13 +242,13 @@ public final class Places {
   /**
    * This function returns the list of hidden gems without the duplicates.
    * @param hiddenGems                 This takes as parameter the set of hidden gems to be filtered.
-   * @return List<PlacesSearchResult>  This return a list of hidden gems without the duplicates.
+   * @return List<HiddenGem>  This return a list of hidden gems without the duplicates.
    */
-  public static List<PlacesSearchResult> removeDuplicates(Set<PlacesSearchResult> hiddenGems) {
-    Map<String, PlacesSearchResult> distinctHiddenGemsMap = 
+  public static List<HiddenGem> removeDuplicates(Set<HiddenGem> hiddenGems) {
+    Map<String, HiddenGem> distinctHiddenGemsMap = 
     hiddenGems.stream().collect(Collectors.toMap(hiddenGem -> hiddenGem.placeId, hiddenGem -> hiddenGem, (oldValue, newValue) -> newValue));
 
-    List<PlacesSearchResult> distinctHiddenGems = new ArrayList<PlacesSearchResult>(distinctHiddenGemsMap.values());
+    List<HiddenGem> distinctHiddenGems = new ArrayList<HiddenGem>(distinctHiddenGemsMap.values());
     return distinctHiddenGems;
   }
 }

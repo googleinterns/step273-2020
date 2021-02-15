@@ -20,19 +20,19 @@ import com.google.maps.model.OpeningHours;
 /** Hidden Gems are restaurants or cafes in Australia which have 10-50 reviews and a rating of at least 3.5/5. */
 public final class HiddenGem {
 
-  private final String placeId;
+  public final String placeId;
   public final String name;
   public final String[] types;
   public final String address;
   public final double lat;
   public final double lng;
-  public final String price_level;
+  public final String priceLevel;
   public final float rating;
   public final int userRatingsTotal;
   public final URL website;
   public final OpeningHours openingHours;
   public final String photoReference;
-  public final String htmlAttributions;
+  public final String[] htmlAttributions;
   public final boolean permanentlyClosed;
   public final String businessStatus;
 
@@ -43,7 +43,7 @@ public final class HiddenGem {
    *  @param address           the address of the hidden gem.
    *  @param lat               the latitude of the hidden gem's location.
    *  @param lng               the longitude of the hidden gem's location.
-   *  @param price_level       the price range of the hidden gem. From 0 (free) to 4 (very expensive).
+   *  @param priceLevel       the price range of the hidden gem. From 0 (free) to 4 (very expensive).
    *  @param rating            the google star rating of the hidden gem. From 1 (poor rating) to 5 (excellent rating).
    *  @param userRatingsTotal  the total number of ratings provided by user's.
    *  @param website           the website of the hidden gem.
@@ -54,8 +54,8 @@ public final class HiddenGem {
    *  @param businessStatus    the current status of the hidden gem   
   */
   public HiddenGem(String placeId, String name, String[] types, String address, double lat, 
-    double lng, String price_level, float rating, int userRatingsTotal, URL website, OpeningHours openingHours, 
-    String photoReference, String htmlAttributions, boolean permanentlyClosed, String businessStatus) {
+    double lng, String priceLevel, float rating, int userRatingsTotal, URL website, OpeningHours openingHours, 
+    String photoReference, String[] htmlAttributions, boolean permanentlyClosed, String businessStatus) {
 
       this.placeId = placeId;
       this.name = name;
@@ -63,7 +63,7 @@ public final class HiddenGem {
       this.address = address;
       this.lat = lat;
       this.lng = lng;
-      this.price_level = price_level;
+      this.priceLevel = priceLevel;
       this.rating = rating;
       this.userRatingsTotal = userRatingsTotal;
       this.website = website;
@@ -74,3 +74,4 @@ public final class HiddenGem {
       this.businessStatus = businessStatus;    
   }
 }
+
