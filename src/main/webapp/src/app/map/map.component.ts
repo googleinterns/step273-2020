@@ -67,8 +67,8 @@ export class MapComponent {
     // For loop to go through all gems and retrieve information about them.
     for (let i = 0; i < this.hiddenGems.length; i++) {
       let currentHiddenGem = this.hiddenGems[i],
-      latLng = new google.maps.LatLng(currentHiddenGem.geometry.location.lat, 
-        currentHiddenGem.geometry.location.lng); 
+      latLng = new google.maps.LatLng(currentHiddenGem.lat, 
+        currentHiddenGem.lng); 
       
       // Creating a marker and putting it on the map.
       let marker = new google.maps.Marker({
@@ -78,7 +78,7 @@ export class MapComponent {
         icon: diamondIcon
       });
       
-      let contentString = currentHiddenGem.name + " " + currentHiddenGem.vicinity +
+      let contentString = currentHiddenGem.name + " " + currentHiddenGem.address +
           ", Star rating: " + currentHiddenGem.rating;
 
       let infoWindow = new google.maps.InfoWindow();

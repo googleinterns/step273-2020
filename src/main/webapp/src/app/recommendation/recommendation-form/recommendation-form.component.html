@@ -8,56 +8,37 @@
   </p>
 
   <div  class="price-group">
-    <h3>Price Range</h3>
-    <label for="low">
-      💲
-      <input type="radio" formControlName="price" value="low" >
-    </label>
-    <label for="medium">
-      💲💲
-      <input type="radio" formControlName="price" value="medium" >
-    </label>
-    <label for="high">
-      💲💲💲
-      <input type="radio" formControlName="price" value="high" >
-    </label>
-    <label for="extreme">
-      💲💲💲💲
-      <input type="radio" formControlName="price"value="extreme" >
-    </label>
+    <h3>
+      <label>Price Range</label>
+    </h3>
+    <select formControlName="price">
+      <option value="any">Any</option>
+      <option value="1">💲</option>
+      <option value="2">💲💲</option>
+      <option value="3">💲💲💲</option>
+      <option value="4">💲💲💲💲</option>
+    </select>
   </div>
 
   <div class="rating-group">
-    <h3>Minimum star rating preferred</h3>
-    <label for="1">
-      ⭐️
-      <input type="radio" formControlName="rating" value="1">
-    </label>
-    <label for="2">
-      ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="2">
-    </label>
-    <label for="3">
-      ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="3" >
-    </label>
-    <label for="4">
-      ⭐️ ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="4" >
-    </label>
-    <label for="5">
-      ⭐️ ⭐️ ⭐️ ⭐️ ⭐️
-      <input type="radio" formControlName="rating" value="5" >
-    </label>
+    <h3>
+      <label>Minimum star rating preferred</label>
+    </h3>
+    <select formControlName="rating">
+      <option value=3>★★★☆☆</option>
+      <option value=4>★★★★☆</option>
+      <option value=5>★★★★★</option>
+    </select>
   </div>
-
+  
   <div class="restaurant-type-group">
     <h3>
       <label>Restaurant Type</label>
     </h3>
     <select formControlName="type">
-      <option value="Restaurant">Restaurant</option>
-      <option value="Cafe">Cafe</option>
+      <option value="restaurant">Restaurant</option>
+      <option value="cafe">Cafe</option>
+      <option value="any">Any</option>
     </select>
   </div>
 
@@ -66,3 +47,5 @@
   <button type="submit" id='submit' [disabled]="preferenceForm.invalid">Find my hidden gems</button>
 
 </form>
+
+<p id="formErrorMessage" #errorMessage> </p>

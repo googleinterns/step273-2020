@@ -33,14 +33,13 @@ import com.google.sps.data.HiddenGem;
 public class GetRankedHiddenGemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-
 
     String lat = request.getParameter("lat");
     String lng = request.getParameter("lng");
     LatLng location = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
 
     Set<HiddenGem> hiddenGems = Places.convertToHiddenGems(Places.getAllHiddenPlaces(Places.getAllPlaces(location)));
+
     Gson gson = new Gson();
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 
