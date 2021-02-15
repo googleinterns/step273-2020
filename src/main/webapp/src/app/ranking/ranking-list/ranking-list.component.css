@@ -4,9 +4,15 @@
 }
 
 mat-spinner {
-  position: absolute;
-  margin-left: 50%;
+  display: grid;
+  justify-content: center;
   margin-top:10px;
+}
+
+#rankingList-heading {
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: bold;
 }
 
 .filter-button {
