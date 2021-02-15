@@ -1,5 +1,4 @@
 import { OpeningHours } from './openingHours';
-//import { Url } from 'url';
 
 // This interface contains the details of a hidden gem.
 export interface HiddenGem {

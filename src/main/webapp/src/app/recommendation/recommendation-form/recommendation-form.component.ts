@@ -45,12 +45,26 @@ export class RecommendationFormComponent {
     this.hiddenGemRecommendation.emit(result);
   }
 
+  /**
+   * A function that gives each hidden gem a match score based on how many user preferences
+   * it matches. Then the function is randomly shuffled and sorted to get the 3 gems
+   * with the highest match score to display to the user.
+   * @param hiddenGems      the list of hidden gems to filter based on user preferences
+   * @param preferenceForm  the users preference data
+   * @return HiddenGem[]    the top 3 recommendation  
+   */
   filterGems(hiddenGems: HiddenGem[], preferenceForm: FormGroup): HiddenGem[] {
 
-    let recommendationGems: HiddenGem[] = hiddenGems.slice(0);
+    let recommendationGems: HiddenGem[] = Array.from(hiddenGems);
 
     for (let i = 0; i < recommendationGems.length; i++) {
       let gem = recommendationGems[i];
+
+      // Display a more user friendly message.
+      if(gem.priceLevel == "null") {
+        gem.priceLevel = "Unavailable"
+      }
+  
       recommendationGems[i].matchScore = 0;
       if(preferenceForm.controls["price"].value == recommendationGems[i].priceLevel){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
@@ -79,8 +93,13 @@ export class RecommendationFormComponent {
     return recommendationGems.slice(0,3);
   }
 
-  // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-  /* Randomize list in-place using Durstenfeld shuffle algorithm */
+  /**
+   * A function to random the list of hidden gems using an in-place shuffle.
+   * Durstenfeld shuffle algorithm. 
+   * https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+   * @param hiddenGems      the hidden gems list ranked by descending rating.
+   * @return  HiddenGem[]   returns the list in a random order
+   */
   shuffleGems(hiddenGems: HiddenGem[]): HiddenGem[] {
 
     for (let i = hiddenGems.length - 1; i > 0; i--) {
