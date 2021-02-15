@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -163,14 +164,14 @@ public final class Places {
    */
   public static List<PlacesSearchResult> getRankedHiddenGems(Set<PlacesSearchResult> hiddenGems) {
     // List of ranked hidden gems (switch to List to keep the ordering)
-    List<PlacesSearchResult> sortedHiddenGems = new ArrayList<PlacesSearchResult>(hiddenGems);
+    List<PlacesSearchResult> sortedHiddenGems = removeDuplicates(hiddenGems);
     Collections.sort(sortedHiddenGems, new Comparator<PlacesSearchResult>() {
       @Override
       public int compare(PlacesSearchResult hiddenGem_1, PlacesSearchResult hiddenGem_2) {
         return Float.compare(hiddenGem_2.rating, hiddenGem_1.rating);
       }
     });
-    return removeDuplicates(sortedHiddenGems);
+    return sortedHiddenGems;
   }
 
   /**
@@ -178,23 +179,11 @@ public final class Places {
    * @param hiddenGems                 This takes as parameter the set of hidden gems to be filtered.
    * @return List<PlacesSearchResult>  This return a list of hidden gems without the duplicates.
    */
-  public static List<PlacesSearchResult> removeDuplicates(List<PlacesSearchResult> hiddenGems) {
-    List<PlacesSearchResult> distinctHiddenGems = hiddenGems.stream() 
-      .filter(distinctByKey(hiddenGem -> hiddenGem.placeId))
-      .collect(Collectors.toList());
-      
+  public static List<PlacesSearchResult> removeDuplicates(Set<PlacesSearchResult> hiddenGems) {
+    Map<String, PlacesSearchResult> distinctHiddenGemsMap = 
+    hiddenGems.stream().collect(Collectors.toMap(hiddenGem -> hiddenGem.placeId, hiddenGem -> hiddenGem, (oldValue, newValue) -> newValue));
+
+    List<PlacesSearchResult> distinctHiddenGems = new ArrayList<PlacesSearchResult>(distinctHiddenGemsMap.values());
     return distinctHiddenGems;
-  }
-  
-  /**
-   * Utility function to filter a list by class field.
-   * Resource used: https://howtodoinjava.com/java8/java-stream-distinct-examples/ 
-   * @param <T>             This is a generic method.
-   * @param keyExtractor    This is the class field with with we want to filter the list.
-   * @return Predicate<T>   This returns a boolean value (generic functional interface).
-   */
-  public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
-    Map<Object, Boolean> map = new ConcurrentHashMap<>();
-    return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
   }
 }
