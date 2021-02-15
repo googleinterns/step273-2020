@@ -5,12 +5,10 @@
 
 .column.side {
   width: 17.5%;
-  background-color: #f48fb1;
   min-height: 200px;
   margin-top: -40px;
 }
 
 .column.middle {
   width: 65%;
-  background-color: white;
 }
