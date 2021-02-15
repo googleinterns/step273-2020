@@ -59,21 +59,28 @@ export class RecommendationFormComponent {
 
     for (let i = 0; i < recommendationGems.length; i++) {
       let gem = recommendationGems[i];
+      recommendationGems[i].matchScore = 0;
 
       // Display a more user friendly message.
       if(gem.priceLevel == "null") {
         gem.priceLevel = "Unavailable"
       }
-  
-      recommendationGems[i].matchScore = 0;
+
+      // A match is same price level as user. 
       if(preferenceForm.controls["price"].value == recommendationGems[i].priceLevel){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
-
+      } else if (preferenceForm.controls["price"].value == "any"){
+        recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
       }
+
+      // A match if hidden gem is greater than or equal to user preference rating
       if(preferenceForm.controls["rating"].value <= recommendationGems[i].rating){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
       }
+
+      // A match if user preference for type [any, restaurant, cafe] is included
+      // in hidden gem type.
       if(preferenceForm.controls["type"].value == "any") {
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
 
