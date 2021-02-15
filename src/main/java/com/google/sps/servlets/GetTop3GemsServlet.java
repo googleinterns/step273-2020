@@ -26,19 +26,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.sps.data.HiddenGem;
 
 /** Servlet that return the hidden gems dummy data. */
 @WebServlet("/recommendation")
 public class GetTop3GemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
     //TODO: For now, a hardcoded location is used. Later on, this servlet will probably be deleted as the filtering
     // based on the user's preferences will probably be done in the frontend. 
     LatLng hardcodedLocation = new LatLng(-33.8688, 151.2093);
-    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces(hardcodedLocation));
+    Set<HiddenGem> hiddenGems = Places.convertToHiddenGems(Places.getAllHiddenPlaces(Places.getAllPlaces(hardcodedLocation)));
     Gson gson = new Gson();
-
+    
     // TODO: replace rankedHiddenGems with the recommendations from user's preference 
+    // TODO: remove this servlet.
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems).subList(0, 3));
 
     // Send the JSON back as the response

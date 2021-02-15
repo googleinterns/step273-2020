@@ -32,7 +32,7 @@ public final class HiddenGem {
   public final URL website;
   public final OpeningHours openingHours;
   public final String photoReference;
-  public final String htmlAttributions;
+  public final String[] htmlAttributions;
   public final boolean permanentlyClosed;
   public final String businessStatus;
 
@@ -55,7 +55,7 @@ public final class HiddenGem {
   */
   public HiddenGem(String placeId, String name, String[] types, String address, double lat, 
     double lng, String price_level, float rating, int userRatingsTotal, URL website, OpeningHours openingHours, 
-    String photoReference, String htmlAttributions, boolean permanentlyClosed, String businessStatus) {
+    String photoReference, String[] htmlAttributions, boolean permanentlyClosed, String businessStatus) {
 
       this.placeId = placeId;
       this.name = name;
@@ -74,3 +74,4 @@ public final class HiddenGem {
       this.businessStatus = businessStatus;    
   }
 }
+
