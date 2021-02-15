@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
 import { AppComponent } from 'src/app/app.component';
@@ -12,8 +12,7 @@ const ON_MARKER_MAP_ZOOM = 17;
   styleUrls: ['./map.component.css']
 })
 
-export class MapComponent {
-  
+export class MapComponent implements AfterViewInit {
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
   map!: google.maps.Map;
@@ -33,7 +32,11 @@ export class MapComponent {
       this.mapInitializer();
     }
   }
-  
+
+  ngAfterViewInit() {
+    this.mapInitializer();
+  }
+
   mapInitializer(): void {
     // Coordinates fetched from the user's location to set the center of the map.
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
@@ -41,9 +44,10 @@ export class MapComponent {
       center: centerOfMapCoordinates,
       zoom: DEFAULT_MAP_ZOOM
     };
+
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
     var androidImg = '../../assets/images/android.png';
-   
+
     let userMarker = new google.maps.Marker({
       position: centerOfMapCoordinates,
       map: this.map,
@@ -58,38 +62,41 @@ export class MapComponent {
       });
       infoWindow.open(this.map, userMarker);
     });
+
     this.loadMarkers();
+
   }
 
   loadMarkers(): void {
     var diamondIcon = '../../assets/images/gem.png';
-    
-    // For loop to go through all gems and retrieve information about them.
-    for (let i = 0; i < this.hiddenGems.length; i++) {
-      let currentHiddenGem = this.hiddenGems[i],
-      latLng = new google.maps.LatLng(currentHiddenGem.lat, 
-        currentHiddenGem.lng); 
-      
-      // Creating a marker and putting it on the map.
-      let marker = new google.maps.Marker({
-        position: latLng,
-        map: this.map,
-        title: currentHiddenGem.name,
-        icon: diamondIcon
-      });
-      
-      let contentString = currentHiddenGem.name + " " + currentHiddenGem.address +
-          ", Star rating: " + currentHiddenGem.rating;
+    if (this.hiddenGems) {
+      // For loop to go through all gems and retrieve information about them.
+      for (let i = 0; i < this.hiddenGems.length; i++) {
+        let currentHiddenGem = this.hiddenGems[i],
+        latLng = new google.maps.LatLng(currentHiddenGem.lat,
+          currentHiddenGem.lng);
 
-      let infoWindow = new google.maps.InfoWindow();
-      
-      marker.addListener("click", () => {
-        this.map.setZoom(ON_MARKER_MAP_ZOOM);
-        this.map.setCenter(latLng);
-        infoWindow.setContent(contentString);
-        infoWindow.setPosition(latLng);
-        infoWindow.open(this.map, marker);
-      });
+        // Creating a marker and putting it on the map.
+        let marker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          title: currentHiddenGem.name,
+          icon: diamondIcon
+        });
+
+        let contentString = currentHiddenGem.name + " " + currentHiddenGem.address +
+            ", Star rating: " + currentHiddenGem.rating;
+
+        let infoWindow = new google.maps.InfoWindow();
+
+        marker.addListener("click", () => {
+          this.map.setZoom(ON_MARKER_MAP_ZOOM);
+          this.map.setCenter(latLng);
+          infoWindow.setContent(contentString);
+          infoWindow.setPosition(latLng);
+          infoWindow.open(this.map, marker);
+        });
+      }
     }
   }
 }
