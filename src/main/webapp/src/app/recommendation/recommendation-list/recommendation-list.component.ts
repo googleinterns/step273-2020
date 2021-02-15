@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HiddenGemService } from '../hidden-gem.service';
-import { HiddenGem } from '../hidden-gem';
+import { HiddenGem } from '../../models/hidden-gem';
 
 @Component({
   selector: 'app-recommendation-list',

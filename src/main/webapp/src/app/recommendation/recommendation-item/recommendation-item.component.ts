@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HiddenGem } from 'src/app/models/hidden-gem';
+import { HiddenGem } from '../../models/hidden-gem';
+
 
 @Component({
-  selector: 'app-ranking-item',
-  templateUrl: './ranking-item.component.html',
-  styleUrls: ['./ranking-item.component.css']
+  selector: 'app-recommendation-item',
+  templateUrl: './recommendation-item.component.html',
+  styleUrls: ['./recommendation-item.component.css']
 })
-
-export class RankingItemComponent implements OnInit{
+export class RecommendationItemComponent implements OnInit{
   @Input() hiddenGem = {} as HiddenGem;
   photoUrl!: string;
   type!: string;

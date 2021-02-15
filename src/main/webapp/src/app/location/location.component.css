@@ -1,0 +1,23 @@
+mat-card{
+  width: 350px;
+  height: 60px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  margin-top:10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f1f1f1;
+}
+#geolocationButton{
+  width:200px;
+  height: 50px;
+}
+#location-container{
+  text-align: center;
+  width: 100%;
+}
+mat-spinner {
+  position: absolute;
+  margin-left: 50%;
+  margin-top:10px;
+}

@@ -1,8 +1,10 @@
 import { HiddenGemService } from "./hidden-gem.service";
-import { HiddenGem } from './hidden-gem';
+import { HiddenGem } from './models/hidden-gem';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { fakeAsync } from '@angular/core/testing';
+
+const LOCATION = { lat: -33.8688, lng: 151.2093 };
 
 describe('HiddenGemService', () => {
   let httpClientSpy: { get: jasmine.Spy };
@@ -17,28 +19,60 @@ describe('HiddenGemService', () => {
     const expectedHiddenGems: HiddenGem[] =
       [
         {
-          id: 1,
+          geometry: {
+            location: {lat: -33.8655823, lng: 151.2078192},
+            viewport:{
+              northeast: {lat: -33.8655823, lng: 151.2078192},
+              southwest: {lat: -33.8655823, lng: 151.2078192}
+            }
+          },
           name: 'Fratelli Fresh',
-          business_type: 'restaurant',
-          address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
-          price_level: 2,
+          icon: '',
+          placeId: '1',
           rating: 3.6,
-          photo: 'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg'
+          types: ['restaurant'],
+          openingHours: {openNow: true},
+          photos: [{
+            photoReference: "photoReference",
+            height: 0,
+            width: 0,
+            htmlAttributions: ["htmlAttributions"]
+          }],
+          vicinity: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+          permanentlyClosed: false,
+          userRatingsTotal: 30,
+          businessStatus: ''
         },
         {
-          id: 2,
+          geometry: {
+            location: {lat: -33.8655823, lng: 151.2078192},
+            viewport:{
+              northeast: {lat: -33.8655823, lng: 151.2078192},
+              southwest: {lat: -33.8655823, lng: 151.2078192}
+            }
+          },
           name: 'Cafe Sydney',
-          business_type: 'cafe',
-          address: '31 Alfred St, Sydney NSW 2000',
-          price_level: 4,
+          icon: '',
+          placeId: '2',
           rating: 4.5,
-          photo: 'https://cdn.pixabay.com/photo/2015/09/02/12/43/meal-918639_960_720.jpg'
+          types: ['cafe'],
+          openingHours: {openNow: true},
+          photos: [{
+            photoReference: "photoReference",
+            height: 0,
+            width: 0,
+            htmlAttributions: ["htmlAttributions"]
+          }],
+          vicinity: '31 Alfred St, Sydney NSW 2000',
+          permanentlyClosed: false,
+          userRatingsTotal: 30,
+          businessStatus: ''
         }
       ];
 
     httpClientSpy.get.and.returnValue(of(expectedHiddenGems));
 
-    hiddenGemService.getAllHiddenGems().subscribe(
+    hiddenGemService.getRankedHiddenGems(LOCATION).subscribe(
       hiddenGems => expect(hiddenGems).toEqual(expectedHiddenGems, 'expected hidden gems'),
       fail
     );
@@ -53,7 +87,7 @@ describe('HiddenGemService', () => {
 
     httpClientSpy.get.and.returnValue(of(errorResponse));
 
-    hiddenGemService.getAllHiddenGems().subscribe(
+    hiddenGemService.getRankedHiddenGems(LOCATION).subscribe(
       {
         error: error => {
           expect(error).toEqual({ error: 'A data error occured, please try again.' });
@@ -64,7 +98,7 @@ describe('HiddenGemService', () => {
 
   it('should return an empty list if there are no hidden gems (HttpClient called once)', () => {
     httpClientSpy.get.and.returnValue(of([]));
-    hiddenGemService.getAllHiddenGems().subscribe(
+    hiddenGemService.getRankedHiddenGems(LOCATION).subscribe(
       hiddenGems => expect(hiddenGems).toEqual([], 'expected hidden gems'),
       fail
     );
@@ -76,13 +110,29 @@ describe('HiddenGemService', () => {
     const expectedTopGems: HiddenGem[] =
       [
         {
-          id: 1,
+          geometry: {
+            location: {lat: -33.8655823, lng: 151.2078192},
+            viewport:{
+              northeast: {lat: -33.8655823, lng: 151.2078192},
+              southwest: {lat: -33.8655823, lng: 151.2078192}
+            }
+          },
           name: 'The best restaurant',
-          business_type: 'Restaurant',
-          address: 'An address located within Sydney, Sydney NSW 2000',
-          price_level: 3,
-          rating: 3,
-          photo: 'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_960_720.jpg'
+          icon: '',
+          placeId: '3',
+          rating: 4.5,
+          types: ['restaurant'],
+          openingHours: {openNow: true},
+          photos: [{
+            photoReference: "photoReference",
+            height: 0,
+            width: 0,
+            htmlAttributions: ["htmlAttributions"]
+          }],
+          vicinity: 'An address located within Sydney, Sydney NSW 2000',
+          permanentlyClosed: false,
+          userRatingsTotal: 30,
+          businessStatus: ''
         },
       ];
 

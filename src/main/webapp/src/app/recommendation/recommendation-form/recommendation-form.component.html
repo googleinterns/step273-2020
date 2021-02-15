@@ -3,9 +3,10 @@
 
 <form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()" #formID="ngForm">
   <h2>Your Restaurant Preferences</h2>
-  <p>Please select your restaurant preferences in the form below. If you have no preference for a 
-    field, please feel free to leave it blank</p>
-  
+  <p>
+    Please select your restaurant preferences in the form below. *All preferences are required.
+  </p>
+
   <div  class="price-group">
     <h3>Price Range</h3>
     <label for="low">
@@ -27,7 +28,7 @@
   </div>
 
   <div class="rating-group">
-    <h3>Minimum star rating preferred</h3> 
+    <h3>Minimum star rating preferred</h3>
     <label for="1">
       ⭐️
       <input type="radio" formControlName="rating" value="1">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HiddenGemService } from '../../hidden-gem.service';
-import { HiddenGem } from 'src/app/hidden-gem';
+import { AppComponent } from 'src/app/app.component';
+import { LocationService } from '../../location.service';
+import { Location } from 'src/app/models/location';
+
 
 @Component({
   selector: 'app-ranking-list',
@@ -8,15 +10,22 @@ import { HiddenGem } from 'src/app/hidden-gem';
   styleUrls: ['./ranking-list.component.css']
 })
 export class RankingListComponent implements OnInit {
-  hiddenGems! : HiddenGem[];
 
-  constructor(private hiddenGemService: HiddenGemService) { }
+  hiddenGems = this.appComponent.hiddenGems;
+  location = {} as Location;
+
+  constructor(private locationService: LocationService, private appComponent: AppComponent) { }
 
   ngOnInit() {
-    this.hiddenGemService.getAllHiddenGems()
-      .subscribe(hiddenGems => {
-        this.hiddenGems = hiddenGems;
-    })
+    this.locationService.getLocation
+      .subscribe(location => {
+        this.location = location;
+      })
   }
 
+  ngDoCheck() {
+    if (this.hiddenGems !== this.appComponent.hiddenGems) {
+      this.hiddenGems = this.appComponent.hiddenGems;
+    }
+  }
 }

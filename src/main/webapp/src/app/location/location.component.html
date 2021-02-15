@@ -1,0 +1,21 @@
+<div id="location-container">
+    <h1>Welcome to Hidden Gems!</h1>
+    <h4>To use Hidden Gems, please allow location services. If not possible select a default location [Sydney, Adelaide].</h4>
+    
+    <mat-card>
+      <button mat-raised-button color="primary" id="geolocationButton" (click)="enableNavigatorLocation()" type="button"><i></i>Find My Location</button>
+    </mat-card>
+
+    <mat-card>
+      <mat-form-field appearance="fill">
+        <mat-label>Select your city</mat-label>
+        <mat-select disableRipple>
+          <mat-option id="sydneyButton" (click)="getSydneyLocation()" value="Sydney"><i></i>Sydney</mat-option>
+          <mat-option id="adelaideButton" (click)="getAdelaideLocation()" value="Adelaide"><i></i>Adelaide</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card>
+   
+    <p id="errorMessage" #errorMessage> </p>
+    <mat-spinner *ngIf="isLocationButtonClicked"></mat-spinner>
+</div>

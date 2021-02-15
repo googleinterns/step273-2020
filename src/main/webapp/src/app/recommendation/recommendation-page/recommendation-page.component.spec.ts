@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RecommendationComponent } from './recommendation.component';
-import { HiddenGem } from '../hidden-gem';
+import { RecommendationPageComponent } from './recommendation-page.component';
+import { HiddenGem } from 'src/app/models/hidden-gem';
 
-describe('RecommendationComponent', () => {
-  let component: RecommendationComponent;
-  let fixture: ComponentFixture<RecommendationComponent>;
+describe('RecommendationPageComponent', () => {
+  let component: RecommendationPageComponent;
+  let fixture: ComponentFixture<RecommendationPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecommendationComponent ]
+      declarations: [ RecommendationPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RecommendationComponent);
+    fixture = TestBed.createComponent(RecommendationPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -31,13 +31,13 @@ describe('RecommendationComponent', () => {
     expect(component.onFormSubmit).not.toHaveBeenCalled();
     expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeDefined;
     expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeNull;
-    
+
   });
 
   it('should display recommendation form and list after form submission', () => {
     expect(fixture.debugElement.query(By.css('app-recommendation-form'))).toBeTruthy;
     expect(fixture.debugElement.query(By.css('app-recommendation-list'))).toBeFalsy;
-    
+
     const hiddenGems: HiddenGem[] = [];
     component.onFormSubmit(hiddenGems);
     fixture.detectChanges();

@@ -3,6 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LocationService } from '../../location.service';
+import { Location } from 'src/app/models/location';
 
 import { RecommendationFormComponent } from './recommendation-form.component';
 
@@ -15,8 +18,10 @@ describe('RecommendationFormComponent', () => {
       declarations: [ RecommendationFormComponent ],
       imports: [
         ReactiveFormsModule,
-        HttpClientTestingModule
-      ]
+        HttpClientTestingModule,
+        RouterTestingModule
+      ],
+      providers: [LocationService]
     })
     .compileComponents();
   });
@@ -78,7 +83,7 @@ describe('RecommendationFormComponent', () => {
     expect(component.preferenceForm.controls['price'].value).toEqual('');
     expect(component.preferenceForm.controls['rating'].value).toEqual('');
     expect(component.preferenceForm.controls['type'].value).toEqual('');
-    
+
     expect(component.preferenceForm.status).toEqual("INVALID");
 
     let submitBtn = fixture.debugElement.query(By.css('#submit')).nativeElement;
@@ -107,4 +112,12 @@ describe('RecommendationFormComponent', () => {
 
   });
 
+  it('should store the initial location', () => {
+
+    const defaultSydneyLocation: Location = {
+      lat: -33.8688,
+      lng: 151.2093,
+    };
+    expect(component.location).toEqual(defaultSydneyLocation);
+  });
 });
