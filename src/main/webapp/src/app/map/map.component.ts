@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef} from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
 import { AppComponent } from 'src/app/app.component';
@@ -12,8 +12,7 @@ const ON_MARKER_MAP_ZOOM = 17;
   styleUrls: ['./map.component.css']
 })
 
-export class MapComponent {
-
+export class MapComponent implements AfterViewInit {
   @ViewChild("mapContainer", { static: false })
   mapContainer!: ElementRef;
   map!: google.maps.Map;
@@ -34,6 +33,10 @@ export class MapComponent {
     }
   }
 
+  ngAfterViewInit() {
+    this.mapInitializer();
+  }
+
   mapInitializer(): void {
     // Coordinates fetched from the user's location to set the center of the map.
     let centerOfMapCoordinates = new google.maps.LatLng(this.location.lat, this.location.lng);
@@ -41,6 +44,7 @@ export class MapComponent {
       center: centerOfMapCoordinates,
       zoom: DEFAULT_MAP_ZOOM
     };
+
     this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
     var androidImg = '../../assets/images/android.png';
 
@@ -58,7 +62,9 @@ export class MapComponent {
       });
       infoWindow.open(this.map, userMarker);
     });
+
     this.loadMarkers();
+
   }
 
   loadMarkers(): void {
@@ -67,53 +73,54 @@ export class MapComponent {
     let type = '';
     let openingStatus = '';
 
-    // For loop to go through all gems and retrieve information about them.
-    for (let i = 0; i < this.hiddenGems.length; i++) {
-      let currentHiddenGem = this.hiddenGems[i],
-      latLng = new google.maps.LatLng(currentHiddenGem.lat,
-        currentHiddenGem.lng);
+    if (this.hiddenGems) {
+      // For loop to go through all gems and retrieve information about them.
+      for (let i = 0; i < this.hiddenGems.length; i++) {
+        let currentHiddenGem = this.hiddenGems[i],
+          latLng = new google.maps.LatLng(currentHiddenGem.lat, currentHiddenGem.lng);
 
-      // Creating a marker and putting it on the map.
-      let marker = new google.maps.Marker({
-        position: latLng,
-        map: this.map,
-        title: currentHiddenGem.name,
-        icon: diamondIcon
-      });
+        // Creating a marker and putting it on the map.
+        let marker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          title: currentHiddenGem.name,
+          icon: diamondIcon
+        });
 
-      // Get the photo URL.
-      if (currentHiddenGem.photoReference != null) {
-        photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="
-          + currentHiddenGem.photoReference
-          + "&key=AIzaSyCBb8QQBQal9jDNl3ZG6f3bS6ROX2MtYIM";
+        // Get the photo URL.
+        if (currentHiddenGem.photoReference != null) {
+          photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="
+            + currentHiddenGem.photoReference
+            + "&key=AIzaSyCBb8QQBQal9jDNl3ZG6f3bS6ROX2MtYIM";
+        }
+        else {
+          photoUrl = "https://www.flaticon.com/svg/vstatic/svg/3716/3716538.svg?token=exp=1612753174~hmac=f38de8989e705031bdecb2da1464c379"
+        }
+
+        // Get the business type.
+        if (currentHiddenGem.types[0] != null && (currentHiddenGem.types[0] === 'restaurant' || currentHiddenGem.types[0] === 'cafe'))
+          type = currentHiddenGem.types[0];
+        else if (currentHiddenGem.types[1] != null && (currentHiddenGem.types[1] === 'restaurant' || currentHiddenGem.types[1] === 'cafe'))
+          type = currentHiddenGem.types[1];
+
+        // Get the business' opening status.
+        if (currentHiddenGem.openingHours)
+          openingStatus = "Open Now";
+        else
+          openingStatus = "Currently Closed"
+
+        let infoWindowContent = this.createInfoWindow(currentHiddenGem.name, currentHiddenGem.address, photoUrl, type, openingStatus, currentHiddenGem.rating);
+
+        let infoWindow = new google.maps.InfoWindow();
+
+        marker.addListener("click", () => {
+          this.map.setZoom(ON_MARKER_MAP_ZOOM);
+          this.map.setCenter(latLng);
+          infoWindow.setContent(infoWindowContent);
+          infoWindow.setPosition(latLng);
+          infoWindow.open(this.map, marker);
+        });
       }
-      else {
-        photoUrl = "https://www.flaticon.com/svg/vstatic/svg/3716/3716538.svg?token=exp=1612753174~hmac=f38de8989e705031bdecb2da1464c379"
-      }
-
-      // Get the business type.
-      if (currentHiddenGem.types[0] != null && (currentHiddenGem.types[0] === 'restaurant' || currentHiddenGem.types[0] === 'cafe'))
-        type = currentHiddenGem.types[0];
-      else if (currentHiddenGem.types[1] != null && (currentHiddenGem.types[1] === 'restaurant' || currentHiddenGem.types[1] === 'cafe'))
-        type = currentHiddenGem.types[1];
-
-      // Get the business' opening status.
-      if (currentHiddenGem.openingHours)
-        openingStatus = "Open Now";
-      else
-        openingStatus = "Currently Closed"
-
-      let infoWindowContent = this.createInfoWindow(currentHiddenGem.name, currentHiddenGem.address, photoUrl, type, openingStatus, currentHiddenGem.rating);
-
-      let infoWindow = new google.maps.InfoWindow();
-
-      marker.addListener("click", () => {
-        this.map.setZoom(ON_MARKER_MAP_ZOOM);
-        this.map.setCenter(latLng);
-        infoWindow.setContent(infoWindowContent);
-        infoWindow.setPosition(latLng);
-        infoWindow.open(this.map, marker);
-      });
     }
   }
 
