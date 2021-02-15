@@ -69,6 +69,7 @@ export class RecommendationFormComponent {
       // A match is same price level as user. 
       if(preferenceForm.controls["price"].value == recommendationGems[i].priceLevel){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
+        
       } else if (preferenceForm.controls["price"].value == "any"){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
       }
@@ -86,7 +87,6 @@ export class RecommendationFormComponent {
 
       } else if (recommendationGems[i].types.includes(preferenceForm.controls["type"].value)){
         recommendationGems[i].matchScore = recommendationGems[i].matchScore + 1;
-
       }
     }
   
