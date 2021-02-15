@@ -23,8 +23,11 @@ export class RankingItemComponent implements OnInit{
     }
 
     // This prevent the tests from failing with "Cannot read property '0' of undefined"
-    if (this.hiddenGem.types != null && this.hiddenGem.types[0] != null) {
-      this.type = this.hiddenGem.types[0];
+    if (this.hiddenGem.types != null) {
+      if (this.hiddenGem.types[0] != null && (this.hiddenGem.types[0] === 'restaurant' || this.hiddenGem.types[0] === 'cafe'))
+        this.type = this.hiddenGem.types[0];
+      else if (this.hiddenGem.types[1] != null && (this.hiddenGem.types[1] === 'restaurant' || this.hiddenGem.types[1] === 'cafe'))
+        this.type = this.hiddenGem.types[1];
     }
   }
 }
