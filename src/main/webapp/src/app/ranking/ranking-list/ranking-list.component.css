@@ -1,10 +1,16 @@
 .ranking-list {
   padding: 16px;
   margin: 16px;
+  margin-left: 50%;
 }
 
 mat-spinner {
   position: absolute;
   margin-left: 50%;
   margin-top:10px;
+}
+
+#headerRank {
+  margin-left: 50%;
+
 }

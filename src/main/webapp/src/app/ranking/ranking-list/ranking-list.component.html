@@ -1,5 +1,5 @@
 <div class="ranking-list">
-  <h2>Ranking List</h2>
+  <h1 id="headerRank">Ranking List</h1>
   <section>
     <app-ranking-item *ngFor="let hiddenGem of hiddenGems | slice:0:10" [hiddenGem]="hiddenGem"></app-ranking-item>
     <mat-spinner *ngIf="!hiddenGems"></mat-spinner>
