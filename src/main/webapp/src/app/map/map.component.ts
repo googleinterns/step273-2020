@@ -117,6 +117,7 @@ export class MapComponent {
     }
   }
 
+  // TODO: Figure out how to get info windows styles in the stylesheet.
   createInfoWindow(name: string, address: string, url: string, businessType: string, openingStatus: string, rating: number) {
     const divElement = document.createElement('div');
     const nameElement = document.createElement('h2');
