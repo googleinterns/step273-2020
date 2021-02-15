@@ -20,7 +20,7 @@ import com.google.maps.model.OpeningHours;
 /** Hidden Gems are restaurants or cafes in Australia which have 10-50 reviews and a rating of at least 3.5/5. */
 public final class HiddenGem {
 
-  private final String placeId;
+  public final String placeId;
   public final String name;
   public final String[] types;
   public final String address;

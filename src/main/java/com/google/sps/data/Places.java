@@ -17,13 +17,18 @@ package com.google.sps.data;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,6 +52,9 @@ public final class Places {
   private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN = 10;
   private static final int HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX = 50;
   private static final int NUM_RESULTS_PAGES = 3;
+  private static final String BUSINESS_STATUS_OPERATIONAL = "OPERATIONAL";
+  private static final String TYPE_RESTAURANT = "restaurant";
+  private static final String TYPE_CAFE = "cafe";
 
   /**
    * This function getAllPlaces retrieved from a Places Search API using the API
@@ -125,8 +133,15 @@ public final class Places {
     Set<PlacesSearchResult> hiddenGems = new HashSet<>();
     hiddenGems = flatten(all_places)
       .filter(place -> 
-        place.rating >= HIDDEN_GEMS_RATINGS_MIN && place.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
-        && place.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX)
+        place.rating >= HIDDEN_GEMS_RATINGS_MIN 
+        && place.userRatingsTotal >= HIDDEN_GEMS_NUMBER_OF_RATINGS_MIN
+        && place.userRatingsTotal <= HIDDEN_GEMS_NUMBER_OF_RATINGS_MAX
+        && place.businessStatus.equals(BUSINESS_STATUS_OPERATIONAL)
+        && (
+          (place.types[0].equals(TYPE_CAFE) || place.types[0].equals(TYPE_RESTAURANT))
+          || (place.types[1].equals(TYPE_CAFE) || place.types[1].equals(TYPE_RESTAURANT))
+        )
+      )
       .collect(Collectors.toSet());
     
     return hiddenGems;
@@ -214,7 +229,7 @@ public final class Places {
    */
   public static List<HiddenGem> getRankedHiddenGems(Set<HiddenGem> hiddenGems) {
     // List of ranked hidden gems (switch to List to keep the ordering)
-    List<HiddenGem> sortedHiddenGems = new ArrayList<HiddenGem>(hiddenGems);
+    List<HiddenGem> sortedHiddenGems = removeDuplicates(hiddenGems);
     Collections.sort(sortedHiddenGems, new Comparator<HiddenGem>() {
       @Override
       public int compare(HiddenGem hiddenGem_1, HiddenGem hiddenGem_2) {
@@ -222,5 +237,18 @@ public final class Places {
       }
     });
     return sortedHiddenGems;
+  }
+
+  /**
+   * This function returns the list of hidden gems without the duplicates.
+   * @param hiddenGems                 This takes as parameter the set of hidden gems to be filtered.
+   * @return List<HiddenGem>  This return a list of hidden gems without the duplicates.
+   */
+  public static List<HiddenGem> removeDuplicates(Set<HiddenGem> hiddenGems) {
+    Map<String, HiddenGem> distinctHiddenGemsMap = 
+    hiddenGems.stream().collect(Collectors.toMap(hiddenGem -> hiddenGem.placeId, hiddenGem -> hiddenGem, (oldValue, newValue) -> newValue));
+
+    List<HiddenGem> distinctHiddenGems = new ArrayList<HiddenGem>(distinctHiddenGemsMap.values());
+    return distinctHiddenGems;
   }
 }
