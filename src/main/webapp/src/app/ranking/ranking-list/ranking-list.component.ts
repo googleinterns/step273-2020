@@ -11,11 +11,15 @@ import { HiddenGem } from 'src/app/models/hidden-gem';
   styleUrls: ['./ranking-list.component.css']
 })
 export class RankingListComponent implements OnInit {
-
+  // There are 3 arrays of hidden gems to allow users to filter the ranking to
+  // see either a ranking of restaurants, a ranking of cafes, or a ranking of both
   hiddenGems = this.appComponent.hiddenGems;
   restaurants = [] as HiddenGem[];
   cafes = [] as HiddenGem[];
   location = {} as Location;
+
+  // This shows which ranking list will be displayed
+  // Options: only restaurants, only cafes, or both
   show = "any";
 
   constructor(private locationService: LocationService, private appComponent: AppComponent) { }
