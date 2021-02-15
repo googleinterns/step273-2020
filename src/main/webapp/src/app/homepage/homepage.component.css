@@ -4,11 +4,11 @@
 }
 
 .column.side {
-  width: 17.5%;
+  width: 25%;
   min-height: 200px;
   margin-top: -40px;
 }
 
 .column.middle {
-  width: 65%;
+  width: 50%;
 }
