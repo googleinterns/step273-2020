@@ -13,9 +13,9 @@ export class RankingItemComponent implements OnInit{
   type!: string;
 
   ngOnInit() {
-    if (this.hiddenGem.photos != null) {
+    if (this.hiddenGem.photoReference != null) {
       this.photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="
-        + this.hiddenGem.photos[0].photoReference
+        + this.hiddenGem.photoReference
         + "&key=AIzaSyCBb8QQBQal9jDNl3ZG6f3bS6ROX2MtYIM";
     }
     else {
@@ -23,8 +23,13 @@ export class RankingItemComponent implements OnInit{
     }
 
     // This prevent the tests from failing with "Cannot read property '0' of undefined"
-    if (this.hiddenGem.types != null && this.hiddenGem.types[0] != null) {
-      this.type = this.hiddenGem.types[0];
+    // The backend Places Search Query guarantee types, but the ones that matter to us are only the 1st and
+    // 2nd types.
+    if (this.hiddenGem.types != null) {
+      if (this.hiddenGem.types[0] != null && (this.hiddenGem.types[0] === 'restaurant' || this.hiddenGem.types[0] === 'cafe'))
+        this.type = this.hiddenGem.types[0];
+      else if (this.hiddenGem.types[1] != null && (this.hiddenGem.types[1] === 'restaurant' || this.hiddenGem.types[1] === 'cafe'))
+        this.type = this.hiddenGem.types[1];
     }
   }
 }

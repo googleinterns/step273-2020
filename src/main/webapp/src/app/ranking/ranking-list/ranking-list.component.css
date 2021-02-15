@@ -11,6 +11,10 @@ mat-spinner {
 
 #rankingList-heading {
   text-align: center;
-  margin: 0px;
+  margin-bottom: 12px;
   font-weight: bold;
+}
+
+.filter-button {
+  margin-right:10px;
 }

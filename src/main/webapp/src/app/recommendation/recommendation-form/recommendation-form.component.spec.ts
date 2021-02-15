@@ -45,10 +45,10 @@ describe('RecommendationFormComponent', () => {
   it('should set price button correctly ', () => {
     let priceRange = component.preferenceForm.controls['price'];
     expect(priceRange.value).toEqual("");
-    priceRange.setValue('low');
+    priceRange.setValue('1');
     component.onSubmit();
     expect(priceRange.errors).toBeNull();
-    expect(priceRange.value).toEqual("low");
+    expect(priceRange.value).toEqual("1");
     expect(priceRange.valueChanges).toBeTruthy();
   });
 
@@ -120,4 +120,11 @@ describe('RecommendationFormComponent', () => {
     };
     expect(component.location).toEqual(defaultSydneyLocation);
   });
+
+
+  // TODO after demo
+  // Test filter function sorts list in decreasing matchscore
+  // Test result from filter function has length three
+  // Test an empty set of hidden gems triggers the error message
+  // Test recommendationGems is shuffled
 });
