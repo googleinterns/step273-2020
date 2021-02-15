@@ -70,8 +70,8 @@ export class MapComponent {
     // For loop to go through all gems and retrieve information about them.
     for (let i = 0; i < this.hiddenGems.length; i++) {
       let currentHiddenGem = this.hiddenGems[i],
-      latLng = new google.maps.LatLng(currentHiddenGem.geometry.location.lat,
-        currentHiddenGem.geometry.location.lng);
+      latLng = new google.maps.LatLng(currentHiddenGem.lat,
+        currentHiddenGem.lng);
 
       // Creating a marker and putting it on the map.
       let marker = new google.maps.Marker({
@@ -82,9 +82,9 @@ export class MapComponent {
       });
 
       // Get the photo URL.
-      if (currentHiddenGem.photos != null) {
+      if (currentHiddenGem.photoReference != null) {
         photoUrl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="
-          + currentHiddenGem.photos[0].photoReference
+          + currentHiddenGem.photoReference
           + "&key=AIzaSyCBb8QQBQal9jDNl3ZG6f3bS6ROX2MtYIM";
       }
       else {
@@ -103,7 +103,7 @@ export class MapComponent {
       else
         openingStatus = "Currently Closed"
 
-      let infoWindowContent = this.createInfoWindow(currentHiddenGem.name, currentHiddenGem.vicinity, photoUrl, type, openingStatus, currentHiddenGem.rating);
+      let infoWindowContent = this.createInfoWindow(currentHiddenGem.name, currentHiddenGem.address, photoUrl, type, openingStatus, currentHiddenGem.rating);
 
       let infoWindow = new google.maps.InfoWindow();
 

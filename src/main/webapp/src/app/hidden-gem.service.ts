@@ -24,14 +24,6 @@ export class HiddenGemService {
       .pipe(catchError(this.handleError))
   }
 
-  // TODO: Get rid of this function when the /recommendation servlet will be deleted.
-  findHiddenGemRecommendation(data: any) : Observable<HiddenGem[]> {
-    const params = new HttpParams().append("preferences", data);
-    return this.httpClient
-      .get<HiddenGem[]>('/recommendation', {params})
-      .pipe(catchError(this.handleError))
-  }
-
   handleError(error: HttpErrorResponse) {
     return throwError('A data error occured, please try again.');
   }
