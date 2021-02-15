@@ -26,17 +26,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.sps.data.HiddenGem;
 
 /** Servlet that returns the hidden gems ranked based on rating (descending order). */
 @WebServlet("/ranked-hidden-gems")
 public class GetRankedHiddenGemsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
     String lat = request.getParameter("lat");
     String lng = request.getParameter("lng");
     LatLng location = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
 
-    Set<PlacesSearchResult> hiddenGems = Places.getAllHiddenGems(Places.getAllPlaces(location));
+    Set<HiddenGem> hiddenGems = Places.convertToHiddenGems(Places.getAllHiddenPlaces(Places.getAllPlaces(location)));
+
     Gson gson = new Gson();
     String jsonResponse = gson.toJson(Places.getRankedHiddenGems(hiddenGems));
 
