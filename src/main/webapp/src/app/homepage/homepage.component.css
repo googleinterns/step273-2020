@@ -1,14 +1,4 @@
-.column {
-  float: left;
-  padding: 10px;
-}
-
-.column.side {
-  width: 25%;
-  min-height: 200px;
-  margin-top: -40px;
-}
-
-.column.middle {
-  width: 50%;
+app-ranking-list {
+  display: grid;
+  justify-content: center;
 }
