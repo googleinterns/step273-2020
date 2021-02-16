@@ -1,51 +1,58 @@
-<h1>Hidden Gems Recommendations</h1>
-<h4>Get a restaurant recommendation tailored just for you!</h4>
+<div class="center">
+  <mat-card class="form-card">
+    <h1>Hidden Gems Recommendations</h1>
+    <h4>Get a restaurant recommendation tailored just for you!</h4>
 
-<form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()" #formID="ngForm">
-  <h2>Your Restaurant Preferences</h2>
-  <p>
-    Please select your restaurant preferences in the form below. *All preferences are required.
-  </p>
-
-  <div  class="price-group">
-    <h3>
-      <label>Price Range</label>
-    </h3>
-    <select formControlName="price">
-      <option value="any">Any</option>
-      <option value="1">💲</option>
-      <option value="2">💲💲</option>
-      <option value="3">💲💲💲</option>
-      <option value="4">💲💲💲💲</option>
-    </select>
-  </div>
-
-  <div class="rating-group">
-    <h3>
-      <label>Minimum star rating preferred</label>
-    </h3>
-    <select formControlName="rating">
-      <option value=3>★★★☆☆</option>
-      <option value=4>★★★★☆</option>
-      <option value=5>★★★★★</option>
-    </select>
-  </div>
-  
-  <div class="restaurant-type-group">
-    <h3>
-      <label>Restaurant Type</label>
-    </h3>
-    <select formControlName="type">
-      <option value="restaurant">Restaurant</option>
-      <option value="cafe">Cafe</option>
-      <option value="any">Any</option>
-    </select>
-  </div>
-
-  <br>
-  <br>
-  <button type="submit" id='submit' [disabled]="preferenceForm.invalid">Find my hidden gems</button>
-
-</form>
-
-<p id="formErrorMessage" #errorMessage> </p>
+    <mat-card-content>
+      <form [formGroup]="preferenceForm" (ngSubmit)="onSubmit()" #formID="ngForm">
+        <h2>Your Restaurant Preferences</h2>
+        <p>
+          Please select your restaurant preferences in the form below. *All preferences are required.
+        </p>
+        
+        <div  class="price-group">
+          <h3>
+            <label>Price Range</label>
+          </h3>
+          <select formControlName="price">
+            <option value="any">Any</option>
+            <option value="1">💲</option>
+            <option value="2">💲💲</option>
+            <option value="3">💲💲💲</option>
+            <option value="4">💲💲💲💲</option>
+          </select>
+        </div>
+        <br>
+        <mat-divider></mat-divider>
+        <div class="rating-group">
+          <h3>
+            <label>Minimum star rating preferred</label>
+          </h3>
+          <select formControlName="rating">
+            <option value=3>★★★☆☆</option>
+            <option value=4>★★★★☆</option>
+            <option value=5>★★★★★</option>
+          </select>
+        </div>
+        <br>
+        <mat-divider></mat-divider>
+        <div class="restaurant-type-group">
+          <h3>
+            <label>Restaurant Type</label>
+          </h3>
+          <select formControlName="type">
+            <option value="restaurant">Restaurant</option>
+            <option value="cafe">Cafe</option>
+            <option value="any">Any</option>
+          </select>
+        </div>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <br>
+        <button type="submit" id='submit' [disabled]="preferenceForm.invalid">Find my hidden gems</button>
+      </form>
+    <p id="formErrorMessage" #errorMessage> </p>
+    </mat-card-content>
+  </mat-card>
+</div>
