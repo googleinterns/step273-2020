@@ -1,11 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { RankingListComponent } from './ranking-list.component';
 import { HiddenGemService } from '../../hidden-gem.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { LocationService } from '../../location.service';
-import { Location } from 'src/app/models/location';
 import { HiddenGem } from 'src/app/models/hidden-gem';
 import { By } from '@angular/platform-browser';
 
@@ -21,8 +19,7 @@ describe('RankingListComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        HiddenGemService,
-        LocationService
+        HiddenGemService
       ]
     })
     .compileComponents();
@@ -41,16 +38,7 @@ describe('RankingListComponent', () => {
   //   fixture.detectChanges();
   //   const compiled = fixture.nativeElement;
   //   expect(compiled.querySelectorAll('app-ranking-item').length).toEqual(10);
-  // })
-
-  it('should store the initial location', () => {
-
-    const defaultSydneyLocation: Location = {
-      lat: -33.8688,
-      lng: 151.2093,
-    };
-    expect(component.location).toEqual(defaultSydneyLocation);
-  });
+  // });
 
   it('should display the spinner when hidden gems are not fetched yet', () => {
     const hiddenGems: HiddenGem[] = []
