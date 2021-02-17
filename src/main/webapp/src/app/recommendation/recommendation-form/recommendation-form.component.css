@@ -1,0 +1,18 @@
+.center h1, .center h4 {
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-card {
+  margin-top: 40px;
+  width: 700px;
+}
+
+#divider {
+  margin-top: 20x;
+  margin-bottom: 20px;
+}
