@@ -16,6 +16,8 @@ package com.google.sps.data;
 
 import java.net.URL;
 import com.google.maps.model.OpeningHours;
+import com.google.maps.model.PlacesSearchResult;
+import com.google.maps.model.PlaceDetails;
 
 /** Hidden Gems are restaurants or cafes in Australia which have 10-50 reviews and a rating of at least 3.5/5. */
 public final class HiddenGem {
@@ -73,5 +75,26 @@ public final class HiddenGem {
       this.permanentlyClosed = permanentlyClosed;
       this.businessStatus = businessStatus;    
   }
+
+  public HiddenGem(PlacesSearchResult place, PlaceDetails details) {
+    this.placeId = place.placeId;
+    this.name = place.name;
+    this.types = place.types;
+    this.address = details.formattedAddress;
+    this.lat = place.geometry.location.lat;
+    this.lng = place.geometry.location.lng;
+    this.priceLevel = String.valueOf(details.priceLevel);
+    this.rating = place.rating;
+    this.userRatingsTotal = place.userRatingsTotal;
+    this.website = details.website;
+    this.openingHours = place.openingHours;
+    this.photoReference = place.photos[0].photoReference;
+    this.htmlAttributions = place.photos[0].htmlAttributions;
+    this.permanentlyClosed = place.permanentlyClosed;
+    this.businessStatus = place.businessStatus;
+
+  }
+
 }
+
 
