@@ -52,7 +52,7 @@ describe('RecommendationItemComponent', () => {
     expect(compiled.querySelector('img').src).toBeTruthy;
     expect(compiled.querySelector('#business_type').textContent).toBeTruthy;
     expect(compiled.querySelector('#number_of_reviews').textContent).toContain(30);
-    expect(compiled.querySelector('#rating').textContent).toBe('Star Rating (⭐️): 3.6');
+    expect(compiled.querySelector('#rating').textContent).toBe(' ⭐️ Star Rating: 3.6');
     expect(compiled.querySelector('#opening_hours').textContent).toContain('Open Now');
   });
 });
