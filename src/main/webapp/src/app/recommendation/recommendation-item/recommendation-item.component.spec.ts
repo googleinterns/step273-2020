@@ -25,29 +25,24 @@ describe('RecommendationItemComponent', () => {
   });
 
   it('should render hidden gem details', () => {
-    const hiddenGem: HiddenGem = {
-      geometry: {
-        location: {lat: -33.8655823, lng: 151.2078192},
-        viewport:{
-          northeast: {lat: -33.8655823, lng: 151.2078192},
-          southwest: {lat: -33.8655823, lng: 151.2078192}
-        }
-      },
+    const hiddenGem : HiddenGem = {
+       
+      lat: -33.8655823, 
+      lng: 151.2078192,
       name: 'Fratelli Fresh',
-      icon: '',
       placeId: '1',
       rating: 3.6,
       types: ['restaurant'],
       openingHours: {openNow: true},
-      photos: [{
-        photoReference: "photoReference",
-        height: 0,
-        width: 0,
-        htmlAttributions: ["htmlAttributions"]}],
-      vicinity: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+      photoReference: "photoReference",
+      htmlAttributions: ["htmlAttributions"],
+      address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
       permanentlyClosed: false,
       userRatingsTotal: 30,
-      businessStatus: ''
+      businessStatus: '',
+      priceLevel: "",
+      website: "",
+      matchScore: 1
     };
 
     component.hiddenGem = hiddenGem;
