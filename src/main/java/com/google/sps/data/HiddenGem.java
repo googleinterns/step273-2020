@@ -76,6 +76,11 @@ public final class HiddenGem {
       this.businessStatus = businessStatus;    
   }
 
+  /** Creates a Hidden Gem using the data from the PlacesSearchResult 
+   * and PlaceDetails objects outputted from the Places API.
+   * @param place   the PlacesSearchResult with the info for the hidden gem i.e. name, location, rating, photo.
+   * @param details the PlaceDetails for the hidden gem (address, price, website)
+   */
   public HiddenGem(PlacesSearchResult place, PlaceDetails details) {
     this.placeId = place.placeId;
     this.name = place.name;
