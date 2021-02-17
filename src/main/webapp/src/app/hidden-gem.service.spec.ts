@@ -16,59 +16,46 @@ describe('HiddenGemService', () => {
   });
 
   it('should return expected hidden gems (HttpClient called once)', () => {
-    const expectedHiddenGems: HiddenGem[] =
-      [
-        {
-          geometry: {
-            location: {lat: -33.8655823, lng: 151.2078192},
-            viewport:{
-              northeast: {lat: -33.8655823, lng: 151.2078192},
-              southwest: {lat: -33.8655823, lng: 151.2078192}
-            }
-          },
-          name: 'Fratelli Fresh',
-          icon: '',
-          placeId: '1',
-          rating: 3.6,
-          types: ['restaurant'],
-          openingHours: {openNow: true},
-          photos: [{
-            photoReference: "photoReference",
-            height: 0,
-            width: 0,
-            htmlAttributions: ["htmlAttributions"]
-          }],
-          vicinity: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
-          permanentlyClosed: false,
-          userRatingsTotal: 30,
-          businessStatus: ''
-        },
-        {
-          geometry: {
-            location: {lat: -33.8655823, lng: 151.2078192},
-            viewport:{
-              northeast: {lat: -33.8655823, lng: 151.2078192},
-              southwest: {lat: -33.8655823, lng: 151.2078192}
-            }
-          },
-          name: 'Cafe Sydney',
-          icon: '',
-          placeId: '2',
-          rating: 4.5,
-          types: ['cafe'],
-          openingHours: {openNow: true},
-          photos: [{
-            photoReference: "photoReference",
-            height: 0,
-            width: 0,
-            htmlAttributions: ["htmlAttributions"]
-          }],
-          vicinity: '31 Alfred St, Sydney NSW 2000',
-          permanentlyClosed: false,
-          userRatingsTotal: 30,
-          businessStatus: ''
-        }
-      ];
+    
+    const expectedHiddenGems : HiddenGem[] = [
+      { 
+      lat: -33.8655823, 
+      lng: 151.2078192,
+      name: 'Fratelli Fresh',
+      placeId: '1',
+      rating: 3.6,
+      types: ['restaurant'],
+      openingHours: {openNow: true},
+      photoReference: "photoReference",
+      htmlAttributions: ["htmlAttributions"],
+      address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+      permanentlyClosed: false,
+      userRatingsTotal: 30,
+      businessStatus: '',
+      priceLevel: "",
+      website: "",
+      matchScore: 1
+      },
+      {
+        lat: -33.8655823, 
+        lng: 151.2078192,
+        name: 'Cafe Sydney',
+        placeId: '2',
+        rating: 4.5,
+        types: ['cafe'],
+        openingHours: {openNow: true},
+        photoReference: "photoReference",
+        htmlAttributions: ["htmlAttributions"],
+        address: '31 Alfred St, Sydney NSW 2000',
+        permanentlyClosed: false,
+        userRatingsTotal: 30,
+        businessStatus: '',
+        priceLevel: "",
+        website: "",
+        matchScore: 1
+      }
+    ];
+ 
 
     httpClientSpy.get.and.returnValue(of(expectedHiddenGems));
 
@@ -110,29 +97,22 @@ describe('HiddenGemService', () => {
     const expectedTopGems: HiddenGem[] =
       [
         {
-          geometry: {
-            location: {lat: -33.8655823, lng: 151.2078192},
-            viewport:{
-              northeast: {lat: -33.8655823, lng: 151.2078192},
-              southwest: {lat: -33.8655823, lng: 151.2078192}
-            }
-          },
+          lat: -33.8655823, 
+          lng: 151.2078192, 
           name: 'The best restaurant',
-          icon: '',
           placeId: '3',
           rating: 4.5,
           types: ['restaurant'],
           openingHours: {openNow: true},
-          photos: [{
-            photoReference: "photoReference",
-            height: 0,
-            width: 0,
-            htmlAttributions: ["htmlAttributions"]
-          }],
-          vicinity: 'An address located within Sydney, Sydney NSW 2000',
+          photoReference: "photoReference",
+          htmlAttributions: ["htmlAttributions"],
+          address: 'An address located within Sydney, Sydney NSW 2000',
           permanentlyClosed: false,
           userRatingsTotal: 30,
-          businessStatus: ''
+          businessStatus: '',
+          priceLevel: "",
+          website: "",
+          matchScore: 1
         },
       ];
 
