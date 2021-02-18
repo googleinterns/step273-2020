@@ -19,54 +19,40 @@ describe('HiddenGemService', () => {
     const expectedHiddenGems: HiddenGem[] =
       [
         {
-          geometry: {
-            location: {lat: -33.8655823, lng: 151.2078192},
-            viewport:{
-              northeast: {lat: -33.8655823, lng: 151.2078192},
-              southwest: {lat: -33.8655823, lng: 151.2078192}
-            }
-          },
+          lat: -33.8655823,
+          lng: 151.2078192,
           name: 'Fratelli Fresh',
-          icon: '',
           placeId: '1',
           rating: 3.6,
           types: ['restaurant'],
           openingHours: {openNow: true},
-          photos: [{
-            photoReference: "photoReference",
-            height: 0,
-            width: 0,
-            htmlAttributions: ["htmlAttributions"]
-          }],
-          vicinity: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+          photoReference: 'photoReference',
+          htmlAttributions: ["htmlAttributions"],
+          address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
           permanentlyClosed: false,
           userRatingsTotal: 30,
-          businessStatus: ''
+          businessStatus: '',
+          priceLevel: '2',
+          matchScore: 0,
+          website: ''
         },
         {
-          geometry: {
-            location: {lat: -33.8655823, lng: 151.2078192},
-            viewport:{
-              northeast: {lat: -33.8655823, lng: 151.2078192},
-              southwest: {lat: -33.8655823, lng: 151.2078192}
-            }
-          },
+          lat: -33.8655823,
+          lng: 151.2078192,
           name: 'Cafe Sydney',
-          icon: '',
           placeId: '2',
           rating: 4.5,
           types: ['cafe'],
           openingHours: {openNow: true},
-          photos: [{
-            photoReference: "photoReference",
-            height: 0,
-            width: 0,
-            htmlAttributions: ["htmlAttributions"]
-          }],
-          vicinity: '31 Alfred St, Sydney NSW 2000',
+          photoReference: 'photoReference',
+          htmlAttributions: ["htmlAttributions"],
+          address: '31 Alfred St, Sydney NSW 2000',
           permanentlyClosed: false,
           userRatingsTotal: 30,
-          businessStatus: ''
+          businessStatus: '',
+          priceLevel: '2',
+          matchScore: 0,
+          website: ''
         }
       ];
 
@@ -104,62 +90,4 @@ describe('HiddenGemService', () => {
     );
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   })
-
-  it('should return hidden gem recommendations', () => {
-
-    const expectedTopGems: HiddenGem[] =
-      [
-        {
-          geometry: {
-            location: {lat: -33.8655823, lng: 151.2078192},
-            viewport:{
-              northeast: {lat: -33.8655823, lng: 151.2078192},
-              southwest: {lat: -33.8655823, lng: 151.2078192}
-            }
-          },
-          name: 'The best restaurant',
-          icon: '',
-          placeId: '3',
-          rating: 4.5,
-          types: ['restaurant'],
-          openingHours: {openNow: true},
-          photos: [{
-            photoReference: "photoReference",
-            height: 0,
-            width: 0,
-            htmlAttributions: ["htmlAttributions"]
-          }],
-          vicinity: 'An address located within Sydney, Sydney NSW 2000',
-          permanentlyClosed: false,
-          userRatingsTotal: 30,
-          businessStatus: ''
-        },
-      ];
-
-    httpClientSpy.get.and.returnValue(of(expectedTopGems));
-
-    hiddenGemService.findHiddenGemRecommendation("")
-      .subscribe(hiddenGems => {
-        expect(hiddenGems).toEqual(expectedTopGems);
-    })
-    expect(httpClientSpy.get.calls.count()).toBe(1);
-  })
-
-  it('should return an error when the recommendation server returns a 404', fakeAsync((done: DoneFn) => {
-    const errorResponse = new HttpErrorResponse({
-      error: 'test 404 error',
-      status: 404, statusText: 'Not Found'
-    });
-
-    httpClientSpy.get.and.returnValue(of(errorResponse));
-
-    hiddenGemService.findHiddenGemRecommendation("").subscribe(
-      {
-        error: error => {
-          expect(error).toEqual({ error: 'A data error occured, please try again.' });
-          done();
-      }}
-    );
-  }));
-
 })
