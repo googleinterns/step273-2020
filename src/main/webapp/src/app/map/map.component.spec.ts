@@ -5,8 +5,6 @@ import { MapComponent } from './map.component';
 import { LocationService } from '../location.service';
 import { Location } from 'src/app/models/location';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HiddenGem } from '../models/hidden-gem';
-import { By } from '@angular/platform-browser';
 
 describe('MapComponent', () => {
   let component: MapComponent;

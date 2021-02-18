@@ -112,16 +112,6 @@ describe('RecommendationFormComponent', () => {
 
   });
 
-  it('should store the initial location', () => {
-
-    const defaultSydneyLocation: Location = {
-      lat: -33.8688,
-      lng: 151.2093,
-    };
-    expect(component.location).toEqual(defaultSydneyLocation);
-  });
-
-
   // TODO after demo
   // Test filter function sorts list in decreasing matchscore
   // Test result from filter function has length three
