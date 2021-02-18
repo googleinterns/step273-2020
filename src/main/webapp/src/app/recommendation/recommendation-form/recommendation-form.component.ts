@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HiddenGem } from '../../models/hidden-gem';
 import { AppComponent } from "src/app/app.component"
 
