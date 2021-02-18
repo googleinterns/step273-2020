@@ -16,7 +16,6 @@ package com.google.sps.servlets;
 
 import com.google.gson.Gson;
 import com.google.maps.model.LatLng;
-import com.google.maps.model.PlacesSearchResult;
 import com.google.sps.data.Places;
 
 import java.io.IOException;
