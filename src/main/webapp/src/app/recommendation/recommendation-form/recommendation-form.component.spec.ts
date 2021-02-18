@@ -114,7 +114,31 @@ describe('RecommendationFormComponent', () => {
 
   // TODO after demo
   // Test filter function sorts list in decreasing matchscore
-  // Test result from filter function has length three
+
   // Test an empty set of hidden gems triggers the error message
   // Test recommendationGems is shuffled
+
+  //  async onSubmit() {
+  //   // filter hidden gems by preference form criteria.
+  //   let result = this.filterGems(this.hiddenGems, this.preferenceForm);
+  //   if(Object.keys(result).length == 0) {
+  //     this.errorMessage.nativeElement.innerText = "Sorry there are no hidden gems matching your preferences"
+  //   }
+  //   // send top 3 recommendation gems to display in list.
+  //   this.hiddenGemRecommendation.emit(result);
+  // }
+  // Test result from filter function has length three
+  it('filter function should have length three', () => {
+    let result = filterGems(hiddenGems, preferenceForm);
+    expect(component.preferenceForm.controls['price'].value).toEqual('');
+    expect(component.preferenceForm.controls['rating'].value).toEqual('');
+    expect(component.preferenceForm.controls['type'].value).toEqual('');
+
+    expect(component.preferenceForm.status).toEqual("INVALID");
+
+    let submitBtn = fixture.debugElement.query(By.css('#submit')).nativeElement;
+    expect(submitBtn.disabled).toBeTrue;
+    expect(component.preferenceForm.touched).toBeFalse;
+
+  });
 });
