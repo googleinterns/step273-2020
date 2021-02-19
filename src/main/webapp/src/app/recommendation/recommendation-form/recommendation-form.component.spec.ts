@@ -112,9 +112,12 @@ describe('RecommendationFormComponent', () => {
 
   });
 
-  // TODO 
+  // TODO after demo
   // Test filter function sorts list in decreasing matchscore
   // Test recommendationGems is shuffled
+  // Test filter function sorts list in decreasing matchscore
+  // Test result from filter function has length three
+  // Test an empty set of hidden gems triggers the error message
 
   it('Test an empty set of hidden gems triggers the error message ', () => {
     const hiddenGems: HiddenGem[] = [];
