@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LocationService } from '../../location.service';
 import { Location } from 'src/app/models/location';
 import { FormGroup} from '@angular/forms';
+
 import { RecommendationFormComponent } from './recommendation-form.component';
 import { HiddenGem } from 'src/app/models/hidden-gem';
 
@@ -22,7 +22,7 @@ describe('RecommendationFormComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule
       ],
-      providers: [LocationService]
+      providers: []
     })
     .compileComponents();
   });

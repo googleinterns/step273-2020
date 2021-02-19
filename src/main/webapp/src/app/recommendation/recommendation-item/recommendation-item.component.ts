@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HiddenGem } from '../../models/hidden-gem';
 
-
 @Component({
   selector: 'app-recommendation-item',
   templateUrl: './recommendation-item.component.html',

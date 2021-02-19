@@ -119,9 +119,4 @@ public final class PlacesTest {
       }
     }
   }
-
-  // TODO: add in a test that checks the fetchHiddenGemsFromApi function
-  // correctly converts a PlaceSearchResult into a Hidden Gem object, after demo.
-  // @Test 
-  // public void getSetOfHiddenGemType() throws IOException {
 }
