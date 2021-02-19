@@ -36,7 +36,7 @@ export class RecommendationFormComponent {
   async onSubmit() {
     // filter hidden gems by preference form criteria.
     let result = this.filterGems(this.hiddenGems, this.preferenceForm);
-
+// TO DO TEST THIS
     if(Object.keys(result).length == 0) {
       this.errorMessage.nativeElement.innerText = "Sorry there are no hidden gems matching your preferences"
     }
@@ -93,6 +93,7 @@ export class RecommendationFormComponent {
     // shuffle list so recommendation doesn't give a preference to gems with high rating
     // randomise the pool of matching gems for selecting recommendation 
     recommendationGems = this.shuffleGems(recommendationGems);
+    
     // sort list, gems with highest score populate to the top.
     recommendationGems.sort((n1,n2) => n2.matchScore - n1.matchScore);
 

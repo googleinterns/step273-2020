@@ -1,10 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LocationService } from '../../location.service';
+import { Location } from 'src/app/models/location';
+import { FormGroup} from '@angular/forms';
 
 import { RecommendationFormComponent } from './recommendation-form.component';
+import { HiddenGem } from 'src/app/models/hidden-gem';
 
 describe('RecommendationFormComponent', () => {
   let component: RecommendationFormComponent;
@@ -109,9 +113,94 @@ describe('RecommendationFormComponent', () => {
 
   });
 
-  // TODO after demo
+  // TODO 
   // Test filter function sorts list in decreasing matchscore
-  // Test result from filter function has length three
   // Test an empty set of hidden gems triggers the error message
   // Test recommendationGems is shuffled
+  
+  it('Result from filter function should have length 3', () => {
+    const hiddenGems: HiddenGem[] = [
+      {
+        lat: -33.8655823,
+        lng: 151.2078192,
+        name: 'cafe 1',
+        placeId: '1',
+        rating: 3.6,
+        types: ['cafe'],
+        openingHours: {openNow: true},
+        photoReference: 'photoReference',
+        htmlAttributions: ["htmlAttributions"],
+        address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+        permanentlyClosed: false,
+        userRatingsTotal: 30,
+        businessStatus: '',
+        priceLevel: '1',
+        matchScore: 0,
+        website: ''
+      },
+      {
+        lat: -33.8655823,
+        lng: 151.2078192,
+        name: 'restaurant 2',
+        placeId: '1',
+        rating: 4,
+        types: ['restaurant'],
+        openingHours: {openNow: true},
+        photoReference: 'photoReference',
+        htmlAttributions: ["htmlAttributions"],
+        address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+        permanentlyClosed: false,
+        userRatingsTotal: 30,
+        businessStatus: '',
+        priceLevel: '3',
+        matchScore: 0,
+        website: ''
+      },
+      {
+        lat: -33.8655823,
+        lng: 151.2078192,
+        name: 'restaurant 3',
+        placeId: '1',
+        rating: 5,
+        types: ['restaurant'],
+        openingHours: {openNow: true},
+        photoReference: 'photoReference',
+        htmlAttributions: ["htmlAttributions"],
+        address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+        permanentlyClosed: false,
+        userRatingsTotal: 30,
+        businessStatus: '',
+        priceLevel: '2',
+        matchScore: 0,
+        website: ''
+      },
+      {
+        lat: -33.8655823,
+        lng: 151.2078192,
+        name: 'restaurant 4',
+        placeId: '1',
+        rating: 4.9,
+        types: ['restaurant'],
+        openingHours: {openNow: true},
+        photoReference: 'photoReference',
+        htmlAttributions: ["htmlAttributions"],
+        address: 'ICC Sydney, tenancy 2/14 Darling Dr, Sydney NSW 2000',
+        permanentlyClosed: false,
+        userRatingsTotal: 30,
+        businessStatus: '',
+        priceLevel: '1',
+        matchScore: 0,
+        website: ''
+      }
+    ];
+    //Build preference form
+    const preferenceForm = new FormGroup({
+      price: new FormControl(3),
+      rating: new FormControl(3),
+      type: new FormControl('restaurant')
+    });
+    //component.hiddenGems = hiddenGems;
+    fixture.detectChanges();
+    expect( (component.filterGems(hiddenGems, preferenceForm)).length).toEqual(3);
+  })
 });
