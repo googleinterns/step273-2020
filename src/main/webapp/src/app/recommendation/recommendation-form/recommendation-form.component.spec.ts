@@ -115,7 +115,6 @@ describe('RecommendationFormComponent', () => {
 
   // TODO 
   // Test filter function sorts list in decreasing matchscore
-  // Test an empty set of hidden gems triggers the error message
   // Test recommendationGems is shuffled
   
   it('Test result from filter function shoudl have length 3 ', () => {
@@ -199,8 +198,22 @@ describe('RecommendationFormComponent', () => {
       rating: new FormControl(3),
       type: new FormControl('restaurant')
     });
-    //component.hiddenGems = hiddenGems;
     fixture.detectChanges();
     expect( (component.filterGems(hiddenGems, preferenceForm)).length).toEqual(3);
+  })
+
+  it('Test an empty set of hidden gems triggers the error message ', () => {
+    const hiddenGems: HiddenGem[] = [];
+    component.hiddenGems = hiddenGems;
+    fixture.detectChanges();
+    //Build preference form
+    const preferenceForm = new FormGroup({
+      price: new FormControl(1),
+      rating: new FormControl(5),
+      type: new FormControl('restaurant')
+    });
+    const compiled = fixture.nativeElement;
+    expect((component.filterGems(hiddenGems, preferenceForm)).length).toEqual(0);
+    expect(compiled.querySelector('#formErrorMessage').textContent).toBe('Sorry there are no hidden gems matching your preferences');
   })
 });
