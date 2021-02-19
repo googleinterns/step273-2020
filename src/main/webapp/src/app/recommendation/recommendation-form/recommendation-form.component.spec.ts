@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LocationService } from '../../location.service';
 import { Location } from 'src/app/models/location';
 import { FormGroup} from '@angular/forms';
+
 import { RecommendationFormComponent } from './recommendation-form.component';
 import { HiddenGem } from 'src/app/models/hidden-gem';
 
@@ -115,7 +116,6 @@ describe('RecommendationFormComponent', () => {
   // TODO after demo
   // Test filter function sorts list in decreasing matchscore
   // Test recommendationGems is shuffled
-  // Test filter function sorts list in decreasing matchscore
   // Test result from filter function has length three
   // Test an empty set of hidden gems triggers the error message
 
