@@ -6,7 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LocationService } from '../../location.service';
 import { Location } from 'src/app/models/location';
-import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 import { RecommendationFormComponent } from './recommendation-form.component';
 import { HiddenGem } from 'src/app/models/hidden-gem';
 
@@ -118,7 +118,7 @@ describe('RecommendationFormComponent', () => {
   // Test an empty set of hidden gems triggers the error message
   // Test recommendationGems is shuffled
   
-  it('Test result from filter function shoudl have length 3 ', () => {
+  it('Result from filter function should have length 3', () => {
     const hiddenGems: HiddenGem[] = [
       {
         lat: -33.8655823,
