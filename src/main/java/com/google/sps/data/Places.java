@@ -22,13 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -40,9 +36,7 @@ import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
 import com.google.maps.model.PlacesSearchResult;
 import com.google.maps.model.PlaceDetails;
-import com.google.maps.model.PriceLevel;
 import com.google.maps.PlaceDetailsRequest;
-import com.google.maps.PlaceDetailsRequest.FieldMask;
 import com.google.maps.model.RankBy;
 import com.google.sps.GetConfigProperties;
 
