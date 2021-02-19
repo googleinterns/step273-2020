@@ -113,9 +113,8 @@ describe('RecommendationFormComponent', () => {
 
   });
 
-  // TODO after demo
+  // TODO 
   // Test filter function sorts list in decreasing matchscore
-  // Test result from filter function has length three
   // Test an empty set of hidden gems triggers the error message
   // Test recommendationGems is shuffled
   
@@ -124,7 +123,7 @@ describe('RecommendationFormComponent', () => {
       {
         lat: -33.8655823,
         lng: 151.2078192,
-        name: '1',
+        name: 'cafe 1',
         placeId: '1',
         rating: 3.6,
         types: ['cafe'],
@@ -142,7 +141,7 @@ describe('RecommendationFormComponent', () => {
       {
         lat: -33.8655823,
         lng: 151.2078192,
-        name: '2',
+        name: 'restaurant 2',
         placeId: '1',
         rating: 4,
         types: ['restaurant'],
@@ -160,7 +159,7 @@ describe('RecommendationFormComponent', () => {
       {
         lat: -33.8655823,
         lng: 151.2078192,
-        name: '3',
+        name: 'restaurant 3',
         placeId: '1',
         rating: 5,
         types: ['restaurant'],
@@ -178,7 +177,7 @@ describe('RecommendationFormComponent', () => {
       {
         lat: -33.8655823,
         lng: 151.2078192,
-        name: '4',
+        name: 'restaurant 4',
         placeId: '1',
         rating: 4.9,
         types: ['restaurant'],
